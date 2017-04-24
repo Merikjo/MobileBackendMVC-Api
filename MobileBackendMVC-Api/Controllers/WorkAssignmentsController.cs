@@ -119,7 +119,6 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(WorkAssignmentsViewModel model)
         {
-
             JohaMeriSQL2Entities db = new JohaMeriSQL2Entities();
 
             WorkAssignments wam = new WorkAssignments();

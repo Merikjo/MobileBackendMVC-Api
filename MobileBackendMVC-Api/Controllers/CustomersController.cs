@@ -93,6 +93,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
             CustomersViewModel model = new CustomersViewModel();
+
             return View(model);
         }//create
 
@@ -106,17 +107,24 @@ namespace MobileBackendMVC_Api.Controllers
             JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
 
             Customers cus = new Customers();
-            cus.Id_Customer = model.Id_Customer;
             cus.CustomerName = model.CustomerName;
             cus.ContactPerson = model.ContactPerson;
             cus.PhoneNumber = model.PhoneNumber;
             cus.EmailAddress = model.EmailAddress;
-            cus.CreatedAt = model.CreatedAt;
-            cus.LastModifiedAt = model.LastModifiedAt;
-            cus.DeletedAt = model.DeletedAt;
+            cus.CreatedAt = DateTime.Now;
+            cus.LastModifiedAt = DateTime.Now;
             cus.Active = model.Active;
 
             db.Customers.Add(cus);
+
+            try
+            {
+                db.SaveChanges();
+            }
+
+            catch (Exception ex)
+            {
+            }
 
             return RedirectToAction("Index");
         }//create
@@ -156,13 +164,12 @@ namespace MobileBackendMVC_Api.Controllers
         public ActionResult Edit(CustomersViewModel model)
         { 
             Customers cus = new Customers();
-            cus.Id_Customer = model.Id_Customer;
             cus.CustomerName = model.CustomerName;
             cus.ContactPerson = model.ContactPerson;
             cus.PhoneNumber = model.PhoneNumber;
             cus.EmailAddress = model.EmailAddress;
             cus.CreatedAt = model.CreatedAt;
-            cus.LastModifiedAt = model.LastModifiedAt;
+            cus.LastModifiedAt = DateTime.Now; ;
             cus.DeletedAt = model.DeletedAt;
             cus.Active = model.Active;
 

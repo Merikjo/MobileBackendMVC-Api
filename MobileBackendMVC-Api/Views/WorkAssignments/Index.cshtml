@@ -4,96 +4,276 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@section scripts {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Deadline)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InProgress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InProgressAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Completed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompletedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastModifiedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeletedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Active)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Customers.CustomerName)
-        </th>
-        <th></th>
-    </tr>
+    <script type="text/javascript">
+        // oma filtteröintifunktio ..., jotka ovat aktiivisia
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            // luetaan valintaruudun asetus
+            var showArchive = $("#showArchiveWorkAssignmentsCheckbox").is(":checked");
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Deadline)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InProgress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InProgressAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Completed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompletedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastModifiedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeletedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Customers.CustomerName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_WorkAssignment }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_WorkAssignment }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_WorkAssignment })
-        </td>
-    </tr>
+            // luetaan 11. solun arvo: tämä on "Tila"
+            var activeWorkassignment = settings.aoData[dataIndex].anCells[10].children[0].checked;
+
+            /* Jos käyttäjä on valinnut asetuksen "Näytä aktiiviset", otetaan listalle
+             * mukaan myös arkistoidut asiakkaat. Muussa tapauksessa (oletusarvo) ei näytetä.
+             * Tämän funktion paluuarvo kertoo, näytetäänkö rivi taulukossa vai ei. */
+            if (showArchive) {
+                // näytetään kaikki asiakkaat, myös arkistoidut
+                return true;
+            }
+            else {
+                if (activeWorkassignment) {
+                    // ei näytetä arkistoituja asiakkaita
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        });
+
+        $(function () {
+            // sivun alustus
+            //alert("Sivun alustus");
+            var workassignmentTaulu = $("#workAssignmentTable").DataTable();
+
+            $("#showArchiveWorkAssignmentsCheckbox").change(function () {
+                // kun käyttäjä napsauttaa valintaruutua, päivitetään asiakastaulukko
+                workassignmentTaulu.draw();
+            });
+        });
+
+        // oma filtteröintifunktio ..., jotka ovat aktiivisia
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            // luetaan valintaruudun asetus
+            var showArchive = $("#showArchiveInProgressCheckbox").is(":checked");
+
+            // luetaan 11. solun arvo: tämä on "Tila"
+            var activeInProgress = settings.aoData[dataIndex].anCells[3].children[0].checked;
+
+            /* Jos käyttäjä on valinnut asetuksen "Näytä aktiiviset", otetaan listalle
+             * mukaan myös arkistoidut asiakkaat. Muussa tapauksessa (oletusarvo) ei näytetä.
+             * Tämän funktion paluuarvo kertoo, näytetäänkö rivi taulukossa vai ei. */
+            if (showArchive) {
+                // näytetään kaikki asiakkaat, myös arkistoidut
+                return true;
+            }
+            else {
+                if (activeInProgress ) {
+                    // ei näytetä arkistoituja asiakkaita
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        });
+
+        $(function () {
+            // sivun alustus
+            //alert("Sivun alustus");
+            var workassignmentTaulu = $("#workAssignmentTable").DataTable();
+
+            $("#showArchiveInProgressCheckbox").change(function () {
+                // kun käyttäjä napsauttaa valintaruutua, päivitetään asiakastaulukko
+                workassignmentTaulu.draw();
+            });
+        });
+
+        // oma filtteröintifunktio ..., jotka ovat aktiivisia
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            // luetaan valintaruudun asetus
+            var showArchive = $("#showArchiveCompletedCheckbox").is(":checked");
+
+            // luetaan 11. solun arvo: tämä on "Tila"
+            var activeCompleted = settings.aoData[dataIndex].anCells[5].children[0].checked;
+
+            /* Jos käyttäjä on valinnut asetuksen "Näytä aktiiviset", otetaan listalle
+             * mukaan myös arkistoidut asiakkaat. Muussa tapauksessa (oletusarvo) ei näytetä.
+             * Tämän funktion paluuarvo kertoo, näytetäänkö rivi taulukossa vai ei. */
+            if (showArchive) {
+                // näytetään kaikki asiakkaat, myös arkistoidut
+                return true;
+            }
+            else {
+                if (activeCompleted) {
+                    // ei näytetä arkistoituja asiakkaita
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        });
+
+        $(function () {
+            // sivun alustus
+            //alert("Sivun alustus");
+            var workassignmentTaulu = $("#workAssignmentTable").DataTable();
+
+            $("#showArchiveCompletedCheckbox").change(function () {
+                // kun käyttäjä napsauttaa valintaruutua, päivitetään asiakastaulukko
+                workassignmentTaulu.draw();
+            });
+        });
+
+    </script>
+
 }
 
-</table>
+@section head {
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Scripts/DataTables/datatables.css" rel="stylesheet" />
+    <link href="~/Scripts/DataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+
+    <style>
+        /*div.dataTables_wrapper div.dataTables_filter input {
+            width: 400px;
+        }*/
+    </style>
+}
+
+<title></title>
+<!-- !SIDEMENU CONTENT!
+================================================== -->
+@*@{ Html.RenderAction("SideMenu", "Customers");}*@
+
+<!-- !PAGE CONTENT!
+================================================== -->
+<div class="w3-main" style="margin-left:252px">
+
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+
+    <!-- Container -->
+    <div class="w3-container">
+        <h2>Work Assignments</h2>
+        <p>&nbsp;</p>
+
+        <p><a href="/Customers/Create" class="w3-btn w3-large">New WorkAssignment</a></p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>Show all workassignments: <input id="showArchiveWorkAssignmentsCheckbox" type="checkbox" /></p>
+        <p>Show all inprogress: <input id="showArchiveInProgressCheckbox" type="checkbox" /></p>
+        <p>Show all : <input id="showArchiveCompletedCheckbox" type="checkbox" /></p>
+
+        <table class="table" id="workAssignmentTable">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Deadline)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InProgress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InProgressAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Completed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompletedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastModifiedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeletedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Active)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customers.CustomerName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Deadline)
+                    </td>
+                    <td>
+                        @{
+                            string True = "";
+                            if (item.InProgress.HasValue && (item.InProgress.Value == true))
+                            {
+                                True = "checked";
+                            }
+                        }
+                        <input name="InProgress" type="checkbox" @True />
+                        @*@Html.DisplayFor(modelItem => item.InProgress)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InProgressAt)
+                    </td>
+                    <td>
+                        @{
+                            string Completed1 = "";
+                            if (item.Completed.HasValue && (item.Completed.Value == true))
+                            {
+                                Completed1 = "checked";
+                            }
+                        }
+                        <input name="Completed" type="checkbox" @Completed1 />
+                        @*@Html.DisplayFor(modelItem => item.Completed)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompletedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastModifiedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeletedAt)
+                    </td>
+                    <td>
+                        @{
+                            string Active1 = "";
+                            if (item.Active.HasValue && (item.Active.Value == true))
+                            {
+                                Active1 = "checked";
+                            }
+                        }
+                        <input name="Active" type="checkbox" @Active1 />
+                        @*@Html.DisplayFor(modelItem => item.Active)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customers.CustomerName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id_WorkAssignment }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id_WorkAssignment }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id_WorkAssignment })
+                    </td>
+                </tr>
+                            }
+
+        </table>
+    </div><!-- End content -->
+</div><!-- End page content -->

@@ -92,6 +92,7 @@ namespace MobileBackendMVC_Api.Controllers
         public ActionResult Create()
         {
             JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+
             CustomersViewModel model = new CustomersViewModel();
 
             return View(model);

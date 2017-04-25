@@ -10,24 +10,24 @@
     <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
 
     <script type="text/javascript">
-        // oma filtteröintifunktio asiakkaille, jotka ovat aktiivisia
+        // oma filtteröintifunktio ..., jotka ovat aktiivisia
         $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
             // luetaan valintaruudun asetus
             var showArchive = $("#showArchiveEmployeesCheckbox").is(":checked");
 
-            // luetaan 11. solun arvo: tämä on "Tila"
-            var activeEmployee = settings.aoData[dataIndex].anCells[6].children[0].checked;
+            // luetaan 8. solun arvo: tämä on "Active"
+            var activeEmployee = settings.aoData[dataIndex].anCells[8].children[0].checked;
 
             /* Jos käyttäjä on valinnut asetuksen "Näytä aktiiviset", otetaan listalle
-             * mukaan myös arkistoidut asiakkaat. Muussa tapauksessa (oletusarvo) ei näytetä.
+             * mukaan myös arkistoidut .... Muussa tapauksessa (oletusarvo) ei näytetä.
              * Tämän funktion paluuarvo kertoo, näytetäänkö rivi taulukossa vai ei. */
             if (showArchive) {
-                // näytetään kaikki asiakkaat, myös arkistoidut
+                // näytetään kaikki ..., myös arkistoidut
                 return true;
             }
             else {
                 if (activeEmployee) {
-                    // ei näytetä arkistoituja asiakkaita
+                    // ei näytetä arkistoituja ...
                     return true;
                 }
                 else {
@@ -42,7 +42,7 @@
             var employeeTaulu = $("#employeeTable").DataTable();
 
             $("#showArchiveEmployeesCheckbox").change(function () {
-                // kun käyttäjä napsauttaa valintaruutua, päivitetään asiakastaulukko
+                // kun käyttäjä napsauttaa valintaruutua, päivitetään ...taulukko
                 employeeTaulu.draw();
             });
         });
@@ -70,13 +70,13 @@
 
 <!-- !PAGE CONTENT!
 ================================================== -->
-<div class="w3-main" style="margin-left:252px">
+@*<div class="w3-main" style="margin-left:252px">*@
 
     <!-- Push down content on small screens -->
     <div class="w3-hide-large" style="margin-top:83px"></div>
 
     <!-- Container -->
-    <div class="w3-container">
+    @*<div class="w3-container">*@
 
         <h2>Employees</h2>
         <p>&nbsp;</p>
@@ -103,18 +103,29 @@
                     <th>
                         @Html.DisplayNameFor(model => model.EmployeeReference)
                     </th>
+                   
+                  
+
                     <th>
-                        @Html.DisplayNameFor(model => model.DeletedAt)
+                        @Html.DisplayNameFor(model => model.DepartmentName)
                     </th>
+                
                     <th>
-                        @Html.DisplayNameFor(model => model.Active)
+                        @Html.DisplayNameFor(model => model.CompanyName)
                     </th>
+
                     <th>
                         @Html.DisplayNameFor(model => model.EmployeePicture)
                     </th>
+
                     <th>
-                        @Html.DisplayNameFor(model => model.Contractors.CompanyName)
+                        @Html.DisplayNameFor(model => model.Active)
                     </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeletedAt)
+                    </th>
+
                     <th></th>
                 </tr>
             </thead>
@@ -137,8 +148,18 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.EmployeeReference)
                         </td>
+                       
+                
+                        
                         <td>
-                            @Html.DisplayFor(modelItem => item.DeletedAt)
+                            @Html.DisplayFor(modelItem => item.DepartmentName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompanyName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeePicture)
                         </td>
                         <td>
                             @{
@@ -152,10 +173,7 @@
                             @*@Html.DisplayFor(modelItem => item.Active)*@
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.EmployeePicture)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Contractors.CompanyName)
+                            @Html.DisplayFor(modelItem => item.DeletedAt)
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.Id_Employee }) |
@@ -166,5 +184,5 @@
                 }
             </tbody>
         </table>
-    </div><!-- End content -->
-</div><!-- End page content -->
+    @*</div><!-- End content -->
+</div><!-- End page content -->*@

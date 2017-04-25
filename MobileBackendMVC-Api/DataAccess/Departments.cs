@@ -14,10 +14,16 @@ namespace MobileBackendMVC_Api.DataAccess
     
     public partial class Departments
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Departments()
+        {
+            this.Employees = new HashSet<Employees>();
+        }
+    
         public int Id_Department { get; set; }
         public string DepartmentName { get; set; }
-        public Nullable<int> Id_Employee { get; set; }
     
-        public virtual Employees Employees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employees> Employees { get; set; }
     }
 }

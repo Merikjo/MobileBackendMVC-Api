@@ -124,13 +124,12 @@ namespace MobileBackendMVC_Api.Controllers
             WorkAssignments wam = new WorkAssignments();
             wam.Title = model.Title;
             wam.Description = model.Description;
-            wam.Deadline = model.Deadline;
-            wam.InProgress = model.InProgress;
-            wam.InProgressAt = model.InProgressAt;
+            wam.Deadline = model.Deadline.GetValueOrDefault();
+            wam.InProgress = model.InProgress.GetValueOrDefault();
+            wam.InProgressAt = model.InProgressAt.GetValueOrDefault();
             wam.CompletedAt = DateTime.Now;
             wam.Completed = model.Completed;
-            wam.LastModifiedAt = DateTime.Now; ;
-            wam.DeletedAt = model.DeletedAt;
+            wam.LastModifiedAt = DateTime.Now;
             wam.Active = model.Active;
 
             db.WorkAssignments.Add(wam);
@@ -202,12 +201,12 @@ namespace MobileBackendMVC_Api.Controllers
             wam.Description = model.Description;
             wam.Deadline = model.Deadline;
             wam.InProgress = model.InProgress;
-            wam.InProgressAt = model.InProgressAt;
+            wam.InProgressAt = model.InProgressAt.GetValueOrDefault();
             wam.CompletedAt = DateTime.Now;
             wam.Completed = model.Completed;
-            wam.LastModifiedAt = DateTime.Now; ;
-            wam.DeletedAt = model.DeletedAt;
-            wam.Active = model.Active;
+            wam.LastModifiedAt = DateTime.Now;
+            wam.DeletedAt = model.DeletedAt.GetValueOrDefault();
+            wam.Active = model.Active.GetValueOrDefault();
 
             int customerId = int.Parse(model.CustomerName);
             if (customerId > 0)
@@ -244,8 +243,8 @@ namespace MobileBackendMVC_Api.Controllers
             view.InProgressAt = workassdetail.InProgressAt;
             view.CompletedAt = workassdetail.CompletedAt;
             view.Completed = workassdetail.Completed;
-            view.LastModifiedAt = workassdetail.LastModifiedAt;
-            view.DeletedAt = workassdetail.DeletedAt;
+            view.LastModifiedAt = DateTime.Now;
+            view.DeletedAt = DateTime.Now;
             view.Active = workassdetail.Active;
 
             view.Id_Customer = workassdetail.Customers?.Id_Customer;

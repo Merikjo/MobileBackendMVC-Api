@@ -17,12 +17,12 @@ namespace MobileBackendMVC_Api.DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employees()
         {
-            this.Departments = new HashSet<Departments>();
             this.PinCodes = new HashSet<PinCodes>();
         }
     
         public int Id_Employee { get; set; }
         public Nullable<int> Id_Contractor { get; set; }
+        public Nullable<int> Id_Department { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
@@ -33,8 +33,7 @@ namespace MobileBackendMVC_Api.DataAccess
         public byte[] EmployeePicture { get; set; }
     
         public virtual Contractors Contractors { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Departments> Departments { get; set; }
+        public virtual Departments Departments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PinCodes> PinCodes { get; set; }
     }

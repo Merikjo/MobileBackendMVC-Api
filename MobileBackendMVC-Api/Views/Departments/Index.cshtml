@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MobileBackendMVC_Api.ViewModels.DepartmentsViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section head {
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Scripts/DataTables/datatables.css" rel="stylesheet" />
+    <link href="~/Scripts/DataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+
+    <style>
+        /*div.dataTables_wrapper div.dataTables_filter input {
+            width: 400px;
+        }*/
+    </style>
+}
+
+<title></title>
+<!-- !SIDEMENU CONTENT!
+================================================== -->
+@*@{ Html.RenderAction("SideMenu", "Customers");}*@
+
+<!-- !PAGE CONTENT!
+================================================== -->
+<div class="w3-main" style="margin-left:252px">
+
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+
+    <!-- Container -->
+    <div class="w3-container">
+
+        <h2>Departments</h2>
+
+        <p>&nbsp;</p>
+        @*<p>Customers total: @Model.Count()</p>*@
+
+        <p><a href="/Departments/Create" class="w3-btn w3-large">New Department</a></p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DepartmentName)
+                </th>
+            
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartmentName)
+                    </td>
+               
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id_Department }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id_Department }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id_Department })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div><!-- End content -->
+</div><!-- End page content -->

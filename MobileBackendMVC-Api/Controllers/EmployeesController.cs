@@ -40,6 +40,12 @@ namespace MobileBackendMVC_Api.Controllers
                     view.Active = employee.Active;
                     view.EmployeePicture = employee.EmployeePicture;
 
+                    view.Id_Contractor = employee.Contractors?.Id_Contractor;
+                    view.CompanyName = employee.Contractors?.CompanyName;
+
+                    view.Id_Department = employee.Departments?.Id_Department;
+                    view.DepartmentName = employee.Departments?.DepartmentName;
+
                     model.Add(view);
                 }
             }
@@ -80,6 +86,12 @@ namespace MobileBackendMVC_Api.Controllers
                 view.Active = employeedetail.Active;
                 view.EmployeePicture = employeedetail.EmployeePicture;
 
+                view.Id_Contractor = employeedetail.Contractors?.Id_Contractor;
+                view.CompanyName = employeedetail.Contractors?.CompanyName;
+
+                view.Id_Department = employeedetail.Departments?.Id_Department;
+                view.DepartmentName = employeedetail.Departments?.DepartmentName;
+
                 model = view;
             }
             finally
@@ -95,6 +107,11 @@ namespace MobileBackendMVC_Api.Controllers
         {
             JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
             EmployeesViewModel model = new EmployeesViewModel();
+
+            ViewBag.DepartmentName = new SelectList((from d in db.Departments select new { Id_Department = d.Id_Department, DepartmentName = d.DepartmentName }), "Id_Department", "DepartmentName", null);
+
+            ViewBag.CompanyName = new SelectList((from c in db.Contractors select new { Id_Contractor = c.Id_Contractor, CompanyName = c.CompanyName }), "Id_Contractor", "CompanyName", null);
+
             return View(model);
         }//create
 
@@ -107,18 +124,45 @@ namespace MobileBackendMVC_Api.Controllers
         {
             JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
 
-            Employees evm = new Employees();
-            evm.Id_Employee = model.Id_Employee;
-            evm.FirstName = model.FirstName;
-            evm.LastName = model.LastName;
-            evm.PhoneNumber = model.PhoneNumber;
-            evm.EmailAddress = model.EmailAddress;
-            evm.EmployeeReference = model.EmployeeReference;
-            evm.DeletedAt = model.DeletedAt;
-            evm.Active = model.Active;
-            evm.EmployeePicture = model.EmployeePicture;
+            Employees emp = new Employees();
+            emp.Id_Employee = model.Id_Employee;
+            emp.FirstName = model.FirstName;
+            emp.LastName = model.LastName;
+            emp.PhoneNumber = model.PhoneNumber;
+            emp.EmailAddress = model.EmailAddress;
+            emp.EmployeeReference = model.EmployeeReference;
+            emp.DeletedAt = model.DeletedAt;
+            emp.Active = model.Active;
+            emp.EmployeePicture = model.EmployeePicture;
 
-            db.Employees.Add(evm);
+            db.Employees.Add(emp);
+
+            int contractorId = int.Parse(model.CompanyName);
+            if (contractorId > 0)
+            {
+                Contractors con = db.Contractors.Find(contractorId);
+                emp.Id_Contractor = con.Id_Contractor;
+            }
+
+            int departmentId = int.Parse(model.DepartmentName);
+            if (departmentId > 0)
+            {
+                Departments dep = db.Departments.Find(departmentId);
+                emp.Id_Department = dep.Id_Department;
+            }
+
+            try
+            {
+                db.SaveChanges();
+            }
+
+            catch (Exception ex)
+            {
+            }
+
+            ViewBag.DepartmentName = new SelectList((from d in db.Departments select new { Id_Department = d.Id_Department, DepartmentName = d.DepartmentName }), "Id_Department", "DepartmentName", null);
+
+            ViewBag.CompanyName = new SelectList((from c in db.Contractors select new { Id_Contractor = c.Id_Contractor, CustomerName = c.CompanyName }), "Id_Contractor", "CompanyName", null);
 
             return RedirectToAction("Index");
         }//create
@@ -148,7 +192,16 @@ namespace MobileBackendMVC_Api.Controllers
             view.Active = employeedetail.Active;
             view.EmployeePicture = employeedetail.EmployeePicture;
 
-            //ViewBag.Id_Contractor = new SelectList(db.Contractors, "Id_Contractor", "CompanyName", employees.Id_Contractor);
+            view.Id_Contractor = employeedetail.Contractors?.Id_Contractor;
+            view.CompanyName = employeedetail.Contractors?.CompanyName;
+
+            view.Id_Department = employeedetail.Departments?.Id_Department;
+            view.DepartmentName = employeedetail.Departments?.DepartmentName;
+
+            ViewBag.DepartmentName = new SelectList((from d in db.Departments select new { Id_Department = d.Id_Department, DepartmentName = d.DepartmentName }), "Id_Department", "DepartmentName", null);
+
+            ViewBag.CompanyName = new SelectList((from c in db.Contractors select new { Id_Contractor = c.Id_Contractor, CompanyName = c.CompanyName }), "Id_Contractor", "CompanyName", null);
+
             return View(view);
         }
 
@@ -159,19 +212,43 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EmployeesViewModel model)
         { 
-            Employees evm = new Employees();
-            evm.Id_Employee = model.Id_Employee;
-            evm.FirstName = model.FirstName;
-            evm.LastName = model.LastName;
-            evm.PhoneNumber = model.PhoneNumber;
-            evm.EmailAddress = model.EmailAddress;
-            evm.EmployeeReference = model.EmployeeReference;
-            evm.DeletedAt = model.DeletedAt;
-            evm.Active = model.Active;
-            evm.EmployeePicture = model.EmployeePicture;
+            Employees emp = new Employees();
+            emp.FirstName = model.FirstName;
+            emp.LastName = model.LastName;
+            emp.PhoneNumber = model.PhoneNumber;
+            emp.EmailAddress = model.EmailAddress;
+            emp.EmployeeReference = model.EmployeeReference;
+            emp.DeletedAt = model.DeletedAt;
+            emp.Active = model.Active;
+            emp.EmployeePicture = model.EmployeePicture;
 
-            //ViewBag.Id_Contractor = new SelectList(db.Contractors, "Id_Contractor", "CompanyName", employees.Id_Contractor);
-            db.SaveChanges();
+            int contractorId = int.Parse(model.CompanyName);
+            if (contractorId > 0)
+            {
+                Contractors con = db.Contractors.Find(contractorId);
+                emp.Id_Contractor = con.Id_Contractor;
+            }
+
+            int departmentId = int.Parse(model.DepartmentName);
+            if (departmentId > 0)
+            {
+                Departments dep = db.Departments.Find(departmentId);
+                emp.Id_Department = dep.Id_Department;
+            }
+
+            ViewBag.DepartmentName = new SelectList((from d in db.Departments select new { Id_Department = d.Id_Department, DepartmentName = d.DepartmentName }), "Id_Department", "DepartmentName", null);
+
+            ViewBag.CompanyName = new SelectList((from c in db.Contractors select new { Id_Contractor = c.Id_Contractor, CompanyName = c.CompanyName }), "Id_Contractor", "CompanyName", null);
+
+            try
+            {
+                db.SaveChanges();
+            }
+
+            catch (Exception ex)
+            {
+            }
+
             return View("Index");
         }//edit
 
@@ -198,6 +275,12 @@ namespace MobileBackendMVC_Api.Controllers
             view.DeletedAt = employeedetail.DeletedAt;
             view.Active = employeedetail.Active;
             view.EmployeePicture = employeedetail.EmployeePicture;
+
+            view.Id_Contractor = employeedetail.Contractors?.Id_Contractor;
+            view.CompanyName = employeedetail.Contractors?.CompanyName;
+
+            view.Id_Department = employeedetail.Departments?.Id_Department;
+            view.DepartmentName = employeedetail.Departments?.DepartmentName;
 
             return View(view);
         }

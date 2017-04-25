@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JohaMeriSQL2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="JohaMeriSQL2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Contractors">
           <Key>
             <PropertyRef Name="Id_Contractor" />
@@ -41,7 +41,6 @@
           </Key>
           <Property Name="Id_Department" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DepartmentName" Type="nvarchar" MaxLength="100" />
-          <Property Name="Id_Employee" Type="int" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -49,6 +48,7 @@
           </Key>
           <Property Name="Id_Employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_Contractor" Type="int" />
+          <Property Name="Id_Department" Type="int" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="100" />
@@ -64,6 +64,10 @@
           </Key>
           <Property Name="Id_PinCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PinCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="LastModifiedAt" Type="datetime" />
+          <Property Name="DeletedAt" Type="datetime" />
+          <Property Name="Active" Type="bit" />
           <Property Name="Id_Employee" Type="int" />
           <Property Name="Id_Customer" Type="int" />
           <Property Name="Id_Contractor" Type="int" />
@@ -116,15 +120,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Employees_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
-          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+        <Association Name="FK_Employees_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="Id_Employee" />
+            <Principal Role="Departments">
+              <PropertyRef Name="Id_Department" />
             </Principal>
-            <Dependent Role="Departments">
-              <PropertyRef Name="Id_Employee" />
+            <Dependent Role="Employees">
+              <PropertyRef Name="Id_Department" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -224,9 +228,9 @@
             <End Role="Contractors" EntitySet="Contractors" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_Employees_Employees" Association="Self.FK_Employees_Employees">
-            <End Role="Employees" EntitySet="Employees" />
+          <AssociationSet Name="FK_Employees_Departments" Association="Self.FK_Employees_Departments">
             <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="FK_PinCodes_Contractors" Association="Self.FK_PinCodes_Contractors">
             <End Role="Contractors" EntitySet="Contractors" />
@@ -257,11 +261,55 @@
             <End Role="WorkAssignments" EntitySet="WorkAssignments" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JohaMeriSQL2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="JohaMeriSQL2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contractors" EntityType="JohaMeriSQL2Model.Contractors" />
+          <EntitySet Name="Customers" EntityType="JohaMeriSQL2Model.Customers" />
+          <EntitySet Name="Departments" EntityType="JohaMeriSQL2Model.Departments" />
+          <EntitySet Name="Employees" EntityType="JohaMeriSQL2Model.Employees" />
+          <EntitySet Name="PinCodes" EntityType="JohaMeriSQL2Model.PinCodes" />
+          <EntitySet Name="Timesheets" EntityType="JohaMeriSQL2Model.Timesheets" />
+          <EntitySet Name="WorkAssignments" EntityType="JohaMeriSQL2Model.WorkAssignments" />
+          <AssociationSet Name="FK_Employees_Contractors" Association="JohaMeriSQL2Model.FK_Employees_Contractors">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PinCodes_Contractors" Association="JohaMeriSQL2Model.FK_PinCodes_Contractors">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="PinCodes" EntitySet="PinCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timesheets_Contractors" Association="JohaMeriSQL2Model.FK_Timesheets_Contractors">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="Timesheets" EntitySet="Timesheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PinCodes_Customers" Association="JohaMeriSQL2Model.FK_PinCodes_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="PinCodes" EntitySet="PinCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timesheets_Customers" Association="JohaMeriSQL2Model.FK_Timesheets_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Timesheets" EntitySet="Timesheets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkAssignments_Customers" Association="JohaMeriSQL2Model.FK_WorkAssignments_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="WorkAssignments" EntitySet="WorkAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Departments" Association="JohaMeriSQL2Model.FK_Employees_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PinCodes_Employees" Association="JohaMeriSQL2Model.FK_PinCodes_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="PinCodes" EntitySet="PinCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timesheets_WorkAssignments" Association="JohaMeriSQL2Model.FK_Timesheets_WorkAssignments">
+            <End Role="WorkAssignments" EntitySet="WorkAssignments" />
+            <End Role="Timesheets" EntitySet="Timesheets" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Contractors">
           <Key>
             <PropertyRef Name="Id_Contractor" />
@@ -277,9 +325,9 @@
           <Property Name="LastModifiedAt" Type="DateTime" Precision="3" />
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Contractors" FromRole="Contractors" ToRole="Employees" />
-          <NavigationProperty Name="PinCodes" Relationship="Self.FK_PinCodes_Contractors" FromRole="Contractors" ToRole="PinCodes" />
-          <NavigationProperty Name="Timesheets" Relationship="Self.FK_Timesheets_Contractors" FromRole="Contractors" ToRole="Timesheets" />
+          <NavigationProperty Name="Employees" Relationship="JohaMeriSQL2Model.FK_Employees_Contractors" FromRole="Contractors" ToRole="Employees" />
+          <NavigationProperty Name="PinCodes" Relationship="JohaMeriSQL2Model.FK_PinCodes_Contractors" FromRole="Contractors" ToRole="PinCodes" />
+          <NavigationProperty Name="Timesheets" Relationship="JohaMeriSQL2Model.FK_Timesheets_Contractors" FromRole="Contractors" ToRole="Timesheets" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -294,9 +342,9 @@
           <Property Name="LastModifiedAt" Type="DateTime" Precision="3" />
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="PinCodes" Relationship="Self.FK_PinCodes_Customers" FromRole="Customers" ToRole="PinCodes" />
-          <NavigationProperty Name="Timesheets" Relationship="Self.FK_Timesheets_Customers" FromRole="Customers" ToRole="Timesheets" />
-          <NavigationProperty Name="WorkAssignments" Relationship="Self.FK_WorkAssignments_Customers" FromRole="Customers" ToRole="WorkAssignments" />
+          <NavigationProperty Name="PinCodes" Relationship="JohaMeriSQL2Model.FK_PinCodes_Customers" FromRole="Customers" ToRole="PinCodes" />
+          <NavigationProperty Name="Timesheets" Relationship="JohaMeriSQL2Model.FK_Timesheets_Customers" FromRole="Customers" ToRole="Timesheets" />
+          <NavigationProperty Name="WorkAssignments" Relationship="JohaMeriSQL2Model.FK_WorkAssignments_Customers" FromRole="Customers" ToRole="WorkAssignments" />
         </EntityType>
         <EntityType Name="Departments">
           <Key>
@@ -304,8 +352,7 @@
           </Key>
           <Property Name="Id_Department" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DepartmentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Id_Employee" Type="Int32" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Employees" FromRole="Departments" ToRole="Employees" />
+          <NavigationProperty Name="Employees" Relationship="JohaMeriSQL2Model.FK_Employees_Departments" FromRole="Departments" ToRole="Employees" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -313,6 +360,7 @@
           </Key>
           <Property Name="Id_Employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_Contractor" Type="Int32" />
+          <Property Name="Id_Department" Type="Int32" />
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -321,9 +369,9 @@
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
           <Property Name="EmployeePicture" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Contractors" Relationship="Self.FK_Employees_Contractors" FromRole="Employees" ToRole="Contractors" />
-          <NavigationProperty Name="Departments" Relationship="Self.FK_Employees_Employees" FromRole="Employees" ToRole="Departments" />
-          <NavigationProperty Name="PinCodes" Relationship="Self.FK_PinCodes_Employees" FromRole="Employees" ToRole="PinCodes" />
+          <NavigationProperty Name="Contractors" Relationship="JohaMeriSQL2Model.FK_Employees_Contractors" FromRole="Employees" ToRole="Contractors" />
+          <NavigationProperty Name="Departments" Relationship="JohaMeriSQL2Model.FK_Employees_Departments" FromRole="Employees" ToRole="Departments" />
+          <NavigationProperty Name="PinCodes" Relationship="JohaMeriSQL2Model.FK_PinCodes_Employees" FromRole="Employees" ToRole="PinCodes" />
         </EntityType>
         <EntityType Name="PinCodes">
           <Key>
@@ -331,12 +379,16 @@
           </Key>
           <Property Name="Id_PinCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PinCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
           <Property Name="Id_Employee" Type="Int32" />
           <Property Name="Id_Customer" Type="Int32" />
           <Property Name="Id_Contractor" Type="Int32" />
-          <NavigationProperty Name="Contractors" Relationship="Self.FK_PinCodes_Contractors" FromRole="PinCodes" ToRole="Contractors" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_PinCodes_Customers" FromRole="PinCodes" ToRole="Customers" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_PinCodes_Employees" FromRole="PinCodes" ToRole="Employees" />
+          <NavigationProperty Name="Contractors" Relationship="JohaMeriSQL2Model.FK_PinCodes_Contractors" FromRole="PinCodes" ToRole="Contractors" />
+          <NavigationProperty Name="Customers" Relationship="JohaMeriSQL2Model.FK_PinCodes_Customers" FromRole="PinCodes" ToRole="Customers" />
+          <NavigationProperty Name="Employees" Relationship="JohaMeriSQL2Model.FK_PinCodes_Employees" FromRole="PinCodes" ToRole="Employees" />
         </EntityType>
         <EntityType Name="Timesheets">
           <Key>
@@ -355,9 +407,9 @@
           <Property Name="LastModifiedAt" Type="DateTime" Precision="3" />
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="Contractors" Relationship="Self.FK_Timesheets_Contractors" FromRole="Timesheets" ToRole="Contractors" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Timesheets_Customers" FromRole="Timesheets" ToRole="Customers" />
-          <NavigationProperty Name="WorkAssignments" Relationship="Self.FK_Timesheets_WorkAssignments" FromRole="Timesheets" ToRole="WorkAssignments" />
+          <NavigationProperty Name="Contractors" Relationship="JohaMeriSQL2Model.FK_Timesheets_Contractors" FromRole="Timesheets" ToRole="Contractors" />
+          <NavigationProperty Name="Customers" Relationship="JohaMeriSQL2Model.FK_Timesheets_Customers" FromRole="Timesheets" ToRole="Customers" />
+          <NavigationProperty Name="WorkAssignments" Relationship="JohaMeriSQL2Model.FK_Timesheets_WorkAssignments" FromRole="Timesheets" ToRole="WorkAssignments" />
         </EntityType>
         <EntityType Name="WorkAssignments">
           <Key>
@@ -376,12 +428,12 @@
           <Property Name="LastModifiedAt" Type="DateTime" Precision="3" />
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_WorkAssignments_Customers" FromRole="WorkAssignments" ToRole="Customers" />
-          <NavigationProperty Name="Timesheets" Relationship="Self.FK_Timesheets_WorkAssignments" FromRole="WorkAssignments" ToRole="Timesheets" />
+          <NavigationProperty Name="Customers" Relationship="JohaMeriSQL2Model.FK_WorkAssignments_Customers" FromRole="WorkAssignments" ToRole="Customers" />
+          <NavigationProperty Name="Timesheets" Relationship="JohaMeriSQL2Model.FK_Timesheets_WorkAssignments" FromRole="WorkAssignments" ToRole="Timesheets" />
         </EntityType>
         <Association Name="FK_Employees_Contractors">
-          <End Role="Contractors" Type="Self.Contractors" Multiplicity="0..1" />
-          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <End Type="JohaMeriSQL2Model.Contractors" Role="Contractors" Multiplicity="0..1" />
+          <End Type="JohaMeriSQL2Model.Employees" Role="Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contractors">
               <PropertyRef Name="Id_Contractor" />
@@ -392,8 +444,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PinCodes_Contractors">
-          <End Role="Contractors" Type="Self.Contractors" Multiplicity="0..1" />
-          <End Role="PinCodes" Type="Self.PinCodes" Multiplicity="*" />
+          <End Type="JohaMeriSQL2Model.Contractors" Role="Contractors" Multiplicity="0..1" />
+          <End Type="JohaMeriSQL2Model.PinCodes" Role="PinCodes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contractors">
               <PropertyRef Name="Id_Contractor" />
@@ -404,8 +456,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Timesheets_Contractors">
-          <End Role="Contractors" Type="Self.Contractors" Multiplicity="0..1" />
-          <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="*" />
+          <End Type="JohaMeriSQL2Model.Contractors" Role="Contractors" Multiplicity="0..1" />
+          <End Type="JohaMeriSQL2Model.Timesheets" Role="Timesheets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contractors">
               <PropertyRef Name="Id_Contractor" />
@@ -416,8 +468,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PinCodes_Customers">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
-          <End Role="PinCodes" Type="Self.PinCodes" Multiplicity="*" />
+          <End Type="JohaMeriSQL2Model.Customers" Role="Customers" Multiplicity="0..1" />
+          <End Type="JohaMeriSQL2Model.PinCodes" Role="PinCodes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
               <PropertyRef Name="Id_Customer" />
@@ -428,8 +480,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Timesheets_Customers">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
-          <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="*" />
+          <End Type="JohaMeriSQL2Model.Customers" Role="Customers" Multiplicity="0..1" />
+          <End Type="JohaMeriSQL2Model.Timesheets" Role="Timesheets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
               <PropertyRef Name="Id_Customer" />
@@ -440,8 +492,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WorkAssignments_Customers">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
-          <End Role="WorkAssignments" Type="Self.WorkAssignments" Multiplicity="*" />
+          <End Type="JohaMeriSQL2Model.Customers" Role="Customers" Multiplicity="0..1" />
+          <End Type="JohaMeriSQL2Model.WorkAssignments" Role="WorkAssignments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
               <PropertyRef Name="Id_Customer" />
@@ -451,21 +503,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Employees_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
-          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+        <Association Name="FK_Employees_Departments">
+          <End Type="JohaMeriSQL2Model.Departments" Role="Departments" Multiplicity="0..1" />
+          <End Type="JohaMeriSQL2Model.Employees" Role="Employees" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="Id_Employee" />
+            <Principal Role="Departments">
+              <PropertyRef Name="Id_Department" />
             </Principal>
-            <Dependent Role="Departments">
-              <PropertyRef Name="Id_Employee" />
+            <Dependent Role="Employees">
+              <PropertyRef Name="Id_Department" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PinCodes_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
-          <End Role="PinCodes" Type="Self.PinCodes" Multiplicity="*" />
+          <End Type="JohaMeriSQL2Model.Employees" Role="Employees" Multiplicity="0..1" />
+          <End Type="JohaMeriSQL2Model.PinCodes" Role="PinCodes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="Id_Employee" />
@@ -476,8 +528,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Timesheets_WorkAssignments">
-          <End Role="WorkAssignments" Type="Self.WorkAssignments" Multiplicity="0..1" />
-          <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="*" />
+          <End Type="JohaMeriSQL2Model.WorkAssignments" Role="WorkAssignments" Multiplicity="0..1" />
+          <End Type="JohaMeriSQL2Model.Timesheets" Role="Timesheets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="WorkAssignments">
               <PropertyRef Name="Id_WorkAssignment" />
@@ -487,51 +539,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="JohaMeriSQL2Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Contractors" EntityType="Self.Contractors" />
-          <EntitySet Name="Customers" EntityType="Self.Customers" />
-          <EntitySet Name="Departments" EntityType="Self.Departments" />
-          <EntitySet Name="Employees" EntityType="Self.Employees" />
-          <EntitySet Name="PinCodes" EntityType="Self.PinCodes" />
-          <EntitySet Name="Timesheets" EntityType="Self.Timesheets" />
-          <EntitySet Name="WorkAssignments" EntityType="Self.WorkAssignments" />
-          <AssociationSet Name="FK_Employees_Contractors" Association="Self.FK_Employees_Contractors">
-            <End Role="Contractors" EntitySet="Contractors" />
-            <End Role="Employees" EntitySet="Employees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PinCodes_Contractors" Association="Self.FK_PinCodes_Contractors">
-            <End Role="Contractors" EntitySet="Contractors" />
-            <End Role="PinCodes" EntitySet="PinCodes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Timesheets_Contractors" Association="Self.FK_Timesheets_Contractors">
-            <End Role="Contractors" EntitySet="Contractors" />
-            <End Role="Timesheets" EntitySet="Timesheets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PinCodes_Customers" Association="Self.FK_PinCodes_Customers">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="PinCodes" EntitySet="PinCodes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Timesheets_Customers" Association="Self.FK_Timesheets_Customers">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="Timesheets" EntitySet="Timesheets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkAssignments_Customers" Association="Self.FK_WorkAssignments_Customers">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="WorkAssignments" EntitySet="WorkAssignments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employees_Employees" Association="Self.FK_Employees_Employees">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Departments" EntitySet="Departments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PinCodes_Employees" Association="Self.FK_PinCodes_Employees">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="PinCodes" EntitySet="PinCodes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Timesheets_WorkAssignments" Association="Self.FK_Timesheets_WorkAssignments">
-            <End Role="WorkAssignments" EntitySet="WorkAssignments" />
-            <End Role="Timesheets" EntitySet="Timesheets" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -541,106 +548,110 @@
           <EntitySetMapping Name="Contractors">
             <EntityTypeMapping TypeName="JohaMeriSQL2Model.Contractors">
               <MappingFragment StoreEntitySet="Contractors">
-                <ScalarProperty Name="Id_Contractor" ColumnName="Id_Contractor" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="VatId" ColumnName="VatId" />
-                <ScalarProperty Name="HourlyRate" ColumnName="HourlyRate" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="LastModifiedAt" ColumnName="LastModifiedAt" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="LastModifiedAt" ColumnName="LastModifiedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="HourlyRate" ColumnName="HourlyRate" />
+                <ScalarProperty Name="VatId" ColumnName="VatId" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Id_Contractor" ColumnName="Id_Contractor" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="JohaMeriSQL2Model.Customers">
               <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="LastModifiedAt" ColumnName="LastModifiedAt" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="LastModifiedAt" ColumnName="LastModifiedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Departments">
             <EntityTypeMapping TypeName="JohaMeriSQL2Model.Departments">
               <MappingFragment StoreEntitySet="Departments">
-                <ScalarProperty Name="Id_Department" ColumnName="Id_Department" />
                 <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
-                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+                <ScalarProperty Name="Id_Department" ColumnName="Id_Department" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="JohaMeriSQL2Model.Employees">
               <MappingFragment StoreEntitySet="Employees">
-                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
-                <ScalarProperty Name="Id_Contractor" ColumnName="Id_Contractor" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="EmployeeReference" ColumnName="EmployeeReference" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="EmployeePicture" ColumnName="EmployeePicture" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="EmployeeReference" ColumnName="EmployeeReference" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id_Department" ColumnName="Id_Department" />
+                <ScalarProperty Name="Id_Contractor" ColumnName="Id_Contractor" />
+                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PinCodes">
             <EntityTypeMapping TypeName="JohaMeriSQL2Model.PinCodes">
               <MappingFragment StoreEntitySet="PinCodes">
-                <ScalarProperty Name="Id_PinCode" ColumnName="Id_PinCode" />
-                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
-                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
-                <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
                 <ScalarProperty Name="Id_Contractor" ColumnName="Id_Contractor" />
+                <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
+                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="LastModifiedAt" ColumnName="LastModifiedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="Id_PinCode" ColumnName="Id_PinCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Timesheets">
             <EntityTypeMapping TypeName="JohaMeriSQL2Model.Timesheets">
               <MappingFragment StoreEntitySet="Timesheets">
-                <ScalarProperty Name="Id_Timesheet" ColumnName="Id_Timesheet" />
-                <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
-                <ScalarProperty Name="Id_Contractor" ColumnName="Id_Contractor" />
-                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
-                <ScalarProperty Name="Id_WorkAssignment" ColumnName="Id_WorkAssignment" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="StopTime" ColumnName="StopTime" />
-                <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="WorkComplete" ColumnName="WorkComplete" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="LastModifiedAt" ColumnName="LastModifiedAt" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="LastModifiedAt" ColumnName="LastModifiedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="WorkComplete" ColumnName="WorkComplete" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="StopTime" ColumnName="StopTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Id_WorkAssignment" ColumnName="Id_WorkAssignment" />
+                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+                <ScalarProperty Name="Id_Contractor" ColumnName="Id_Contractor" />
+                <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
+                <ScalarProperty Name="Id_Timesheet" ColumnName="Id_Timesheet" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WorkAssignments">
             <EntityTypeMapping TypeName="JohaMeriSQL2Model.WorkAssignments">
               <MappingFragment StoreEntitySet="WorkAssignments">
-                <ScalarProperty Name="Id_WorkAssignment" ColumnName="Id_WorkAssignment" />
-                <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
-                <ScalarProperty Name="InProgress" ColumnName="InProgress" />
-                <ScalarProperty Name="InProgressAt" ColumnName="InProgressAt" />
-                <ScalarProperty Name="Completed" ColumnName="Completed" />
-                <ScalarProperty Name="CompletedAt" ColumnName="CompletedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="LastModifiedAt" ColumnName="LastModifiedAt" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="LastModifiedAt" ColumnName="LastModifiedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CompletedAt" ColumnName="CompletedAt" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="InProgressAt" ColumnName="InProgressAt" />
+                <ScalarProperty Name="InProgress" ColumnName="InProgress" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
+                <ScalarProperty Name="Id_WorkAssignment" ColumnName="Id_WorkAssignment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

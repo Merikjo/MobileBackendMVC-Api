@@ -16,6 +16,10 @@ namespace MobileBackendMVC_Api.DataAccess
     {
         public int Id_PinCode { get; set; }
         public string PinCode { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> LastModifiedAt { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
+        public Nullable<bool> Active { get; set; }
         public Nullable<int> Id_Employee { get; set; }
         public Nullable<int> Id_Customer { get; set; }
         public Nullable<int> Id_Contractor { get; set; }

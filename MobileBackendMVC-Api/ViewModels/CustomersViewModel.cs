@@ -26,7 +26,8 @@ namespace MobileBackendMVC_Api.ViewModels
         public Nullable<System.DateTime> DeletedAt { get; set; }
         public bool? Active { get; set; }
 
-       
+      
+
         public virtual ICollection<PinCodes> PinCodes { get; set; }
 
         public virtual ICollection<Timesheets> Timesheets { get; set; }

@@ -18,15 +18,22 @@ namespace MobileBackendMVC_Api.ViewModels
         }
 
         public int Id_Employee { get; set; }
-        public Nullable<int> Id_Contractor { get; set; }
+        public int? Id_Contractor { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
         public string EmployeeReference { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
-        public Nullable<bool> Active { get; set; }
+        public bool? Active { get; set; }
+
         public byte[] EmployeePicture { get; set; }
+
+        public string CompanyName { get; set; }
+
+        public string DepartmentName { get; set; }
+
+        public int? Id_Department { get; set; }
 
         public virtual Contractors Contractors { get; set; }
      

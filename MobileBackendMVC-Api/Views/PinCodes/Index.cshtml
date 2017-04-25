@@ -1,0 +1,165 @@
+﻿@model IEnumerable<MobileBackendMVC_Api.DataAccess.PinCodes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+
+    <script type="text/javascript">
+        // oma filtteröintifunktio asiakkaille, jotka ovat aktiivisia
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            // luetaan valintaruudun asetus
+            var showArchive = $("#showArchivePinCodesCheckbox").is(":checked");
+
+            // luetaan 4. solun arvo: tämä on "Active"
+            var activePinCode = settings.aoData[dataIndex].anCells[4].children[0].checked;
+
+            /* Jos käyttäjä on valinnut asetuksen "Näytä aktiiviset", otetaan listalle
+             * mukaan myös arkistoidut .... Muussa tapauksessa (oletusarvo) ei näytetä.
+             * Tämän funktion paluuarvo kertoo, näytetäänkö rivi taulukossa vai ei. */
+            if (showArchive) {
+                // näytetään kaikki ..., myös arkistoidut
+                return true;
+            }
+            else {
+                if (activePinCode) {
+                    // ei näytetä arkistoituja ...
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        });
+
+        $(function () {
+            // sivun alustus
+            //alert("Sivun alustus");
+            var pincodeTaulu = $("#pincodeTable").DataTable();
+
+            $("#showArchivePinCodesCheckbox").change(function () {
+                // kun käyttäjä napsauttaa valintaruutua, päivitetään ...taulukko
+                pincodeTaulu.draw();
+            });
+        });
+
+    </script>
+
+}
+
+@section head {
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Scripts/DataTables/datatables.css" rel="stylesheet" />
+    <link href="~/Scripts/DataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+
+    <style>
+        /*div.dataTables_wrapper div.dataTables_filter input {
+            width: 400px;
+        }*/
+    </style>
+}
+
+<title></title>
+<!-- !SIDEMENU CONTENT!
+================================================== -->
+@*@{ Html.RenderAction("SideMenu", "Customers");}*@
+
+<!-- !PAGE CONTENT!
+================================================== -->
+<div class="w3-main" style="margin-left:252px">
+
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+
+    <!-- Container -->
+    <div class="w3-container">
+
+        <h2>PinCodes</h2>
+        <p>&nbsp;</p>
+        @*<p>PinCodes total: @Model.Count()</p>*@
+
+        <p><a href="/PinCodes/Create" class="w3-btn w3-large">New PinCode</a></p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>Show all pincodes: <input id="showArchivePinCodesCheckbox" type="checkbox" /></p>
+
+        <table class="table" id="pincodeTable">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PinCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastModifiedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeletedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Active)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Contractors.CompanyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customers.CustomerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employees.FirstName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PinCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastModifiedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeletedAt)
+                    </td>
+                    <td>
+                        @{
+                            string True = "";
+                            if (item.Active.HasValue && (item.Active.Value == true))
+                            {
+                                True = "checked";
+                            }
+                        }
+                        <input name="Active" type="checkbox" @True />
+                        @*@Html.DisplayFor(modelItem => item.Active)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contractors.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customers.CustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employees.FirstName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id_PinCode }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id_PinCode }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id_PinCode })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div><!-- End content -->
+</div><!-- End page content -->

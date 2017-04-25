@@ -116,8 +116,8 @@ namespace MobileBackendMVC_Api.Controllers
             tsv.StopTime = model.StopTime;
             tsv.Comments = model.Comments;
             tsv.WorkComplete = model.WorkComplete;
-            tsv.CreatedAt = model.CreatedAt;
-            tsv.LastModifiedAt = model.LastModifiedAt;
+            tsv.CreatedAt = DateTime.Now;
+            tsv.LastModifiedAt = DateTime.Now;
             tsv.DeletedAt = model.DeletedAt;
             tsv.Active = model.Active;
 
@@ -176,7 +176,7 @@ namespace MobileBackendMVC_Api.Controllers
             tsv.Comments = model.Comments;
             tsv.WorkComplete = model.WorkComplete;
             tsv.CreatedAt = model.CreatedAt;
-            tsv.LastModifiedAt = model.LastModifiedAt;
+            tsv.LastModifiedAt = DateTime.Now;
             tsv.DeletedAt = model.DeletedAt;
             tsv.Active = model.Active;
 
@@ -208,8 +208,8 @@ namespace MobileBackendMVC_Api.Controllers
             view.Comments = timesheetdetail.Comments;
             view.WorkComplete = timesheetdetail.WorkComplete;
             view.CreatedAt = timesheetdetail.CreatedAt;
-            view.LastModifiedAt = timesheetdetail.LastModifiedAt;
-            view.DeletedAt = timesheetdetail.DeletedAt;
+            view.LastModifiedAt = DateTime.Now;
+            view.DeletedAt = DateTime.Now;
             view.Active = timesheetdetail.Active;
 
 

@@ -183,11 +183,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContractorsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PinCodesController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\TimesheetsController.cs" />
     <Compile Include="Controllers\WorkAssignmentController.cs" />
@@ -236,9 +239,12 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ContractorsViewModel.cs" />
     <Compile Include="ViewModels\CustomersViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentsViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\HoursPerWorkAssignmentModel.cs" />
+    <Compile Include="ViewModels\PinCodesViewModel.cs" />
     <Compile Include="ViewModels\ReportChartDataViewModel.cs" />
     <Compile Include="ViewModels\TimeSheetsViewModel.cs" />
     <Compile Include="ViewModels\WorkAssignmentsViewModel.cs" />
@@ -273,6 +279,12 @@
     <None Include="Properties\PublishProfiles\MobileBackendMVC-Api - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\MobileBackendMVC-Api2 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.css" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTables\datatables.css" />
+    <Content Include="Scripts\DataTables\datatables.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.css" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -339,6 +351,21 @@
     <Content Include="Views\Timesheets\Details.cshtml" />
     <Content Include="Views\Timesheets\Edit.cshtml" />
     <Content Include="Views\Timesheets\Index.cshtml" />
+    <Content Include="Views\Contractors\Create.cshtml" />
+    <Content Include="Views\Contractors\Delete.cshtml" />
+    <Content Include="Views\Contractors\Details.cshtml" />
+    <Content Include="Views\Contractors\Edit.cshtml" />
+    <Content Include="Views\Contractors\Index.cshtml" />
+    <Content Include="Views\Departments\Create.cshtml" />
+    <Content Include="Views\Departments\Delete.cshtml" />
+    <Content Include="Views\Departments\Details.cshtml" />
+    <Content Include="Views\Departments\Edit.cshtml" />
+    <Content Include="Views\Departments\Index.cshtml" />
+    <Content Include="Views\PinCodes\Create.cshtml" />
+    <Content Include="Views\PinCodes\Delete.cshtml" />
+    <Content Include="Views\PinCodes\Details.cshtml" />
+    <Content Include="Views\PinCodes\Edit.cshtml" />
+    <Content Include="Views\PinCodes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

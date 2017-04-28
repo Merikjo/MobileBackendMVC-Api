@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MobileBackendMVC_Api.DataAccess;
 using MobileBackendMVC_Api.ViewModels;
+using System.Globalization;
 
 namespace MobileBackendMVC_Api.Controllers
 {
@@ -24,7 +25,7 @@ namespace MobileBackendMVC_Api.Controllers
 
             try
             {
-                List<WorkAssignments> workAssignments = entities.WorkAssignments.OrderBy(WorkAssignments => WorkAssignments.Title).ToList();
+                List<WorkAssignments> workAssignments = entities.WorkAssignments.OrderByDescending(WorkAssignments => WorkAssignments.Deadline).ToList();
 
                 // muodostetaan näkymämalli tietokannan rivien pohjalta       
                 foreach (WorkAssignments workAssignment in workAssignments)
@@ -33,17 +34,19 @@ namespace MobileBackendMVC_Api.Controllers
                     view.Id_WorkAssignment = workAssignment.Id_WorkAssignment;
                     view.Title = workAssignment.Title;
                     view.Description = workAssignment.Description;
-                    view.Deadline = workAssignment.Deadline;
-                    view.InProgress = workAssignment.InProgress;
-                    view.InProgressAt = workAssignment.InProgressAt;
-                    view.CompletedAt = workAssignment.CompletedAt;
-                    view.Completed = workAssignment.Completed;
-                    view.LastModifiedAt = workAssignment.LastModifiedAt;
+                    view.Deadline = workAssignment.Deadline.GetValueOrDefault();
+                    view.InProgress = workAssignment.InProgress.GetValueOrDefault();
+                    view.InProgressAt = workAssignment.InProgressAt.GetValueOrDefault();
+                    view.CompletedAt = workAssignment.CompletedAt.GetValueOrDefault();
+                    view.Completed = workAssignment.Completed.GetValueOrDefault();
+                    //view.LastModifiedAt = workAssignment.LastModifiedAt;
                     view.DeletedAt = workAssignment.DeletedAt;
                     view.Active = workAssignment.Active;
 
                     view.Id_Customer = workAssignment.Customers?.Id_Customer;
                     view.CustomerName = workAssignment.Customers?.CustomerName;
+
+                    ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
 
                     model.Add(view);
                 }
@@ -53,7 +56,7 @@ namespace MobileBackendMVC_Api.Controllers
                 entities.Dispose();
             }
 
-
+            CultureInfo fiFi = new CultureInfo("fi-FI");
 
             return View(model);
         }//Index
@@ -89,6 +92,7 @@ namespace MobileBackendMVC_Api.Controllers
 
                 view.Id_Customer = workassdetail.Customers?.Id_Customer;
                 view.CustomerName = workassdetail.Customers?.CustomerName;
+                ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
 
                 model = view;
 
@@ -107,6 +111,7 @@ namespace MobileBackendMVC_Api.Controllers
             JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
 
             WorkAssignmentsViewModel model = new WorkAssignmentsViewModel();
+
             ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
 
             return View(model);
@@ -141,6 +146,8 @@ namespace MobileBackendMVC_Api.Controllers
                 wam.Id_Customer = cus.Id_Customer;       
             }
 
+            ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
+
             try
             {
                 db.SaveChanges();
@@ -150,10 +157,11 @@ namespace MobileBackendMVC_Api.Controllers
             {
             }
 
-            ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
-
+            
             return RedirectToAction("Index");
         }//create
+
+        CultureInfo fiFi = new CultureInfo("fi-FI");
 
         // GET: WorkAssignments/Edit/5
         public ActionResult Edit(int? id)
@@ -172,19 +180,19 @@ namespace MobileBackendMVC_Api.Controllers
             view.Id_WorkAssignment = workassdetail.Id_WorkAssignment;
             view.Title = workassdetail.Title;
             view.Description = workassdetail.Description;
-            view.Deadline = workassdetail.Deadline;
+            view.Deadline = workassdetail.Deadline.Value;
             view.InProgress = workassdetail.InProgress;
-            view.InProgressAt = workassdetail.InProgressAt;
-            view.CompletedAt = workassdetail.CompletedAt;
+            view.InProgressAt = workassdetail.InProgressAt.Value;
+            view.CompletedAt = workassdetail.CompletedAt.Value;
             view.Completed = workassdetail.Completed;
-            view.LastModifiedAt = workassdetail.LastModifiedAt;
+            view.LastModifiedAt = workassdetail.LastModifiedAt.Value;
             view.DeletedAt = workassdetail.DeletedAt;
             view.Active = workassdetail.Active;
 
             view.Id_Customer = workassdetail.Customers?.Id_Customer;
             view.CustomerName = workassdetail.Customers?.CustomerName;
 
-            ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
+            ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", view.Id_Customer);
 
             return View(view);
         }
@@ -199,14 +207,33 @@ namespace MobileBackendMVC_Api.Controllers
             WorkAssignments wam = db.WorkAssignments.Find(model.Id_WorkAssignment);
             wam.Title = model.Title;
             wam.Description = model.Description;
-            wam.Deadline = model.Deadline;
+            wam.Deadline = model.Deadline.Value;
             wam.InProgress = model.InProgress;
             wam.InProgressAt = model.InProgressAt.GetValueOrDefault();
             wam.CompletedAt = DateTime.Now;
             wam.Completed = model.Completed;
             wam.LastModifiedAt = DateTime.Now;
-            wam.DeletedAt = model.DeletedAt.GetValueOrDefault();
+            wam.DeletedAt = model.DeletedAt;
             wam.Active = model.Active.GetValueOrDefault();
+
+            //if (wam.Customers == null)
+            //{
+            //    Customers cus = new Customers();
+            //    cus.CustomerName = model.CustomerName;
+            //    cus.WorkAssignments = wam;
+
+            //    db.Customers.Add(cus);
+            //}
+            //else
+            //{
+            //    Customers customer = wam.Customers;
+            //    if (customer != null)
+            //    {
+            //        customer.CustomerName = model.CustomerName;
+            //    }
+            //}
+
+
 
             int customerId = int.Parse(model.CustomerName);
             if (customerId > 0)
@@ -215,7 +242,7 @@ namespace MobileBackendMVC_Api.Controllers
                 wam.Id_Customer = cus.Id_Customer;
             }
 
-            ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
+            ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", wam.Id_Customer);
 
             db.SaveChanges();
             return RedirectToAction("Index");

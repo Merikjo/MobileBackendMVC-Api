@@ -16,7 +16,7 @@ namespace MobileBackendMVC_Api.ViewModels
         }
 
         public int Id_WorkAssignment { get; set; }
-        public Nullable<int> Id_Customer { get; set; }
+        public int? Id_Customer { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
@@ -24,6 +24,7 @@ namespace MobileBackendMVC_Api.ViewModels
         [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Work Deadline")]
         public DateTime? Deadline { get; set; }
+
         public bool? InProgress { get; set; }
 
 
@@ -32,6 +33,7 @@ namespace MobileBackendMVC_Api.ViewModels
         [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "In Progress")]
         public DateTime? InProgressAt { get; set; }
+
         public bool? Completed { get; set; }
 
 
@@ -54,6 +56,7 @@ namespace MobileBackendMVC_Api.ViewModels
         [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Work Archived")]
         public DateTime? DeletedAt { get; set; }
+
         public bool? Active { get; set; }
 
         public string CustomerName { get; set; }

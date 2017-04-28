@@ -4,96 +4,192 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Id_Employee)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.StartTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StopTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Comments)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WorkComplete)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastModifiedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeletedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Active)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Contractors.CompanyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Customers.CustomerName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WorkAssignments.Title)
-        </th>
-        <th></th>
-    </tr>
+@section scripts {
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
 
-@foreach (var item in Model) {
-    <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Id_Employee)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.StartTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StopTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comments)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WorkComplete)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastModifiedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeletedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Contractors.CompanyName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Customers.CustomerName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WorkAssignments.Title)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_Timesheet }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_Timesheet }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_Timesheet })
-        </td>
-    </tr>
+    <script type="text/javascript">
+        // oma filtteröintifunktio ..., jotka ovat aktiivisia
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            // luetaan valintaruudun asetus
+            var showArchive = $("#showArchiveTimesCheckbox").is(":checked");
+
+            // luetaan 4. solun arvo: tämä on "Active"
+            var activeTime = settings.aoData[dataIndex].anCells[4].children[0].checked;
+
+            /* Jos käyttäjä on valinnut asetuksen "Näytä aktiiviset", otetaan listalle
+             * mukaan myös arkistoidut ajat. Muussa tapauksessa (oletusarvo) ei näytetä.
+             * Tämän funktion paluuarvo kertoo, näytetäänkö rivi taulukossa vai ei. */
+            if (showArchive) {
+                // näytetään kaikki ajat, myös arkistoidut
+                return true;
+            }
+            else {
+                if (activeTime) {
+                    // ei näytetä arkistoituja aikoja
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        });
+
+        $(function () {
+            // sivun alustus
+            //alert("Sivun alustus");
+            var timeTaulu = $("#timesheetTable").DataTable();
+
+            $("#showArchiveTimesCheckbox").change(function () {
+                // kun käyttäjä napsauttaa valintaruutua, päivitetään aikataulukko
+                timeTaulu.draw();
+            });
+        });
+
+    </script>
+
 }
 
-</table>
+@section head {
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Scripts/DataTables/datatables.css" rel="stylesheet" />
+    <link href="~/Scripts/DataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+    <style>
+        /*div.dataTables_wrapper div.dataTables_filter input {
+            width: 400px;
+        }*/
+    </style>
+}
+
+<title>WorkAssignment</title>
+
+<!-- !SIDEMENU CONTENT!
+================================================== -->
+@{ Html.RenderAction("SideMenu", "Customers");}
+
+<!-- !PAGE CONTENT!
+================================================== -->
+<div class="w3-main" style="margin-left:300px">
+
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+
+    <!-- Container -->
+    <div class="w3-container">
+        <h2>Timesheet</h2>
+
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>Show all times: <input id="showArchiveTimesCheckbox" type="checkbox" /></p>
+        @*<p>
+                @Html.ActionLink("Create New", "Create")
+            </p>*@
+
+        <table class="table" id="timesheetTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StopTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Comments)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WorkComplete)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Active)
+                    </th>
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.CreatedAt)
+                </th>*@
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.LastModifiedAt)
+                </th>*@
+                    @*<th>
+                    @Html.DisplayNameFor(model => model.DeletedAt)
+                </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.CompanyName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StopTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comments)
+                        </td>
+                        <td>
+                            @{
+                                string Work = "";
+                                if (item.WorkComplete.HasValue && (item.WorkComplete.Value == true))
+                                {
+                                    Work = "checked";
+                                }
+                            }
+                            <input name="WorkComplete" type="checkbox" @Work />
+                            @*@Html.DisplayFor(modelItem => item.WorkComplete)*@
+                        </td>
+                        <td>
+                            @{
+                                string True = "";
+                                if (item.Active.HasValue && (item.Active.Value == true))
+                                {
+                                    True = "checked";
+                                }
+                            }
+                            <input name="Active" type="checkbox" @True />
+                            @*@Html.DisplayFor(modelItem => item.Active)*@
+                        </td>
+                        @*<td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </td>*@
+                        @*<td>
+                        @Html.DisplayFor(modelItem => item.LastModifiedAt)
+                    </td>*@
+                        @*<td>
+                        @Html.DisplayFor(modelItem => item.DeletedAt)
+                    </td>*@
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompanyName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id_Timesheet }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id_Timesheet }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id_Timesheet })
+                        </td>
+                    </tr>
+                                }
+            </tbody>
+        </table>
+    </div><!-- End content -->
+</div><!-- End page content -->

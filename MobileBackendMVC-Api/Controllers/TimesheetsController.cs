@@ -40,6 +40,17 @@ namespace MobileBackendMVC_Api.Controllers
                     view.DeletedAt = timesheet.DeletedAt;
                     view.Active = timesheet.Active;
 
+                    view.Id_Customer = timesheet.Customers?.Id_Customer;
+                    view.CustomerName = timesheet.Customers?.CustomerName;
+                    ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
+
+                    view.Id_Contractor = timesheet.Contractors?.Id_Contractor;
+                    view.CompanyName = timesheet.Contractors?.CompanyName;
+                    ViewBag.CompanyName = new SelectList((from co in db.Contractors select new { Id_Contractor = co.Id_Contractor, CompanyName = co.CompanyName }), "Id_Contractor", "CompanyName", null);
+
+                    view.Id_WorkAssignment = timesheet.WorkAssignments?.Id_WorkAssignment;
+                    view.Title = timesheet.WorkAssignments?.Title;
+
                     model.Add(view);
                 }
             }
@@ -77,6 +88,18 @@ namespace MobileBackendMVC_Api.Controllers
                 view.DeletedAt = timesheetdetail.DeletedAt;
                 view.Active = timesheetdetail.Active;
 
+                view.Id_Customer = timesheetdetail.Customers?.Id_Customer;
+                view.CustomerName = timesheetdetail.Customers?.CustomerName;
+                ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
+
+                view.Id_Contractor = timesheetdetail.Contractors?.Id_Contractor;
+                view.CompanyName = timesheetdetail.Contractors?.CompanyName;
+                ViewBag.CompanyName = new SelectList((from co in db.Contractors select new { Id_Contractor = co.Id_Contractor, CompanyName = co.CompanyName }), "Id_Contractor", "CompanyName", null);
+
+                view.Id_WorkAssignment = timesheetdetail.WorkAssignments?.Id_WorkAssignment;
+                view.Title = timesheetdetail.WorkAssignments?.Title;
+
+
                 model = view;
             }
             finally
@@ -90,13 +113,13 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: Timesheets/Create
             public ActionResult Create()
         {
-
             JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+
             TimeSheetsViewModel model = new TimeSheetsViewModel();
 
-            //ViewBag.Id_Contractor = new SelectList(db.Contractors, "Id_Contractor", "CompanyName");
-            //ViewBag.Id_Customer = new SelectList(db.Customers, "Id_Customer", "CustomerName");
-            //ViewBag.Id_WorkAssignment = new SelectList(db.WorkAssignments, "Id_WorkAssignment", "Title");
+            ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
+            ViewBag.CompanyName = new SelectList((from co in db.Contractors select new { Id_Contractor = co.Id_Contractor, CompanyName = co.CompanyName }), "Id_Contractor", "CompanyName", null);
+
 
             return View(model);
         }//create
@@ -113,19 +136,16 @@ namespace MobileBackendMVC_Api.Controllers
             Timesheets tsv = new Timesheets();
             tsv.Id_Timesheet = model.Id_Timesheet;
             tsv.StartTime = model.StartTime;
-            tsv.StopTime = model.StopTime;
+            tsv.StopTime = model.StopTime.GetValueOrDefault();
             tsv.Comments = model.Comments;
-            tsv.WorkComplete = model.WorkComplete;
             tsv.CreatedAt = DateTime.Now;
             tsv.LastModifiedAt = DateTime.Now;
-            tsv.DeletedAt = model.DeletedAt;
             tsv.Active = model.Active;
 
             db.Timesheets.Add(tsv);
 
-            //ViewBag.Id_Contractor = new SelectList(db.Contractors, "Id_Contractor", "CompanyName", timesheets.Id_Contractor);
-            //ViewBag.Id_Customer = new SelectList(db.Customers, "Id_Customer", "CustomerName", timesheets.Id_Customer);
-            //ViewBag.Id_WorkAssignment = new SelectList(db.WorkAssignments, "Id_WorkAssignment", "Title", timesheets.Id_WorkAssignment);
+            ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
+            ViewBag.CompanyName = new SelectList((from co in db.Contractors select new { Id_Contractor = co.Id_Contractor, CompanyName = co.CompanyName }), "Id_Contractor", "CompanyName", null);
 
             return RedirectToAction("Index");
         }//create
@@ -146,18 +166,16 @@ namespace MobileBackendMVC_Api.Controllers
 
             TimeSheetsViewModel view = new TimeSheetsViewModel();
             view.Id_Timesheet = timesheetdetail.Id_Timesheet;
-            view.StartTime = timesheetdetail.StartTime;
-            view.StopTime = timesheetdetail.StopTime;
+            view.StartTime = timesheetdetail.StartTime.Value;
+            view.StopTime = timesheetdetail.StopTime.GetValueOrDefault();
             view.Comments = timesheetdetail.Comments;
             view.WorkComplete = timesheetdetail.WorkComplete;
-            view.CreatedAt = timesheetdetail.CreatedAt;
-            view.LastModifiedAt = timesheetdetail.LastModifiedAt;
+            view.LastModifiedAt = DateTime.Now;
             view.DeletedAt = timesheetdetail.DeletedAt;
             view.Active = timesheetdetail.Active;
 
-            //ViewBag.Id_Contractor = new SelectList(db.Contractors, "Id_Contractor", "CompanyName", timesheets.Id_Contractor);
-            //ViewBag.Id_Customer = new SelectList(db.Customers, "Id_Customer", "CustomerName", timesheets.Id_Customer);
-            //ViewBag.Id_WorkAssignment = new SelectList(db.WorkAssignments, "Id_WorkAssignment", "Title", timesheets.Id_WorkAssignment);
+            ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", view.Id_Customer);
+            ViewBag.CompanyName = new SelectList((from co in db.Contractors select new { Id_Contractor = co.Id_Contractor, CompanyName = co.CompanyName }), "Id_Contractor", "CompanyName", view.Id_Contractor);
 
             return View(view);
         }
@@ -175,14 +193,12 @@ namespace MobileBackendMVC_Api.Controllers
             tsv.StopTime = model.StopTime;
             tsv.Comments = model.Comments;
             tsv.WorkComplete = model.WorkComplete;
-            tsv.CreatedAt = model.CreatedAt;
             tsv.LastModifiedAt = DateTime.Now;
             tsv.DeletedAt = model.DeletedAt;
             tsv.Active = model.Active;
 
-            //ViewBag.Id_Contractor = new SelectList(db.Contractors, "Id_Contractor", "CompanyName", timesheets.Id_Contractor);
-            //ViewBag.Id_Customer = new SelectList(db.Customers, "Id_Customer", "CustomerName", timesheets.Id_Customer);
-            //ViewBag.Id_WorkAssignment = new SelectList(db.WorkAssignments, "Id_WorkAssignment", "Title", timesheets.Id_WorkAssignment);
+            ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", tsv.Id_Customer);
+            ViewBag.CompanyName = new SelectList((from co in db.Contractors select new { Id_Contractor = co.Id_Contractor, CompanyName = co.CompanyName }), "Id_Contractor", "CompanyName", tsv.Id_Contractor);
 
             db.SaveChanges();
             return View("Index");

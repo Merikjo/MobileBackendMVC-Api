@@ -68,11 +68,11 @@
 <title></title>
 <!-- !SIDEMENU CONTENT!
 ================================================== -->
-@*@{ Html.RenderAction("SideMenu", "Customers");}*@
+@{ Html.RenderAction("SideMenu", "Customers");}
 
 <!-- !PAGE CONTENT!
 ================================================== -->
-<div class="w3-main" style="margin-left:252px">
+<div class="w3-main" style="margin-left:300px">
 
     <!-- Push down content on small screens -->
     <div class="w3-hide-large" style="margin-top:83px"></div>
@@ -111,6 +111,9 @@
                     @Html.DisplayNameFor(model => model.HourlyRate)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Active)
+                </th>
+                @*<th>
                     @Html.DisplayNameFor(model => model.CreatedAt)
                 </th>
                 <th>
@@ -118,10 +121,8 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.DeletedAt)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Active)
-                </th>
+                </th>*@
+              
                 <th></th>
             </tr>
 
@@ -147,15 +148,6 @@
                         @Html.DisplayFor(modelItem => item.HourlyRate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CreatedAt)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastModifiedAt)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DeletedAt)
-                    </td>
-                    <td>
                         @{
                             string True = "";
                             if (item.Active.HasValue && (item.Active.Value == true))
@@ -166,6 +158,16 @@
                         <input name="Active" type="checkbox" @True />
                         @*@Html.DisplayFor(modelItem => item.Active)*@
                     </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastModifiedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeletedAt)
+                    </td>*@
+             
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id_Contractor }) |
                         @Html.ActionLink("Details", "Details", new { id = item.Id_Contractor }) |

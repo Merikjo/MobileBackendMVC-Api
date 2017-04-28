@@ -142,17 +142,17 @@
 <title></title>
 <!-- !SIDEMENU CONTENT!
 ================================================== -->
-@*@{ Html.RenderAction("SideMenu", "Customers");}*@
+@{ Html.RenderAction("SideMenu", "Customers");}
 
 <!-- !PAGE CONTENT!
 ================================================== -->
-@*<div class="w3-main" style="margin-left:252px">*@
+<div class="w3-main" style="margin-left:300px">
 
     <!-- Push down content on small screens -->
     <div class="w3-hide-large" style="margin-top:83px"></div>
 
     <!-- Container -->
-    @*<div class="w3-container">*@
+    <div class="w3-container">
         <h2>Work Assignments</h2>
         <p>&nbsp;</p>
 
@@ -172,7 +172,7 @@
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Customers.CustomerName)
+                    @Html.DisplayNameFor(model => model.CustomerName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Deadline)
@@ -217,7 +217,7 @@
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Customers.CustomerName)
+                        @Html.DisplayFor(modelItem => item.CustomerName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Deadline)
@@ -285,5 +285,5 @@
                             }
 
         </table>
-    @*</div><!-- End content -->
-</div><!-- End page content -->*@
+    </div><!-- End content -->
+</div><!-- End page content -->

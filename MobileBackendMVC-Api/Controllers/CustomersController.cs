@@ -225,5 +225,12 @@ namespace MobileBackendMVC_Api.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        //SideMenu:
+        public ActionResult SideMenu()
+        {
+            return PartialView("SideMenu");
+        }
     }
 }

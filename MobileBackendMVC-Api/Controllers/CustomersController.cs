@@ -39,7 +39,11 @@ namespace MobileBackendMVC_Api.Controllers
                     view.LastModifiedAt = customer.LastModifiedAt;
                     view.DeletedAt = customer.DeletedAt;
                     view.Active = customer.Active;
-                   
+
+                    view.Id_PinCode = customer.PinCodes.FirstOrDefault()?.Id_PinCode;
+                    view.PinCode = customer.PinCodes.FirstOrDefault()?.PinCode;
+                    ViewBag.PinCode = new SelectList((from u in db.PinCodes select new { Id_PinCode = u.Id_PinCode, PinCode = u.PinCode }), "Id_PinCode", "PinCode", null);
+
                     model.Add(view);
                 }
             }
@@ -76,6 +80,11 @@ namespace MobileBackendMVC_Api.Controllers
                 view.LastModifiedAt = customerdetail.LastModifiedAt;
                 view.DeletedAt = customerdetail.DeletedAt;
                 view.Active = customerdetail.Active;
+
+                view.Id_PinCode = customerdetail.PinCodes.FirstOrDefault()?.Id_PinCode;
+                view.PinCode = customerdetail.PinCodes.FirstOrDefault()?.PinCode;
+                ViewBag.PinCode = new SelectList((from u in db.PinCodes select new { Id_PinCode = u.Id_PinCode, PinCode = u.PinCode }), "Id_PinCode", "PinCode", null);
+
 
                 model = view;
             }
@@ -118,6 +127,15 @@ namespace MobileBackendMVC_Api.Controllers
 
             db.Customers.Add(cus);
 
+            PinCodes pic = new PinCodes();
+            pic.PinCode = model.PinCode;
+            //usr.Password = "joku@joku.fi";
+            pic.Customers = cus;
+            ViewBag.PinCode = new SelectList((from p in db.PinCodes select new { Id_PinCode = p.Id_PinCode, PinCode = p.PinCode }), "Id_PinCode", "PinCode", null);
+
+          
+            db.PinCodes.Add(pic);
+
             try
             {
                 db.SaveChanges();
@@ -154,6 +172,11 @@ namespace MobileBackendMVC_Api.Controllers
             view.DeletedAt = customerdetail.DeletedAt;
             view.Active = customerdetail.Active;
 
+            view.Id_PinCode = customerdetail.PinCodes.FirstOrDefault()?.Id_PinCode;
+            view.PinCode = customerdetail.PinCodes.FirstOrDefault()?.PinCode;
+            ViewBag.PinCode = new SelectList((from u in db.PinCodes select new { Id_PinCode = u.Id_PinCode, PinCode = u.PinCode }), "Id_PinCode", "PinCode", null);
+
+
             return View(view);
         }
 
@@ -173,6 +196,26 @@ namespace MobileBackendMVC_Api.Controllers
             cus.LastModifiedAt = DateTime.Now; ;
             cus.DeletedAt = model.DeletedAt;
             cus.Active = model.Active;
+
+            if (cus.PinCodes == null)
+            {
+                PinCodes pic = new PinCodes();
+                pic.PinCode = model.PinCode;
+                //usr.Password = "joku@joku.fi";
+                pic.Customers = cus;
+
+                db.PinCodes.Add(pic);
+            }
+            else
+            {
+                PinCodes pic = cus.PinCodes.FirstOrDefault();
+                if (pic != null)
+                {
+                    pic.PinCode = model.PinCode;
+                }
+            }
+
+            ViewBag.PinCode = new SelectList((from u in db.PinCodes select new { Id_PinCode = u.Id_PinCode, PinCode = u.PinCode }), "Id_PinCode", "PinCode", null);
 
             db.SaveChanges();
             return View("Index");
@@ -202,6 +245,11 @@ namespace MobileBackendMVC_Api.Controllers
             view.LastModifiedAt = customerdetail.LastModifiedAt;
             view.DeletedAt = customerdetail.DeletedAt;
             view.Active = customerdetail.Active;
+
+            view.Id_PinCode = customerdetail.PinCodes.FirstOrDefault()?.Id_PinCode;
+            view.PinCode = customerdetail.PinCodes.FirstOrDefault()?.PinCode;
+            ViewBag.PinCode = new SelectList((from u in db.PinCodes select new { Id_PinCode = u.Id_PinCode, PinCode = u.PinCode }), "Id_PinCode", "PinCode", null);
+
 
             return View(view);
         }

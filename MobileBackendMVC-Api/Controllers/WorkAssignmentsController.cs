@@ -36,8 +36,8 @@ namespace MobileBackendMVC_Api.Controllers
                     view.Description = workAssignment.Description;
                     view.Deadline = workAssignment.Deadline.GetValueOrDefault();
                     view.InProgress = workAssignment.InProgress.GetValueOrDefault();
-                    view.InProgressAt = workAssignment.InProgressAt.GetValueOrDefault();
-                    view.CompletedAt = workAssignment.CompletedAt.GetValueOrDefault();
+                    view.InProgressAt = workAssignment.InProgressAt;
+                    view.CompletedAt = workAssignment.CompletedAt;
                     view.Completed = workAssignment.Completed.GetValueOrDefault();
                     //view.LastModifiedAt = workAssignment.LastModifiedAt;
                     view.DeletedAt = workAssignment.DeletedAt;

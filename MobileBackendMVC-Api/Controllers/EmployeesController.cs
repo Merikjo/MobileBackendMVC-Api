@@ -40,6 +40,11 @@ namespace MobileBackendMVC_Api.Controllers
                     view.Active = employee.Active;
                     view.EmployeePicture = employee.EmployeePicture;
 
+                    view.Id_PinCode = employee.PinCodes.FirstOrDefault()?.Id_PinCode;
+                    view.PinCode = employee.PinCodes.FirstOrDefault()?.PinCode;
+                    ViewBag.PinCode = new SelectList((from u in db.PinCodes select new { Id_PinCode = u.Id_PinCode, PinCode = u.PinCode }), "Id_PinCode", "PinCode", null);
+
+
                     view.Id_Contractor = employee.Contractors?.Id_Contractor;
                     view.CompanyName = employee.Contractors?.CompanyName;
 

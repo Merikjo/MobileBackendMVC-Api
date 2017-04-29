@@ -36,10 +36,16 @@ namespace MobileBackendMVC_Api.Controllers
                     view.ContactPerson = contractor.ContactPerson;
                     view.PhoneNumber = contractor.PhoneNumber;
                     view.EmailAddress = contractor.EmailAddress;
+                    view.VatId = contractor.VatId;
+                    view.HourlyRate = contractor.HourlyRate;
                     view.CreatedAt = contractor.CreatedAt;
                     view.LastModifiedAt = contractor.LastModifiedAt;
                     view.DeletedAt = contractor.DeletedAt;
                     view.Active = contractor.Active;
+
+                    view.Id_PinCode = contractor.PinCodes.FirstOrDefault()?.Id_PinCode;
+                    view.PinCode = contractor.PinCodes.FirstOrDefault()?.PinCode;
+                    ViewBag.PinCode = new SelectList((from u in db.PinCodes select new { Id_PinCode = u.Id_PinCode, PinCode = u.PinCode }), "Id_PinCode", "PinCode", null);
 
                     model.Add(view);
                 }
@@ -74,6 +80,8 @@ namespace MobileBackendMVC_Api.Controllers
                 view.ContactPerson = contractordetail.ContactPerson;
                 view.PhoneNumber = contractordetail.PhoneNumber;
                 view.EmailAddress = contractordetail.EmailAddress;
+                view.VatId = contractordetail.VatId;
+                view.HourlyRate = contractordetail.HourlyRate;
                 view.CreatedAt = contractordetail.CreatedAt;
                 view.LastModifiedAt = contractordetail.LastModifiedAt;
                 view.DeletedAt = contractordetail.DeletedAt;
@@ -113,6 +121,8 @@ namespace MobileBackendMVC_Api.Controllers
             con.ContactPerson = model.ContactPerson;
             con.PhoneNumber = model.PhoneNumber;
             con.EmailAddress = model.EmailAddress;
+            con.VatId = model.VatId;
+            con.HourlyRate = model.HourlyRate;
             con.CreatedAt = DateTime.Now;
             con.LastModifiedAt = DateTime.Now;
             con.DeletedAt = model.DeletedAt;
@@ -151,6 +161,8 @@ namespace MobileBackendMVC_Api.Controllers
             view.ContactPerson = contractordetail.ContactPerson;
             view.PhoneNumber = contractordetail.PhoneNumber;
             view.EmailAddress = contractordetail.EmailAddress;
+            view.VatId = contractordetail.VatId;
+            view.HourlyRate = contractordetail.HourlyRate;
             view.CreatedAt = contractordetail.CreatedAt;
             view.LastModifiedAt = contractordetail.LastModifiedAt;
             view.DeletedAt = contractordetail.DeletedAt;
@@ -171,6 +183,8 @@ namespace MobileBackendMVC_Api.Controllers
             con.ContactPerson = model.ContactPerson;
             con.PhoneNumber = model.PhoneNumber;
             con.EmailAddress = model.EmailAddress;
+            con.VatId = model.VatId;
+            con.HourlyRate = model.HourlyRate;
             con.CreatedAt = model.CreatedAt;
             con.LastModifiedAt = DateTime.Now;
             con.DeletedAt = model.DeletedAt;
@@ -200,6 +214,8 @@ namespace MobileBackendMVC_Api.Controllers
             view.ContactPerson = contractordetail.ContactPerson;
             view.PhoneNumber = contractordetail.PhoneNumber;
             view.EmailAddress = contractordetail.EmailAddress;
+            view.VatId = contractordetail.VatId;
+            view.HourlyRate = contractordetail.HourlyRate;
             view.CreatedAt = contractordetail.CreatedAt;
             view.LastModifiedAt = DateTime.Now;
             view.DeletedAt = DateTime.Now;

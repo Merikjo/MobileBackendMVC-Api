@@ -1,4 +1,4 @@
-﻿@model MobileBackendMVC_Api.DataAccess.PinCodes
+﻿@model MobileBackendMVC_Api.ViewModels.PinCodesViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -52,27 +52,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Contractors.CompanyName)
+            @Html.DisplayNameFor(model => model.CompanyName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Contractors.CompanyName)
+            @Html.DisplayFor(model => model.CompanyName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Customers.CustomerName)
+            @Html.DisplayNameFor(model => model.CustomerName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Customers.CustomerName)
+            @Html.DisplayFor(model => model.CustomerName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Employees.FirstName)
+            @Html.DisplayNameFor(model => model.FirstName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Employees.FirstName)
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
         </dd>
 
     </dl>

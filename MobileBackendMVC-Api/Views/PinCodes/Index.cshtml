@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MobileBackendMVC_Api.DataAccess.PinCodes>
+﻿@model IEnumerable<MobileBackendMVC_Api.ViewModels.PinCodesViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -67,11 +67,11 @@
 <title></title>
 <!-- !SIDEMENU CONTENT!
 ================================================== -->
-@*@{ Html.RenderAction("SideMenu", "Customers");}*@
+@{ Html.RenderAction("SideMenu", "Customers");}
 
 <!-- !PAGE CONTENT!
 ================================================== -->
-<div class="w3-main" style="margin-left:252px">
+<div class="w3-main" style="margin-left:300px">
 
     <!-- Push down content on small screens -->
     <div class="w3-hide-large" style="margin-top:83px"></div>
@@ -94,26 +94,21 @@
                     @Html.DisplayNameFor(model => model.PinCode)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CreatedAt)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastModifiedAt)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DeletedAt)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Active)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Contractors.CompanyName)
+                    @Html.DisplayNameFor(model => model.CompanyName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Customers.CustomerName)
+                    @Html.DisplayNameFor(model => model.CustomerName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Employees.FirstName)
+                    @Html.DisplayNameFor(model => model.FirstName)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+     
                 <th></th>
             </tr>
 
@@ -123,15 +118,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.PinCode)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedAt)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastModifiedAt)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DeletedAt)
-                    </td>
+              
                     <td>
                         @{
                             string True = "";
@@ -144,14 +131,19 @@
                         @*@Html.DisplayFor(modelItem => item.Active)*@
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Contractors.CompanyName)
+                        @Html.DisplayFor(modelItem => item.CompanyName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Customers.CustomerName)
+                        @Html.DisplayFor(modelItem => item.CustomerName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Employees.FirstName)
+                        @Html.DisplayFor(modelItem => item.FirstName)
                     </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+
+                   
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id_PinCode }) |
                         @Html.ActionLink("Details", "Details", new { id = item.Id_PinCode }) |

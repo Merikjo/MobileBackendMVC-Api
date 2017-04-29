@@ -65,7 +65,8 @@
     </style>
 }
 
-<title></title>
+<title>WorkAssignment</title>
+
 <!-- !SIDEMENU CONTENT!
 ================================================== -->
 @{ Html.RenderAction("SideMenu", "Customers");}
@@ -113,15 +114,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Active)
                 </th>
-                @*<th>
-                    @Html.DisplayNameFor(model => model.CreatedAt)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastModifiedAt)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DeletedAt)
-                </th>*@
+        
               
                 <th></th>
             </tr>
@@ -158,15 +151,7 @@
                         <input name="Active" type="checkbox" @True />
                         @*@Html.DisplayFor(modelItem => item.Active)*@
                     </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.CreatedAt)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastModifiedAt)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DeletedAt)
-                    </td>*@
+            
              
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id_Contractor }) |

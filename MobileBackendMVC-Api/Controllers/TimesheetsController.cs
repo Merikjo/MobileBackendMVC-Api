@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MobileBackendMVC_Api.DataAccess;
 using MobileBackendMVC_Api.ViewModels;
+using System.Globalization;
 
 namespace MobileBackendMVC_Api.Controllers
 {
@@ -58,6 +59,7 @@ namespace MobileBackendMVC_Api.Controllers
             {
                 entities.Dispose();
             }
+            CultureInfo fiFi = new CultureInfo("fi-FI");
 
             return View(model);
         }//Index
@@ -146,6 +148,15 @@ namespace MobileBackendMVC_Api.Controllers
 
             ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
             ViewBag.CompanyName = new SelectList((from co in db.Contractors select new { Id_Contractor = co.Id_Contractor, CompanyName = co.CompanyName }), "Id_Contractor", "CompanyName", null);
+
+            try
+            {
+                db.SaveChanges();
+            }
+
+            catch (Exception ex)
+            {
+            }
 
             return RedirectToAction("Index");
         }//create

@@ -8,6 +8,8 @@ namespace MobileBackendMVC_Api.ViewModels
     using MobileBackendMVC_Api.DataAccess;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class EmployeesViewModel
     {
         
@@ -24,7 +26,11 @@ namespace MobileBackendMVC_Api.ViewModels
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
         public string EmployeeReference { get; set; }
-        public Nullable<System.DateTime> DeletedAt { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "DeletedAt")]
+        public DateTime? DeletedAt { get; set; }
         public bool? Active { get; set; }
 
         public byte[] EmployeePicture { get; set; }
@@ -34,6 +40,9 @@ namespace MobileBackendMVC_Api.ViewModels
         public string DepartmentName { get; set; }
 
         public int? Id_Department { get; set; }
+
+        public int? Id_PinCode { get; set; }
+        public string PinCode { get; set; }
 
         public virtual Contractors Contractors { get; set; }
      

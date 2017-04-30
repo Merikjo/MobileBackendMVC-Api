@@ -59,9 +59,9 @@ namespace MobileBackendMVC_Api.Controllers
             {
                 Employees newEmployee = new Employees()
                 {
-                    FirstName = "Heebo",
-                    LastName = "X",
-                    EmployeePicture = File.ReadAllBytes(@"C:\Temp\Heebo.png")
+                    FirstName = "Matti",
+                    LastName = "Tuhkanen",
+                    EmployeePicture = File.ReadAllBytes(@"C:\Temppi\Matti.jpg")
                 };
                 entities.Employees.Add(newEmployee);
                 entities.SaveChanges();

@@ -18,6 +18,7 @@ namespace MobileBackendMVC_Api.DataAccess
         public Employees()
         {
             this.PinCodes = new HashSet<PinCodes>();
+            this.Timesheets = new HashSet<Timesheets>();
         }
     
         public int Id_Employee { get; set; }
@@ -36,5 +37,7 @@ namespace MobileBackendMVC_Api.DataAccess
         public virtual Departments Departments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PinCodes> PinCodes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Timesheets> Timesheets { get; set; }
     }
 }

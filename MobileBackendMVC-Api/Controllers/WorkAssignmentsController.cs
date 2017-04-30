@@ -25,7 +25,7 @@ namespace MobileBackendMVC_Api.Controllers
 
             try
             {
-                List<WorkAssignments> workAssignments = entities.WorkAssignments.OrderByDescending(WorkAssignments => WorkAssignments.Deadline).ToList();
+                List<WorkAssignments> workAssignments = entities.WorkAssignments.OrderBy(WorkAssignments => WorkAssignments.Deadline).ToList();
 
                 // muodostetaan näkymämalli tietokannan rivien pohjalta       
                 foreach (WorkAssignments workAssignment in workAssignments)
@@ -36,13 +36,13 @@ namespace MobileBackendMVC_Api.Controllers
                     view.Description = workAssignment.Description;
                     view.Deadline = workAssignment.Deadline;
                     view.CreatedAt = workAssignment.CreatedAt;
-                    view.InProgress = true;
+                    view.InProgress = workAssignment.InProgress;
                     view.InProgressAt = workAssignment.InProgressAt;
                     view.CompletedAt = workAssignment.CompletedAt;
                     view.Completed = workAssignment.Completed;
                     view.LastModifiedAt = workAssignment.LastModifiedAt;
                     view.DeletedAt = workAssignment.DeletedAt;
-                    view.Active = true;
+                    view.Active = workAssignment.Active;
 
                     view.Id_Customer = workAssignment.Customers?.Id_Customer;
                     view.CustomerName = workAssignment.Customers?.CustomerName;
@@ -132,10 +132,10 @@ namespace MobileBackendMVC_Api.Controllers
             wam.Title = model.Title;
             wam.Description = model.Description;
             wam.Deadline = model.Deadline;
-            wam.CreatedAt = model.CreatedAt;
+            wam.CreatedAt = DateTime.Now;
             wam.InProgress = model.InProgress;
             wam.InProgressAt = model.InProgressAt;
-            wam.CompletedAt = DateTime.Now;
+            wam.CompletedAt = model.CompletedAt;
             wam.Completed = model.Completed;
             wam.LastModifiedAt = DateTime.Now;
             wam.Active = true; ;
@@ -182,14 +182,14 @@ namespace MobileBackendMVC_Api.Controllers
             view.Id_WorkAssignment = workassdetail.Id_WorkAssignment;
             view.Title = workassdetail.Title;
             view.Description = workassdetail.Description;
-            view.Deadline = workassdetail.Deadline;
-            view.CreatedAt = workassdetail.CreatedAt.Value;
+            view.Deadline = workassdetail.Deadline.GetValueOrDefault();
+            view.CreatedAt = workassdetail.CreatedAt.GetValueOrDefault();
             view.InProgress = workassdetail.InProgress;
-            view.InProgressAt = workassdetail.InProgressAt.Value;
-            view.CompletedAt = workassdetail.CompletedAt;
+            view.InProgressAt = workassdetail.InProgressAt.GetValueOrDefault();
+            view.CompletedAt = workassdetail.CompletedAt.GetValueOrDefault();
             view.Completed = workassdetail.Completed;
             view.LastModifiedAt = DateTime.Now;
-            view.DeletedAt = workassdetail.DeletedAt;
+            view.DeletedAt = workassdetail.DeletedAt.GetValueOrDefault();
             view.Active = workassdetail.Active;
 
             view.Id_Customer = workassdetail.Customers?.Id_Customer;
@@ -210,14 +210,14 @@ namespace MobileBackendMVC_Api.Controllers
             WorkAssignments wam = db.WorkAssignments.Find(model.Id_WorkAssignment);
             wam.Title = model.Title;
             wam.Description = model.Description;
-            wam.Deadline = model.Deadline.Value;
-            wam.CreatedAt = model.CreatedAt.Value;
-            wam.InProgress = true;
-            wam.InProgressAt = model.InProgressAt.Value;
-            wam.CompletedAt = model.CreatedAt.Value;
+            wam.Deadline = model.Deadline.GetValueOrDefault();
+            wam.CreatedAt = model.CreatedAt.GetValueOrDefault();
+            wam.InProgress = model.InProgress;
+            wam.InProgressAt = model.InProgressAt.GetValueOrDefault();
+            wam.CompletedAt = model.CompletedAt.GetValueOrDefault();
             wam.Completed = model.Completed;
             wam.LastModifiedAt = DateTime.Now;
-            wam.DeletedAt = model.DeletedAt.Value;
+            wam.DeletedAt = model.DeletedAt.GetValueOrDefault();
             wam.Active = true;
 
             int customerId = int.Parse(model.CustomerName);

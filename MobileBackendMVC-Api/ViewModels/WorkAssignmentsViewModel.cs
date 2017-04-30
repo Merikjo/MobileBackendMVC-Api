@@ -21,7 +21,7 @@ namespace MobileBackendMVC_Api.ViewModels
         public string Description { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Work Deadline")]
         public DateTime? Deadline { get; set; }
 
@@ -30,7 +30,7 @@ namespace MobileBackendMVC_Api.ViewModels
 
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "In Progress")]
         public DateTime? InProgressAt { get; set; }
 
@@ -38,22 +38,22 @@ namespace MobileBackendMVC_Api.ViewModels
 
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Work Completed")]
         public DateTime? CompletedAt { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Work Created")]
         public DateTime? CreatedAt { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Last Modified")]
         public DateTime? LastModifiedAt { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Work Archived")]
         public DateTime? DeletedAt { get; set; }
 

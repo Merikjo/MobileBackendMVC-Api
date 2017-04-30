@@ -41,6 +41,10 @@ namespace MobileBackendMVC_Api.Controllers
                     view.DeletedAt = timesheet.DeletedAt;
                     view.Active = timesheet.Active;
 
+                    view.Id_Employee = timesheet.Id_Employee;
+                    view.FirstName = timesheet.Employees?.FirstName;
+                    view.LastName = timesheet.Employees?.LastName;
+
                     view.Id_Customer = timesheet.Customers?.Id_Customer;
                     view.CustomerName = timesheet.Customers?.CustomerName;
                     ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
@@ -89,6 +93,10 @@ namespace MobileBackendMVC_Api.Controllers
                 view.LastModifiedAt = timesheetdetail.LastModifiedAt;
                 view.DeletedAt = timesheetdetail.DeletedAt;
                 view.Active = timesheetdetail.Active;
+
+                view.Id_Employee = timesheetdetail.Id_Employee;
+                view.FirstName = timesheetdetail.Employees?.FirstName;
+                view.LastName = timesheetdetail.Employees?.LastName;
 
                 view.Id_Customer = timesheetdetail.Customers?.Id_Customer;
                 view.CustomerName = timesheetdetail.Customers?.CustomerName;
@@ -146,6 +154,20 @@ namespace MobileBackendMVC_Api.Controllers
 
             db.Timesheets.Add(tsv);
 
+            int employeeId = int.Parse(model.FirstName);
+            if (employeeId > 0)
+            {
+                Employees emp = db.Employees.Find(employeeId);
+                tsv.Id_Employee = emp.Id_Employee;
+            }
+
+            int employeeLastId = int.Parse(model.LastName);
+            if (employeeLastId > 0)
+            {
+                Employees emp = db.Employees.Find(employeeLastId);
+                tsv.Id_Employee = emp.Id_Employee;
+            }
+
             ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
             ViewBag.CompanyName = new SelectList((from co in db.Contractors select new { Id_Contractor = co.Id_Contractor, CompanyName = co.CompanyName }), "Id_Contractor", "CompanyName", null);
 
@@ -185,6 +207,10 @@ namespace MobileBackendMVC_Api.Controllers
             view.DeletedAt = timesheetdetail.DeletedAt;
             view.Active = timesheetdetail.Active;
 
+            view.Id_Employee = timesheetdetail.Id_Employee;
+            view.FirstName = timesheetdetail.Employees?.FirstName;
+            view.LastName = timesheetdetail.Employees?.LastName;
+
             ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", view.Id_Customer);
             ViewBag.CompanyName = new SelectList((from co in db.Contractors select new { Id_Contractor = co.Id_Contractor, CompanyName = co.CompanyName }), "Id_Contractor", "CompanyName", view.Id_Contractor);
 
@@ -207,6 +233,20 @@ namespace MobileBackendMVC_Api.Controllers
             tsv.LastModifiedAt = DateTime.Now;
             tsv.DeletedAt = model.DeletedAt;
             tsv.Active = model.Active;
+
+            int employeeId = int.Parse(model.FirstName);
+            if (employeeId > 0)
+            {
+                Employees emp = db.Employees.Find(employeeId);
+                tsv.Id_Employee = emp.Id_Employee;
+            }
+
+            int employeeLastId = int.Parse(model.LastName);
+            if (employeeLastId > 0)
+            {
+                Employees emp = db.Employees.Find(employeeLastId);
+                tsv.Id_Employee = emp.Id_Employee;
+            }
 
             ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", tsv.Id_Customer);
             ViewBag.CompanyName = new SelectList((from co in db.Contractors select new { Id_Contractor = co.Id_Contractor, CompanyName = co.CompanyName }), "Id_Contractor", "CompanyName", tsv.Id_Contractor);
@@ -239,7 +279,9 @@ namespace MobileBackendMVC_Api.Controllers
             view.DeletedAt = DateTime.Now;
             view.Active = timesheetdetail.Active;
 
-
+            view.Id_Employee = timesheetdetail.Id_Employee;
+            view.FirstName = timesheetdetail.Employees?.FirstName;
+            view.LastName = timesheetdetail.Employees?.LastName;
 
             return View(view);
         }

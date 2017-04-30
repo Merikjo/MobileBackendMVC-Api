@@ -192,6 +192,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Timesheets_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_Employee" />
+            </Principal>
+            <Dependent Role="Timesheets">
+              <PropertyRef Name="Id_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Timesheets_WorkAssignments">
           <End Role="WorkAssignments" Type="Self.WorkAssignments" Multiplicity="0..1" />
           <End Role="Timesheets" Type="Self.Timesheets" Multiplicity="*" />
@@ -252,6 +264,10 @@
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Timesheets" EntitySet="Timesheets" />
           </AssociationSet>
+          <AssociationSet Name="FK_Timesheets_Employees" Association="Self.FK_Timesheets_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Timesheets" EntitySet="Timesheets" />
+          </AssociationSet>
           <AssociationSet Name="FK_Timesheets_WorkAssignments" Association="Self.FK_Timesheets_WorkAssignments">
             <End Role="WorkAssignments" EntitySet="WorkAssignments" />
             <End Role="Timesheets" EntitySet="Timesheets" />
@@ -304,6 +320,10 @@
           <AssociationSet Name="FK_PinCodes_Employees" Association="JohaMeriSQL2Model.FK_PinCodes_Employees">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="PinCodes" EntitySet="PinCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timesheets_Employees" Association="JohaMeriSQL2Model.FK_Timesheets_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Timesheets" EntitySet="Timesheets" />
           </AssociationSet>
           <AssociationSet Name="FK_Timesheets_WorkAssignments" Association="JohaMeriSQL2Model.FK_Timesheets_WorkAssignments">
             <End Role="WorkAssignments" EntitySet="WorkAssignments" />
@@ -372,6 +392,7 @@
           <NavigationProperty Name="Contractors" Relationship="JohaMeriSQL2Model.FK_Employees_Contractors" FromRole="Employees" ToRole="Contractors" />
           <NavigationProperty Name="Departments" Relationship="JohaMeriSQL2Model.FK_Employees_Departments" FromRole="Employees" ToRole="Departments" />
           <NavigationProperty Name="PinCodes" Relationship="JohaMeriSQL2Model.FK_PinCodes_Employees" FromRole="Employees" ToRole="PinCodes" />
+          <NavigationProperty Name="Timesheets" Relationship="JohaMeriSQL2Model.FK_Timesheets_Employees" FromRole="Employees" ToRole="Timesheets" />
         </EntityType>
         <EntityType Name="PinCodes">
           <Key>
@@ -409,6 +430,7 @@
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="Contractors" Relationship="JohaMeriSQL2Model.FK_Timesheets_Contractors" FromRole="Timesheets" ToRole="Contractors" />
           <NavigationProperty Name="Customers" Relationship="JohaMeriSQL2Model.FK_Timesheets_Customers" FromRole="Timesheets" ToRole="Customers" />
+          <NavigationProperty Name="Employees" Relationship="JohaMeriSQL2Model.FK_Timesheets_Employees" FromRole="Timesheets" ToRole="Employees" />
           <NavigationProperty Name="WorkAssignments" Relationship="JohaMeriSQL2Model.FK_Timesheets_WorkAssignments" FromRole="Timesheets" ToRole="WorkAssignments" />
         </EntityType>
         <EntityType Name="WorkAssignments">
@@ -527,6 +549,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Timesheets_Employees">
+          <End Type="JohaMeriSQL2Model.Employees" Role="Employees" Multiplicity="0..1" />
+          <End Type="JohaMeriSQL2Model.Timesheets" Role="Timesheets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id_Employee" />
+            </Principal>
+            <Dependent Role="Timesheets">
+              <PropertyRef Name="Id_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Timesheets_WorkAssignments">
           <End Type="JohaMeriSQL2Model.WorkAssignments" Role="WorkAssignments" Multiplicity="0..1" />
           <End Type="JohaMeriSQL2Model.Timesheets" Role="Timesheets" Multiplicity="*" />
@@ -539,7 +573,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

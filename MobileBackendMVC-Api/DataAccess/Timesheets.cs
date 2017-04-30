@@ -30,6 +30,7 @@ namespace MobileBackendMVC_Api.DataAccess
     
         public virtual Contractors Contractors { get; set; }
         public virtual Customers Customers { get; set; }
+        public virtual Employees Employees { get; set; }
         public virtual WorkAssignments WorkAssignments { get; set; }
     }
 }

@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="728f00a33cd044ce9e1616193eb88d23" Name="Diagram1">
-        <EntityTypeShape EntityType="JohaMeriSQL2Model.Contractors" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="JohaMeriSQL2Model.Customers" Width="1.5" PointX="0.75" PointY="6.25" />
-        <EntityTypeShape EntityType="JohaMeriSQL2Model.Departments" Width="1.5" PointX="1.5" PointY="12.25" />
-        <EntityTypeShape EntityType="JohaMeriSQL2Model.Employees" Width="1.5" PointX="3.75" PointY="11.25" />
-        <EntityTypeShape EntityType="JohaMeriSQL2Model.PinCodes" Width="1.5" PointX="6" PointY="6.25" />
-        <EntityTypeShape EntityType="JohaMeriSQL2Model.Timesheets" Width="1.5" PointX="8.25" PointY="5.875" />
-        <EntityTypeShape EntityType="JohaMeriSQL2Model.WorkAssignments" Width="1.5" PointX="3" PointY="5.875" />
+      <Diagram DiagramId="728f00a33cd044ce9e1616193eb88d23" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="JohaMeriSQL2Model.Contractors" Width="1.5" PointX="0.75" PointY="13.5" />
+        <EntityTypeShape EntityType="JohaMeriSQL2Model.Customers" Width="1.5" PointX="0.75" PointY="6.375" />
+        <EntityTypeShape EntityType="JohaMeriSQL2Model.Departments" Width="1.5" PointX="1.5" PointY="11" />
+        <EntityTypeShape EntityType="JohaMeriSQL2Model.Employees" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="JohaMeriSQL2Model.PinCodes" Width="1.5" PointX="3" PointY="6.375" />
+        <EntityTypeShape EntityType="JohaMeriSQL2Model.Timesheets" Width="1.5" PointX="5.25" PointY="10.5" />
+        <EntityTypeShape EntityType="JohaMeriSQL2Model.WorkAssignments" Width="1.5" PointX="3" PointY="15.125" />
         <AssociationConnector Association="JohaMeriSQL2Model.FK_Employees_Contractors" />
         <AssociationConnector Association="JohaMeriSQL2Model.FK_PinCodes_Contractors" />
         <AssociationConnector Association="JohaMeriSQL2Model.FK_Timesheets_Contractors" />
@@ -20,6 +20,7 @@
         <AssociationConnector Association="JohaMeriSQL2Model.FK_WorkAssignments_Customers" />
         <AssociationConnector Association="JohaMeriSQL2Model.FK_Employees_Departments" />
         <AssociationConnector Association="JohaMeriSQL2Model.FK_PinCodes_Employees" />
+        <AssociationConnector Association="JohaMeriSQL2Model.FK_Timesheets_Employees" />
         <AssociationConnector Association="JohaMeriSQL2Model.FK_Timesheets_WorkAssignments" />
       </Diagram>
     </edmx:Diagrams>

@@ -89,69 +89,71 @@
         <p>Show all pincodes: <input id="showArchivePinCodesCheckbox" type="checkbox" /></p>
 
         <table class="table" id="pincodeTable">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.PinCode)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Active)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CompanyName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CustomerName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
-     
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PinCode)
-                    </td>
-              
-                    <td>
-                        @{
-                            string True = "";
-                            if (item.Active.HasValue && (item.Active.Value == true))
-                            {
-                                True = "checked";
-                            }
-                        }
-                        <input name="Active" type="checkbox" @True />
-                        @*@Html.DisplayFor(modelItem => item.Active)*@
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CompanyName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomerName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PinCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Active)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CompanyName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
 
-                   
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id_PinCode }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id_PinCode }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id_PinCode })
-                    </td>
+                    <th></th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PinCode)
+                        </td>
 
+                        <td>
+                            @{
+                                string True = "";
+                                if (item.Active.HasValue && (item.Active.Value == true))
+                                {
+                                    True = "checked";
+                                }
+                            }
+                            <input name="Active" type="checkbox" @True />
+                            @*@Html.DisplayFor(modelItem => item.Active)*@
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompanyName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+
+
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id_PinCode }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id_PinCode }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id_PinCode })
+                        </td>
+                    </tr>
+                                }
+            </tbody>
         </table>
     </div><!-- End content -->
 </div><!-- End page content -->

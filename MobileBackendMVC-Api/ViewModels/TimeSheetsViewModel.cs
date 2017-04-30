@@ -16,30 +16,30 @@ namespace MobileBackendMVC_Api.ViewModels
         public int? Id_WorkAssignment { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "StartTime")]
         public DateTime? StartTime { get; set; }
 
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "StopTime")]
         public DateTime? StopTime { get; set; }
         public string Comments { get; set; }
         public bool? WorkComplete { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "CreatedAt")]
         public DateTime? CreatedAt { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "LastModifiedAt ")]
         public DateTime? LastModifiedAt { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "DeletedAt")]
         public DateTime? DeletedAt { get; set; }
         public bool? Active { get; set; }
@@ -49,8 +49,15 @@ namespace MobileBackendMVC_Api.ViewModels
         public string CompanyName { get; set; }
 
         public string Title { get; set; }
-        
 
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+     
+
+
+        public virtual Employees Employees { get; set; }
         public virtual Contractors Contractors { get; set; }
         public virtual Customers Customers { get; set; }
         public virtual WorkAssignments WorkAssignments { get; set; }

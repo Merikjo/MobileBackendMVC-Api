@@ -22,7 +22,7 @@
             myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ["AA","BB"],
+                    labels: ["AA", "BB"],
                     datasets: [{
                         label: 'Lukumäärä',
                         data: [],
@@ -74,49 +74,81 @@
         });
     </script>
 }
-<h2>Hours Per Work Assignment</h2>
+@section head {
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.WorkAssignmentId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WorkAssignmentName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalHours)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.WorkAssignmentId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WorkAssignmentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalHours)
-            </td>
-        </tr>
-    }
-
-</table>
-
-<p>Total entries: @Model.Count().</p>
-
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-<a href="~/Reports/HoursPerWorkAssignmentAsExcel" class="btn btn-primary">Export To Excel</a>
-
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Scripts/DataTables/datatables.css" rel="stylesheet" />
+    <link href="~/Scripts/DataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
 
-<input id="showOnlyCompletedRecords" type="checkbox" /> Show Only Completed Records
-<canvas id="myChart" width="400" height="200"></canvas>
+    <style>
+        /*div.dataTables_wrapper div.dataTables_filter input {
+            width: 400px;
+        }*/
+    </style>
+}
+
+<title>WorkAssignment</title>
+
+<!-- !SIDEMENU CONTENT!
+================================================== -->
+@{ Html.RenderAction("SideMenu", "Customers");}
+
+<!-- !PAGE CONTENT!
+================================================== -->
+<div class="w3-main" style="margin-left:300px">
+
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+
+    <!-- Container -->
+    <div class="w3-container">
+
+
+        <h2>Hours Per Work Assignment</h2>
+        <p>&nbsp;</p>
+
+        <p>Total entries: @Model.Count().</p>
+        <p>&nbsp;</p>
+
+        <a href="~/Reports/HoursPerWorkAssignmentAsExcel" class="btn btn-primary">Export To Excel</a>
+
+        <p>&nbsp;</p>
+
+
+        <input id="showOnlyCompletedRecords" type="checkbox" /> Show Only Completed Records
+        <canvas id="myChart" width="400" height="200"></canvas>
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkAssignmentId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkAssignmentName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalHours)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkAssignmentId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkAssignmentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalHours)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div><!-- End content -->
+</div><!-- End page content -->

@@ -49,6 +49,27 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="OpenXmlSdkTool">
+      <HintPath>C:\Program Files (x86)\Open XML SDK\V2.5\tool\OpenXmlSdkTool.exe</HintPath>
+    </Reference>
+    <Reference Include="OpenXmlSdkTool.ClassExplorer">
+      <HintPath>C:\Program Files (x86)\Open XML SDK\V2.5\tool\OpenXmlSdkTool.ClassExplorer.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenXmlSdkTool.Core">
+      <HintPath>C:\Program Files (x86)\Open XML SDK\V2.5\tool\OpenXmlSdkTool.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenXmlSdkTool.DocumentReflector">
+      <HintPath>C:\Program Files (x86)\Open XML SDK\V2.5\tool\OpenXmlSdkTool.DocumentReflector.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenXmlSdkTool.OpenXmlDiff">
+      <HintPath>C:\Program Files (x86)\Open XML SDK\V2.5\tool\OpenXmlSdkTool.OpenXmlDiff.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenXmlSdkTool.OpenXmlValidator">
+      <HintPath>C:\Program Files (x86)\Open XML SDK\V2.5\tool\OpenXmlSdkTool.OpenXmlValidator.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenXmlSdkTool.PackageInspector">
+      <HintPath>C:\Program Files (x86)\Open XML SDK\V2.5\tool\OpenXmlSdkTool.PackageInspector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -381,6 +402,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

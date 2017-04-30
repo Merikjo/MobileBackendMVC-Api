@@ -34,14 +34,15 @@ namespace MobileBackendMVC_Api.Controllers
                     view.Id_WorkAssignment = workAssignment.Id_WorkAssignment;
                     view.Title = workAssignment.Title;
                     view.Description = workAssignment.Description;
-                    view.Deadline = workAssignment.Deadline.GetValueOrDefault();
-                    view.InProgress = workAssignment.InProgress.GetValueOrDefault();
+                    view.Deadline = workAssignment.Deadline;
+                    view.CreatedAt = workAssignment.CreatedAt;
+                    view.InProgress = true;
                     view.InProgressAt = workAssignment.InProgressAt;
                     view.CompletedAt = workAssignment.CompletedAt;
-                    view.Completed = workAssignment.Completed.GetValueOrDefault();
-                    //view.LastModifiedAt = workAssignment.LastModifiedAt;
+                    view.Completed = workAssignment.Completed;
+                    view.LastModifiedAt = workAssignment.LastModifiedAt;
                     view.DeletedAt = workAssignment.DeletedAt;
-                    view.Active = workAssignment.Active;
+                    view.Active = true;
 
                     view.Id_Customer = workAssignment.Customers?.Id_Customer;
                     view.CustomerName = workAssignment.Customers?.CustomerName;
@@ -82,6 +83,7 @@ namespace MobileBackendMVC_Api.Controllers
                 view.Title = workassdetail.Title;
                 view.Description = workassdetail.Description;
                 view.Deadline = workassdetail.Deadline;
+                view.CreatedAt = workassdetail.CreatedAt;
                 view.InProgress = workassdetail.InProgress;
                 view.InProgressAt = workassdetail.InProgressAt;
                 view.CompletedAt = workassdetail.CompletedAt;
@@ -92,7 +94,7 @@ namespace MobileBackendMVC_Api.Controllers
 
                 view.Id_Customer = workassdetail.Customers?.Id_Customer;
                 view.CustomerName = workassdetail.Customers?.CustomerName;
-                ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", null);
+                ViewBag.CustomerName = new SelectList((from c in db.Customers select new { Id_Customer = c.Id_Customer, CustomerName = c.CustomerName }), "Id_Customer", "CustomerName", view.Id_Customer);
 
                 model = view;
 
@@ -108,7 +110,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: WorkAssignments/Create
         public ActionResult Create()
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL2Entities db = new JohaMeriSQL2Entities();
 
             WorkAssignmentsViewModel model = new WorkAssignmentsViewModel();
 
@@ -129,13 +131,14 @@ namespace MobileBackendMVC_Api.Controllers
             WorkAssignments wam = new WorkAssignments();
             wam.Title = model.Title;
             wam.Description = model.Description;
-            wam.Deadline = model.Deadline.GetValueOrDefault();
-            wam.InProgress = model.InProgress.GetValueOrDefault();
-            wam.InProgressAt = model.InProgressAt.GetValueOrDefault();
+            wam.Deadline = model.Deadline;
+            wam.CreatedAt = model.CreatedAt;
+            wam.InProgress = model.InProgress;
+            wam.InProgressAt = model.InProgressAt;
             wam.CompletedAt = DateTime.Now;
             wam.Completed = model.Completed;
             wam.LastModifiedAt = DateTime.Now;
-            wam.Active = model.Active;
+            wam.Active = true; ;
 
             db.WorkAssignments.Add(wam);
 
@@ -156,8 +159,7 @@ namespace MobileBackendMVC_Api.Controllers
             catch (Exception ex)
             {
             }
-
-            
+           
             return RedirectToAction("Index");
         }//create
 
@@ -180,12 +182,13 @@ namespace MobileBackendMVC_Api.Controllers
             view.Id_WorkAssignment = workassdetail.Id_WorkAssignment;
             view.Title = workassdetail.Title;
             view.Description = workassdetail.Description;
-            view.Deadline = workassdetail.Deadline.Value;
+            view.Deadline = workassdetail.Deadline;
+            view.CreatedAt = workassdetail.CreatedAt.Value;
             view.InProgress = workassdetail.InProgress;
             view.InProgressAt = workassdetail.InProgressAt.Value;
-            view.CompletedAt = workassdetail.CompletedAt.Value;
+            view.CompletedAt = workassdetail.CompletedAt;
             view.Completed = workassdetail.Completed;
-            view.LastModifiedAt = workassdetail.LastModifiedAt.Value;
+            view.LastModifiedAt = DateTime.Now;
             view.DeletedAt = workassdetail.DeletedAt;
             view.Active = workassdetail.Active;
 
@@ -208,32 +211,14 @@ namespace MobileBackendMVC_Api.Controllers
             wam.Title = model.Title;
             wam.Description = model.Description;
             wam.Deadline = model.Deadline.Value;
-            wam.InProgress = model.InProgress;
-            wam.InProgressAt = model.InProgressAt.GetValueOrDefault();
-            wam.CompletedAt = DateTime.Now;
+            wam.CreatedAt = model.CreatedAt.Value;
+            wam.InProgress = true;
+            wam.InProgressAt = model.InProgressAt.Value;
+            wam.CompletedAt = model.CreatedAt.Value;
             wam.Completed = model.Completed;
             wam.LastModifiedAt = DateTime.Now;
-            wam.DeletedAt = model.DeletedAt;
-            wam.Active = model.Active.GetValueOrDefault();
-
-            //if (wam.Customers == null)
-            //{
-            //    Customers cus = new Customers();
-            //    cus.CustomerName = model.CustomerName;
-            //    cus.WorkAssignments = wam;
-
-            //    db.Customers.Add(cus);
-            //}
-            //else
-            //{
-            //    Customers customer = wam.Customers;
-            //    if (customer != null)
-            //    {
-            //        customer.CustomerName = model.CustomerName;
-            //    }
-            //}
-
-
+            wam.DeletedAt = model.DeletedAt.Value;
+            wam.Active = true;
 
             int customerId = int.Parse(model.CustomerName);
             if (customerId > 0)

@@ -44,7 +44,7 @@ namespace MobileBackendMVC_Api.ViewModels
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Work Started")]
+        [Display(Name = "Work Created")]
         public DateTime? CreatedAt { get; set; }
 
         [DataType(DataType.Date)]

@@ -300,6 +300,7 @@
     <None Include="Properties\PublishProfiles\MobileBackendMVC-Api - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\MobileBackendMVC-Api2 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\DataTables\dataTables.bootstrap.css" />
     <Content Include="Scripts\DataTables\dataTables.bootstrap.js" />
     <Content Include="Scripts\DataTables\datatables.css" />

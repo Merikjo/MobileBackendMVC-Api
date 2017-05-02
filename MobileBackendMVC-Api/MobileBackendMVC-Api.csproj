@@ -288,6 +288,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\TalviKorsi.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="DataAccess\TimesheetModel.edmx">
@@ -389,6 +390,7 @@
     <Content Include="Views\PinCodes\Edit.cshtml" />
     <Content Include="Views\PinCodes\Index.cshtml" />
     <Content Include="Views\Shared\SideMenu.cshtml" />
+    <Content Include="Views\Employees\Geo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

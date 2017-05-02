@@ -61,7 +61,7 @@ namespace MobileBackendMVC_Api.Controllers
                 {
                     FirstName = "Matti",
                     LastName = "Tuhkanen",
-                    EmployeePicture = File.ReadAllBytes(@"C:\Temppi\Matti.jpg")
+                    EmployeePicture = File.ReadAllBytes(@"E:\Visual Studio 2017\Images\Matti.jpg")
                 };
                 entities.Employees.Add(newEmployee);
                 entities.SaveChanges();

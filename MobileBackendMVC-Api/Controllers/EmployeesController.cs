@@ -309,5 +309,10 @@ namespace MobileBackendMVC_Api.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Geo()
+        {
+            return View();
+        }
     }
 }

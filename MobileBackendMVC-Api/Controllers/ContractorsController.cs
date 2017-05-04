@@ -100,7 +100,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: Contractors/Create
         public ActionResult Create()
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL2Entities db = new JohaMeriSQL2Entities();
 
             ContractorsViewModel model = new ContractorsViewModel();
 
@@ -114,7 +114,7 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ContractorsViewModel model)
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL2Entities db = new JohaMeriSQL2Entities();
 
             Contractors con = new Contractors();
             con.CompanyName = model.CompanyName;

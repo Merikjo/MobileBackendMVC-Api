@@ -110,7 +110,7 @@ namespace MobileBackendMVC_Api.Controllers
 
             // palautetaan CSV-tiedot selaimelle
             byte[] buffer = Encoding.UTF8.GetBytes(csv.ToString());
-            return File(buffer, "text/csv", "Työtunnit.csv");
+            return File(buffer, "text/csv", "Työtunnit2.csv");
         }
 
         public ActionResult GetTimesheetCounts(string onlyComplete)

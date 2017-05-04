@@ -82,13 +82,16 @@
         <h2>Employees</h2>
         <p>&nbsp;</p>
 
-        <p><a href="/Customers/Create" class="w3-btn w3-large">New Employee</a></p>
+        <p><a href="/Employees/Create" class="w3-btn w3-large">New Employee</a></p>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
         <p>Show all employees: <input id="showArchiveEmployeesCheckbox" type="checkbox" /></p>
         <table class="table" id="employeeTable">
             <thead>
                 <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id_Employee)
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.FirstName)
                     </th>
@@ -104,9 +107,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.EmployeeReference)
                     </th>
-                   
-                  
-
                     <th>
                         @Html.DisplayNameFor(model => model.DepartmentName)
                     </th>
@@ -135,6 +135,9 @@
             {
                     <tr>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Id_Employee)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.FirstName)
                         </td>
                         <td>
@@ -155,7 +158,6 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.CompanyName)
                         </td>
-
                         <td>
                             @Html.DisplayFor(modelItem => item.EmployeePicture)
                         </td>

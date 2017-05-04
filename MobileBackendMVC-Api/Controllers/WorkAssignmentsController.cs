@@ -27,6 +27,8 @@ namespace MobileBackendMVC_Api.Controllers
             {
                 List<WorkAssignments> workAssignments = entities.WorkAssignments.OrderBy(WorkAssignments => WorkAssignments.Deadline).ToList();
 
+                CultureInfo fiFi = new CultureInfo("fi-FI");
+               
                 // muodostetaan näkymämalli tietokannan rivien pohjalta       
                 foreach (WorkAssignments workAssignment in workAssignments)
                 {
@@ -57,7 +59,7 @@ namespace MobileBackendMVC_Api.Controllers
                 entities.Dispose();
             }
 
-            CultureInfo fiFi = new CultureInfo("fi-FI");
+            
 
             return View(model);
         }//Index
@@ -168,6 +170,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: WorkAssignments/Edit/5
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

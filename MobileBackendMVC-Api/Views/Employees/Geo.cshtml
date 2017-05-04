@@ -5,9 +5,7 @@
 
 
 <body>
-
-
-    @section scripts {
+@section scripts {
 
         <script src="~/Scripts/modernizr-2.8.3.js"></script>
         <script src="~/Scripts/bootstrap.min.js"></script>
@@ -16,7 +14,7 @@
 
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <script src="http://maps.googleapis.com/maps/api/js"></script>
-        @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_Jxx0pa197zGwfVh7jZUks0k1SJnB7ow&callback=initMap" async defer></script>*@
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_Jxx0pa197zGwfVh7jZUks0k1SJnB7ow&callback=initMap" async defer></script>
         <script type="text/javascript">
             //Omasijaintikartta
             var x = document.getElementById("demo");
@@ -57,12 +55,12 @@
             }
 
         </script>
-    }
+}
 
-    @section head {
+@section head {
         <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
-    }
+}
 
     <!-- !SIDEMENU CONTENT!
     ================================================== -->
@@ -81,11 +79,12 @@
             <div>
                 <p id="demo">Tarkista sijaintisi</p>
 
-                <button onclick="getLocation()">Your Location</button>
+                <button onclick="getLocation()">My Location</button>
 
-                <div id="mapholder"></div>
+                <div id="mapholder" style="width:300px;height:300px"></div>
+              
 
-            </div>
+                </div>
 
         </div><!-- End content -->
     </div><!-- End page content -->

@@ -111,6 +111,7 @@ namespace MobileBackendMVC_Api.Controllers
         public ActionResult Create()
         {
             JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+
             EmployeesViewModel model = new EmployeesViewModel();
 
             ViewBag.DepartmentName = new SelectList((from d in db.Departments select new { Id_Department = d.Id_Department, DepartmentName = d.DepartmentName }), "Id_Department", "DepartmentName", null);

@@ -13,6 +13,7 @@
 <script src="http://maps.googleapis.com/maps/api/js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_Jxx0pa197zGwfVh7jZUks0k1SJnB7ow&callback=initMap" async defer></script>
 <script src="~/Scripts/Chart.js"></script>
+
 <script type="text/javascript">
     // Get the Sidebar
     var mySidebar = document.getElementById("mySidebar");
@@ -237,17 +238,14 @@
 @section head {
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
    
-}
-
 <style>
     body {
         background-image: url('../../Images/TalviJaljet.jpg');
-     
     }
 
-    div.bodyimagecolor {
-        /*opacity: 0.5;*/
-        background-color: rgb(230, 230, 230);
+    .bodyimagecolor {
+        /*opacity: 0.5;
+        background-color: rgb(230, 230, 230);*/
     }
 
     .container {
@@ -255,7 +253,7 @@
         opacity: 0.8;
     }
 </style>
-
+}
 
 
 <body class="w3-light-grey">
@@ -267,7 +265,7 @@
         </div>
 
         <!-- Sidebar/menu -->
-        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar">
+        <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;background-color:rgb(166, 166, 166)!important;" id="mySidebar">
             <br>
             <div class="w3-container w3-row">
                 <div class="w3-col s4">
@@ -276,7 +274,7 @@
 
                 <div class="w3-col s8 w3-bar">
                     <span>Welcome, <strong>Johanna</strong></span><br>
-                    <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+                    <a href="mailto:johanna.merikanto@hotmail.com?Subject=Hello!%20leave a message for us, thank you:" target="_top" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
                     <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
                     <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
                 </div>
@@ -540,6 +538,9 @@
             </div>
             <!-- End page content -->
         </div>
-        </div>
+    </div>
 
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 </body>

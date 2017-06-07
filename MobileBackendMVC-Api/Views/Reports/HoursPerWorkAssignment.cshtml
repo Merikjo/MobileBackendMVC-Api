@@ -73,6 +73,64 @@
                 lataaDataPalvelimelta(url);
             })
         });
+
+// Contractors Hourly rate
+
+        function alustaGraafi() {
+            var ctx = document.getElementById("myChart2");
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["AA", "BB"],
+                    datasets: [{
+                        label: 'Hourly Rate',
+                        data: [],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: chartOptions
+            });
+        }
+
+        function lataaDataPalvelimelta(url) {
+            $.get(url, function (data) {
+                myChart.config.data.datasets[0].data = data.Counts;
+                myChart.config.data.labels = data.Labels;
+                myChart.update();
+            });
+        }
+
+        $(function () {
+            // sivun alustus
+            alustaGraafi();
+            lataaDataPalvelimelta("/reports/GetTimesheetCounts2");
+
+            $("#showOnlyCompletedRecords2").change(function () {
+                var selected = $("#showOnlyCompletedRecords2").is(":checked");
+
+                var url = "/reports/GetTimesheetCounts2";
+                if (selected) {
+                    url += "?onlyComplete=1"
+                }
+                lataaDataPalvelimelta(url);
+            })
+        });
     </script>
 }
 @section head {
@@ -161,3 +219,10 @@
 
     </div><!-- End content -->
 </div><!-- End page content -->
+
+
+<h2>Contractors Hourly Rate</h2>
+<p>&nbsp;</p>
+
+<input id="showOnlyCompletedRecords2" type="checkbox" /> Show Only Completed Records
+<canvas id="myChart2" width="400" height="200"></canvas>

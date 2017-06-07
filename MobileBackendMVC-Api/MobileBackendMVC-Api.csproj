@@ -296,9 +296,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Jousi.jpg" />
+    <Content Include="Images\Ketju.jpg" />
+    <Content Include="Images\Kivet.jpg" />
+    <Content Include="Images\Kukka.jpg" />
     <Content Include="Images\Matti.jpg" />
     <Content Include="Images\TalviJaljet.jpg" />
     <Content Include="Images\TalviKorsi.jpg" />
+    <Content Include="Images\Topi.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="DataAccess\TimesheetModel.edmx">

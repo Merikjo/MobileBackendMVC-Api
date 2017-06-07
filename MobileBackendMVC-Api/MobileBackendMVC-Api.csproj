@@ -286,6 +286,12 @@
       <DependentUpon>TimesheetModel.edmx</DependentUpon>
       <LastGenOutput>TimesheetModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Database\dbo.Contractors.sql" />
+    <Content Include="Database\dbo.Customers.sql" />
+    <Content Include="Database\dbo.Employees.sql" />
+    <Content Include="Database\dbo.PinCodes.sql" />
+    <Content Include="Database\dbo.Timesheets.sql" />
+    <Content Include="Database\dbo.WorkAssignments.sql" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

@@ -25,7 +25,7 @@ namespace MobileBackendMVC_Api.ViewModels
         [Display(Name = "Work Deadline")]
         public DateTime? Deadline { get; set; }
 
-        public bool? InProgress { get; set; }
+        public bool InProgress { get; set; }
 
 
 
@@ -34,7 +34,7 @@ namespace MobileBackendMVC_Api.ViewModels
         [Display(Name = "In Progress")]
         public DateTime? InProgressAt { get; set; }
 
-        public bool? Completed { get; set; }
+        public bool Completed { get; set; }
 
 
         [DataType(DataType.Date)]

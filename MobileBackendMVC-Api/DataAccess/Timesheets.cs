@@ -22,11 +22,11 @@ namespace MobileBackendMVC_Api.DataAccess
         public Nullable<System.DateTime> StartTime { get; set; }
         public Nullable<System.DateTime> StopTime { get; set; }
         public string Comments { get; set; }
-        public Nullable<bool> WorkComplete { get; set; }
+        public bool WorkComplete { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> LastModifiedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
-        public Nullable<bool> Active { get; set; }
+        public bool Active { get; set; }
     
         public virtual Contractors Contractors { get; set; }
         public virtual Customers Customers { get; set; }

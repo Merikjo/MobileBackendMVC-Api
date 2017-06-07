@@ -30,7 +30,7 @@ namespace MobileBackendMVC_Api.DataAccess
         public string EmailAddress { get; set; }
         public string EmployeeReference { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
-        public Nullable<bool> Active { get; set; }
+        public bool Active { get; set; }
         public byte[] EmployeePicture { get; set; }
     
         public virtual Contractors Contractors { get; set; }

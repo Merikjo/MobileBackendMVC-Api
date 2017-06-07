@@ -31,7 +31,7 @@ namespace MobileBackendMVC_Api.ViewModels
         [Display(Name = "DeletedAt")]
         public DateTime? DeletedAt { get; set; }
 
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
         public string CompanyName { get; set; }
         public string CustomerName { get; set; }
         public string FirstName { get; set; }

@@ -31,7 +31,7 @@ namespace MobileBackendMVC_Api.ViewModels
         [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "DeletedAt")]
         public DateTime? DeletedAt { get; set; }
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
 
         public byte[] EmployeePicture { get; set; }
 

@@ -11,6 +11,6 @@ namespace MobileBackendMVC_Api.ViewModels
         public string WorkAssignmentName { get; set; }
         public double TotalHours { get; set; }
 
-        public bool? WorkComplete { get; set; }
+        public bool WorkComplete { get; set; }
     }
 }

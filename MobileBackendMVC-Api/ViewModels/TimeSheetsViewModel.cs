@@ -26,7 +26,7 @@ namespace MobileBackendMVC_Api.ViewModels
         [Display(Name = "StopTime")]
         public DateTime? StopTime { get; set; }
         public string Comments { get; set; }
-        public bool? WorkComplete { get; set; }
+        public bool WorkComplete { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
@@ -42,7 +42,7 @@ namespace MobileBackendMVC_Api.ViewModels
         [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "DeletedAt")]
         public DateTime? DeletedAt { get; set; }
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
 
         public string CustomerName { get; set; }
 
@@ -53,9 +53,6 @@ namespace MobileBackendMVC_Api.ViewModels
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-
-     
-
 
         public virtual Employees Employees { get; set; }
         public virtual Contractors Contractors { get; set; }

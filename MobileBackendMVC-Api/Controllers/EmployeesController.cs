@@ -13,14 +13,14 @@ namespace MobileBackendMVC_Api.Controllers
 {
     public class EmployeesController : Controller
     {
-        private JohaMeriSQL2Entities db = new JohaMeriSQL2Entities();
+        private JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
 
         // GET: Employees
         public ActionResult Index()
         {
             List<EmployeesViewModel> model = new List<EmployeesViewModel>();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             try
             {
@@ -69,7 +69,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             EmployeesViewModel model = new EmployeesViewModel();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 Employees employeedetail = entities.Employees.Find(id);
@@ -110,7 +110,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             EmployeesViewModel model = new EmployeesViewModel();
 
@@ -128,7 +128,7 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(EmployeesViewModel model)
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             Employees emp = new Employees();
             emp.Id_Employee = model.Id_Employee;

@@ -15,6 +15,7 @@ namespace MobileBackendMVC_Api.ViewModels
             this.Timesheets = new HashSet<Timesheets>();
         }
 
+        [Display(Name = "WorkID")]
         public int Id_WorkAssignment { get; set; }
         public int? Id_Customer { get; set; }
         public string Title { get; set; }
@@ -57,7 +58,7 @@ namespace MobileBackendMVC_Api.ViewModels
         [Display(Name = "Work Archived")]
         public DateTime? DeletedAt { get; set; }
 
-        public bool? Active { get; set; }
+        public bool Active { get; set; }
 
         public string CustomerName { get; set; }
 

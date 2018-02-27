@@ -15,6 +15,7 @@
 <script src="~/Scripts/Chart.js"></script>
 
 <script type="text/javascript">
+
     // Get the Sidebar
     var mySidebar = document.getElementById("mySidebar");
 
@@ -65,8 +66,6 @@
     //    var img = document.getElementById("liikennekartta");
     //    ctx.drawImage(img, 10, 10);
     //}
-
-
 
        ////Completed Work
        // var myChart = null;
@@ -368,10 +367,16 @@
                     </div>
                     @*//Liikennekartta*@
                     <div class="w3-half" id="#" style="width:300px;height:300px">
-                        <h5 class="w3-hide">Work Completed</h5>
+                        <h5 class="w3-hide">Trafic Map</h5>
                         @*<img src="#" style="width:100%" alt="LiikenneKartta">*@
-                        @*<input id="showOnlyCompletedRecords" type="checkbox" /> Show Only Completed Records*@
+                     
                         <canvas id="myDoughnutChart" width="300" height="300"></canvas>
+                    </div>
+
+                    @*//WorkCompleted*@
+                    <div class="w3-half" id="#" style="width:300px;height:300px">
+                        <h5 class="w3-hide">Work Completed</h5>
+                        <iframe style="text-align:center" width="500" height="500" src="https://app.powerbi.com/view?r=eyJrIjoiYTI4YzU3ZTUtYWI4Yy00OWNiLTg2NjYtMzk1NWIzMDRiZDJjIiwidCI6IjE2NmIwZjdjLThkYWEtNGY0OS05YzU4LTg4ZWYzMWM2NTJkMyIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
                     </div>
                   
 
@@ -494,7 +499,7 @@
                 <h5>Recent Comments</h5>
                 <div class="w3-row">
                     <div class="w3-col m2 text-center">
-                        <img class="w3-circle" src="~/Images/Kukka.jpg" style="width:96px;height:96px">
+                        <img class="w3-circle" src="~/Images/Kukka.jpg" style="width:55px;height:55px">
                     </div>
                     <div class="w3-col m10 w3-container">
                         <h4>Milla <span class="w3-opacity w3-medium">04.25.2017, 10:15</span></h4>
@@ -504,7 +509,7 @@
 
                 <div class="w3-row">
                     <div class="w3-col m2 text-center">
-                        <img class="w3-circle" src="~/Images/Matti.jpg" style="width:96px;height:96px">
+                        <img class="w3-circle" src="~/Images/Matti.jpg" style="width:55px;height:55px">
                     </div>
                     <div class="w3-col m10 w3-container">
                         <h4>Matti <span class="w3-opacity w3-medium">04.25.2017, 12:02</span></h4>

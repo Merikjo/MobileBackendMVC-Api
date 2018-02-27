@@ -14,14 +14,14 @@ namespace MobileBackendMVC_Api.Controllers
 {
     public class WorkAssignmentsController : Controller
     {
-        private JohaMeriSQL2Entities db = new JohaMeriSQL2Entities();
+        private JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
 
         // GET: WorkAssignments
         public ActionResult Index()
         {
             List<WorkAssignmentsViewModel> model = new List<WorkAssignmentsViewModel>();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             try
             {
@@ -59,8 +59,6 @@ namespace MobileBackendMVC_Api.Controllers
                 entities.Dispose();
             }
 
-            
-
             return View(model);
         }//Index
 
@@ -69,10 +67,9 @@ namespace MobileBackendMVC_Api.Controllers
         {
             WorkAssignmentsViewModel model = new WorkAssignmentsViewModel();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
-
                 WorkAssignments workassdetail = entities.WorkAssignments.Find(id);
                 if (workassdetail == null)
                 {
@@ -112,7 +109,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: WorkAssignments/Create
         public ActionResult Create()
         {
-            JohaMeriSQL2Entities db = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
 
             WorkAssignmentsViewModel model = new WorkAssignmentsViewModel();
 
@@ -128,7 +125,7 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(WorkAssignmentsViewModel model)
         {
-            JohaMeriSQL2Entities db = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
 
             WorkAssignments wam = new WorkAssignments();
             wam.Title = model.Title;
@@ -191,7 +188,7 @@ namespace MobileBackendMVC_Api.Controllers
             view.InProgressAt = workassdetail.InProgressAt.GetValueOrDefault();
             view.CompletedAt = workassdetail.CompletedAt.GetValueOrDefault();
             view.Completed = workassdetail.Completed;
-            view.LastModifiedAt = DateTime.Now;
+            view.LastModifiedAt = workassdetail.LastModifiedAt;
             view.DeletedAt = workassdetail.DeletedAt.GetValueOrDefault();
             view.Active = workassdetail.Active;
 
@@ -217,7 +214,8 @@ namespace MobileBackendMVC_Api.Controllers
             wam.CreatedAt = model.CreatedAt.GetValueOrDefault();
             wam.InProgress = model.InProgress;
             wam.InProgressAt = model.InProgressAt.GetValueOrDefault();
-            wam.CompletedAt = model.CompletedAt.GetValueOrDefault();
+            //wam.CompletedAt = model.CompletedAt.GetValueOrDefault();
+            wam.CompletedAt = DateTime.Now;
             wam.Completed = model.Completed;
             wam.LastModifiedAt = DateTime.Now;
             wam.DeletedAt = model.DeletedAt.GetValueOrDefault();

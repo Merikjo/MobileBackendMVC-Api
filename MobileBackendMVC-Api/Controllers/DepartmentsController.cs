@@ -13,14 +13,14 @@ namespace MobileBackendMVC_Api.Controllers
 {
     public class DepartmentsController : Controller
     {
-        private JohaMeriSQL2Entities db = new JohaMeriSQL2Entities();
+        private JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
 
         // GET: Departments
         public ActionResult Index()
         {
             List<DepartmentsViewModel> model = new List<DepartmentsViewModel>();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             try
             {
@@ -49,7 +49,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             DepartmentsViewModel model = new DepartmentsViewModel();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             try
             {
@@ -80,7 +80,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: Departments/Create
         public ActionResult Create()
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             DepartmentsViewModel model = new DepartmentsViewModel();
 
@@ -97,7 +97,7 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(DepartmentsViewModel model)
         { 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
 
             Departments dep= new Departments();        

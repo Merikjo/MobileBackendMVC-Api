@@ -18,18 +18,18 @@ namespace MobileBackendMVC_Api.Controllers
         public ActionResult HoursPerWorkAssignment()
         {
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 DateTime today = DateTime.Today;
-                DateTime tomorrow = today.AddDays(1);
+                DateTime tomorrow = today.AddDays(30);
 
                 // haetaan kaikki kuluvan päivän tuntikirjaukset
                 List<Timesheets> allTimesheetsToday = (from ts in entities.Timesheets
-                                                      where (ts.StartTime > today) &&
-                                                      (ts.StartTime < tomorrow) &&
-                                                      (ts.WorkComplete == true)
-                                                      select ts).ToList();
+                                                       where (ts.StartTime > today) &&
+                                                       (ts.StartTime < tomorrow) &&
+                                                       (ts.WorkComplete == true)
+                                                       select ts).ToList();
 
                 // ryhmitellään kirjaukset tehtävittäin, ja lasketaan kestot
                 List<HoursPerWorkAssignmentModel> model = new List<HoursPerWorkAssignmentModel>();
@@ -38,7 +38,7 @@ namespace MobileBackendMVC_Api.Controllers
                 {
                     int assignmentId = timesheet.Id_WorkAssignment.Value;
                     HoursPerWorkAssignmentModel existing = model.Where(
-                        m => m.WorkAssignmentId == assignmentId).FirstOrDefault();
+                        m => m.Id_WorkAssignment == assignmentId).FirstOrDefault();
 
                     if (existing != null)
                     {
@@ -48,9 +48,10 @@ namespace MobileBackendMVC_Api.Controllers
                     {
                         existing = new HoursPerWorkAssignmentModel()
                         {
-                            WorkAssignmentId = assignmentId,
+                            Id_WorkAssignment = assignmentId,
                             WorkAssignmentName = timesheet.WorkAssignments.Title,
-                            TotalHours = (timesheet.StopTime.Value - timesheet.StartTime.Value).TotalHours
+                            TotalHours = (timesheet.StopTime.Value - timesheet.StartTime.Value).TotalHours,
+                            WorkComplete = timesheet.WorkComplete
                         };
                         model.Add(existing);
                     }
@@ -84,7 +85,7 @@ namespace MobileBackendMVC_Api.Controllers
             StringBuilder csv = new StringBuilder();
 
             // luodaan CSV-muotoinen tiedosto
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 DateTime today = DateTime.Today;
@@ -92,10 +93,10 @@ namespace MobileBackendMVC_Api.Controllers
 
                 // haetaan kaikki kuluvan päivän tuntikirjaukset
                 List<Timesheets> allTimesheetsToday = (from ts in entities.Timesheets
-                                                      where (ts.StartTime > today) &&
-                                                      (ts.StartTime < tomorrow) &&
-                                                      (ts.WorkComplete == true)
-                                                      select ts).ToList();
+                                                       where (ts.StartTime > today) &&
+                                                       (ts.StartTime < tomorrow) &&
+                                                       (ts.WorkComplete == true)
+                                                       select ts).ToList();
 
                 foreach (Timesheets timesheet in allTimesheetsToday)
                 {
@@ -117,7 +118,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             ReportChartDataViewModel model = new ReportChartDataViewModel();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 model.Labels = (from wa in entities.WorkAssignments
@@ -154,7 +155,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             ReportChartDataViewModel model = new ReportChartDataViewModel();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 model.Labels = (from wa in entities.WorkAssignments
@@ -185,6 +186,5 @@ namespace MobileBackendMVC_Api.Controllers
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
     }
-    }
+}

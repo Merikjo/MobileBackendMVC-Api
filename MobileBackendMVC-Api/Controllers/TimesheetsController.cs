@@ -14,18 +14,19 @@ namespace MobileBackendMVC_Api.Controllers
 {
     public class TimesheetsController : Controller
     {
-        private JohaMeriSQL2Entities db = new JohaMeriSQL2Entities();
+        private JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
 
         // GET: Timesheets
         public ActionResult Index()
         {
             List<TimeSheetsViewModel> model = new List<TimeSheetsViewModel>();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             try
             {
-                List<Timesheets> timesheets = entities.Timesheets.OrderByDescending(Timesheets => Timesheets.StartTime).ToList();
+                //List<Timesheets> timesheets = entities.Timesheets.OrderByDescending(Timesheets => Timesheets.StartTime).ToList();
+                List<Timesheets> timesheets = entities.Timesheets.OrderBy(Timesheets => Timesheets.StartTime).ToList();
 
                 // muodostetaan näkymämalli tietokannan rivien pohjalta       
                 foreach (Timesheets timesheet in timesheets)
@@ -73,7 +74,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             TimeSheetsViewModel model = new TimeSheetsViewModel();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 Timesheets timesheetdetail = entities.Timesheets.Find(id);
@@ -123,7 +124,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: Timesheets/Create
             public ActionResult Create()
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             TimeSheetsViewModel model = new TimeSheetsViewModel();
 
@@ -141,7 +142,7 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TimeSheetsViewModel model)
         { 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             Timesheets tsv = new Timesheets();
             tsv.Id_Timesheet = model.Id_Timesheet;

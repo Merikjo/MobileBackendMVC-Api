@@ -171,20 +171,18 @@
         <p>&nbsp;</p>
 
         <a href="~/Reports/HoursPerWorkAssignmentAsExcel" class="btn btn-primary">Export To Excel</a>
-
-        <a href="~/Reports/  HoursPerWorkAssignmentAsExcel2" class="btn btn-primary">Export To Excel2</a>
+        <a href="~/Reports/HoursPerWorkAssignmentAsExcel2" class="btn btn-primary">Export To Excel2</a>
       
         <p>&nbsp;</p>
 
-
-        <input id="showOnlyCompletedRecords" type="checkbox" /> Show Only Completed Records
-        <canvas id="myChart" width="400" height="200"></canvas>
+        @*<input id="showOnlyCompletedRecords" type="checkbox" /> Show Only Completed Records
+        <canvas id="myChart" width="400" height="200"></canvas>*@
 
 
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.WorkAssignmentId)
+                    @Html.DisplayNameFor(model => model.Id_WorkAssignment)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.WorkAssignmentName)
@@ -201,7 +199,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.WorkAssignmentId)
+                        @Html.DisplayFor(modelItem => item.Id_WorkAssignment)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.WorkAssignmentName)
@@ -217,12 +215,14 @@
 
         </table>
 
+        <h2>Contractors Hourly Rate</h2>
+        <p>&nbsp;</p>
+
+        <input id="showOnlyCompletedRecords2" type="checkbox" /> Show Only Completed Records
+        <canvas id="myChart2" width="400" height="200"></canvas>
+
+
     </div><!-- End content -->
 </div><!-- End page content -->
 
 
-<h2>Contractors Hourly Rate</h2>
-<p>&nbsp;</p>
-
-<input id="showOnlyCompletedRecords2" type="checkbox" /> Show Only Completed Records
-<canvas id="myChart2" width="400" height="200"></canvas>

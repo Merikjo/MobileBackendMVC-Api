@@ -13,10 +13,10 @@ namespace MobileBackendMVC_Api.DataAccess
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class JohaMeriSQL2Entities : DbContext
+    public partial class JohaMeriSQL5Entities : DbContext
     {
-        public JohaMeriSQL2Entities()
-            : base("name=JohaMeriSQL2Entities")
+        public JohaMeriSQL5Entities()
+            : base("name=JohaMeriSQL5Entities")
         {
         }
     

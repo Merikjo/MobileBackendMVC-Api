@@ -13,14 +13,14 @@ namespace MobileBackendMVC_Api.Controllers
 {
     public class PinCodesController : Controller
     {
-        private JohaMeriSQL2Entities db = new JohaMeriSQL2Entities();
+        private JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
 
         // GET: PinCodes
         public ActionResult Index()
         {
             List<PinCodesViewModel> model = new List<PinCodesViewModel>();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             try
             {
@@ -66,7 +66,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             PinCodesViewModel model = new PinCodesViewModel();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 PinCodes pincodedetail = entities.PinCodes.Find(id);
@@ -108,7 +108,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: PinCodes/Create
         public ActionResult Create()
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             PinCodesViewModel model = new PinCodesViewModel();
 
@@ -129,7 +129,7 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PinCodesViewModel model)
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             PinCodes pin = new PinCodes();
             pin.Id_PinCode = model.Id_PinCode;

@@ -13,14 +13,14 @@ namespace MobileBackendMVC_Api.Controllers
 {
     public class CustomersController : Controller
     {
-        private JohaMeriSQL2Entities db = new JohaMeriSQL2Entities();
+        private JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
 
         // GET: Customers
         public ActionResult Index()
         {
             List<CustomersViewModel> model = new List<CustomersViewModel>();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             try
             {
@@ -60,7 +60,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
            CustomersViewModel model = new CustomersViewModel();
 
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 Customers customerdetail = entities.Customers.Find(id);
@@ -100,7 +100,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             CustomersViewModel model = new CustomersViewModel();
 
@@ -114,7 +114,7 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CustomersViewModel model)
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
 
             Customers cus = new Customers();
             cus.CustomerName = model.CustomerName;

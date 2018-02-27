@@ -14,7 +14,7 @@ namespace MobileBackendMVC_Api.Controllers
         public string[] GetAll()
         {
             string[] employeeNames = null;
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 employeeNames = (from e in entities.Employees
@@ -32,7 +32,7 @@ namespace MobileBackendMVC_Api.Controllers
 
         public byte[] GetEmployeeImage(string employeeName)
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 string[] nameParts = employeeName.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
@@ -54,14 +54,15 @@ namespace MobileBackendMVC_Api.Controllers
 
         public string PutEmployeeImage()
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 Employees newEmployee = new Employees()
                 {
                     FirstName = "Matti",
                     LastName = "Tuhkanen",
-                    EmployeePicture = File.ReadAllBytes(@"E:\Visual Studio 2017\Images\Matti.jpg")
+                    //EmployeePicture = File.ReadAllBytes(@"E:\Visual Studio 2017\Images\Ratasopacity.png")
+                    EmployeePicture = File.ReadAllBytes(@"C:\TEMP\Ratasopacity.png")
                 };
                 entities.Employees.Add(newEmployee);
                 entities.SaveChanges();

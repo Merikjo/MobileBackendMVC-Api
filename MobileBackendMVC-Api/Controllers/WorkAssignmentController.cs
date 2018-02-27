@@ -14,7 +14,7 @@ namespace MobileBackendMVC_Api.Controllers
         public string[] GetAll()
         {
             string[] assignmentNames = null;
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 assignmentNames = (from wa in entities.WorkAssignments
@@ -32,7 +32,7 @@ namespace MobileBackendMVC_Api.Controllers
         [HttpPost]
         public bool PostStatus(WorkAssignmentOperationModel input)
         {
-            JohaMeriSQL2Entities entities = new JohaMeriSQL2Entities();
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
                 WorkAssignments assignment = (from wa in entities.WorkAssignments

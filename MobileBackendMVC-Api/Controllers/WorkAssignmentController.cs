@@ -48,6 +48,7 @@ namespace MobileBackendMVC_Api.Controllers
                 if (input.Operation == "Start")
                 {
                     int assignmentId = assignment.Id_WorkAssignment;
+
                     Timesheets newEntry = new Timesheets()
                     {
                         Id_WorkAssignment = assignmentId,

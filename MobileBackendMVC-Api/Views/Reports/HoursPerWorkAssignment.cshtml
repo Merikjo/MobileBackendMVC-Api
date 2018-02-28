@@ -170,8 +170,8 @@
         <p>Total entries: @Model.Count().</p>
         <p>&nbsp;</p>
 
-        <a href="~/Reports/HoursPerWorkAssignmentAsExcel" class="btn btn-primary">Export To Excel</a>
-        <a href="~/Reports/HoursPerWorkAssignmentAsExcel2" class="btn btn-primary">Export To Excel2</a>
+        <a href="~/Reports/HoursPerWorkAssignmentAsExcel" class="w3-btn w3-large">Export To Excel</a>
+        <a href="~/Reports/HoursPerWorkAssignmentAsExcel2" class="w3-btn w3-large">Export Hours Per Work Assignment To Excel</a>
       
         <p>&nbsp;</p>
 
@@ -193,24 +193,42 @@
                 <th>
                     @Html.DisplayNameFor(model => model.WorkComplete)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StopTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comments)
+                </th>
             </tr>
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id_WorkAssignment)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.WorkAssignmentName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TotalHours)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.WorkComplete)
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_WorkAssignment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkAssignmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkComplete)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StopTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+            </tr>
             }
 
         </table>

@@ -21,8 +21,8 @@ namespace MobileBackendMVC_Api.Controllers
             JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
             try
             {
-                DateTime today = DateTime.Today;
-                DateTime tomorrow = today.AddDays(30);
+                DateTime today = DateTime.Today.AddDays(-1);
+                DateTime tomorrow = today.AddDays(1);
 
                 // haetaan kaikki kuluvan päivän tuntikirjaukset
                 List<Timesheets> allTimesheetsToday = (from ts in entities.Timesheets
@@ -51,7 +51,10 @@ namespace MobileBackendMVC_Api.Controllers
                             Id_WorkAssignment = assignmentId,
                             WorkAssignmentName = timesheet.WorkAssignments.Title,
                             TotalHours = (timesheet.StopTime.Value - timesheet.StartTime.Value).TotalHours,
-                            WorkComplete = timesheet.WorkComplete
+                            WorkComplete = timesheet.WorkComplete,
+                            StartTime = timesheet.StartTime.Value,
+                            StopTime = timesheet.StopTime.Value,
+                            Comments = timesheet.Comments
                         };
                         model.Add(existing);
                     }
@@ -68,16 +71,19 @@ namespace MobileBackendMVC_Api.Controllers
         public ActionResult HoursPerWorkAssignmentAsExcel()
         {
             // TODO: hae tiedot tietokannasta!
+            //Muododostetaan data stingbuilderillä:
             StringBuilder csv = new StringBuilder();
 
-            // luodaan CSV-muotoinen tiedosto
+            // luodaan CSV-muotoinen tiedosto 
             csv.AppendLine("Matti;123,5");
             csv.AppendLine("Jesse;86,25");
             csv.AppendLine("Kaisa;99,00");
 
             // palautetaan CSV-tiedot selaimelle
-            byte[] buffer = Encoding.UTF8.GetBytes(csv.ToString());
-            return File(buffer, "text/csv", "Työtunnit.csv");
+            //Muutetaan string-builder tavutaulukoksi, jossa käytetään UTF8-merkistöä:
+            byte[] buffer = Encoding.UTF8.GetBytes(csv.ToString()); //merkkijono
+            //File-rutiini, jossa käytetään tavutaulukkoa ja palautetaan MVC-controllerista tiedosto:
+            return File(buffer, "text/csv", "Työtunnit.csv"); //MIME csv -tietotyyppi, tiedoston nimi
         }
 
         public ActionResult HoursPerWorkAssignmentAsExcel2()
@@ -89,7 +95,7 @@ namespace MobileBackendMVC_Api.Controllers
             try
             {
                 DateTime today = DateTime.Today;
-                DateTime tomorrow = today.AddDays(1);
+                DateTime tomorrow = today.AddDays(30);
 
                 // haetaan kaikki kuluvan päivän tuntikirjaukset
                 List<Timesheets> allTimesheetsToday = (from ts in entities.Timesheets
@@ -101,7 +107,7 @@ namespace MobileBackendMVC_Api.Controllers
                 foreach (Timesheets timesheet in allTimesheetsToday)
                 {
                     csv.AppendLine(timesheet.Id_Employee + ";" +
-                        timesheet.StartTime + ";" + timesheet.StopTime + ";");
+                        timesheet.StartTime + ";" + timesheet.StopTime + ";" + timesheet.Comments + ";");
                 }
             }
             finally
@@ -140,13 +146,11 @@ namespace MobileBackendMVC_Api.Controllers
                                     group ts by ts.Id_WorkAssignment into grp
                                     select grp.Count()).ToArray();
                 }
-
             }
             finally
             {
                 entities.Dispose();
             }
-
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
@@ -177,7 +181,6 @@ namespace MobileBackendMVC_Api.Controllers
                                     group ts by ts.Id_WorkAssignment into grp
                                     select grp.Count()).ToArray();
                 }
-
             }
             finally
             {

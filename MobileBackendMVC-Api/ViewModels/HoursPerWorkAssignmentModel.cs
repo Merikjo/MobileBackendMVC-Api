@@ -13,5 +13,10 @@ namespace MobileBackendMVC_Api.ViewModels
         public double TotalHours { get; set; }
 
         public bool WorkComplete { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime StopTime { get; set; }
+
+        public string Comments { get; set; }
+
     }
 }

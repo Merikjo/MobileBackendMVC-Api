@@ -63,126 +63,135 @@
     </style>
 }
 
-<title>WorkAssignment</title>
+<title>Employees</title>
 
-<!-- !SIDEMENU CONTENT!
+<!-- !BODY CONTENT!
 ================================================== -->
-@{ Html.RenderAction("SideMenu", "Customers");}
 
-<!-- !PAGE CONTENT!
-================================================== -->
-<div class="w3-main" style="margin-left:300px">
+<body class="w3-content-light-grey" style="max-width:1200px">
 
-    <!-- Push down content on small screens -->
-    <div class="w3-hide-large" style="margin-top:83px"></div>
+    <!-- !SIDEMENU CONTENT!
+    ================================================== -->
+    @{ Html.RenderAction("SideMenu", "Customers");}
 
-    <!-- Container -->
-    <div class="w3-container">
+    <!-- !PAGE CONTENT!
+    ================================================== -->
+    <div class="w3-main" style="margin-left:300px">
 
-        <h2>Employees</h2>
-        <p>&nbsp;</p>
+        <!-- Push down content on small screens -->
+        <div class="w3-hide-large" style="margin-top:83px"></div>
 
-        <p><a href="/Employees/Create" class="w3-btn w3-large">New Employee</a></p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>Show all employees: <input id="showArchiveEmployeesCheckbox" type="checkbox" /></p>
-        <table class="table" id="employeeTable" style="width:100%">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Id_Employee)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FirstName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.LastName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PhoneNumber)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.EmailAddress)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.EmployeeReference)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DepartmentName)
-                    </th>
-                
-                    <th>
-                        @Html.DisplayNameFor(model => model.CompanyName)
-                    </th>
+        <!-- Container -->
+        <div class="w3-container">
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.EmployeePicture)
-                    </th>
+            <h2>Employees</h2>
+            <p>&nbsp;</p>
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.Active)
-                    </th>
-
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.DeletedAt)
-                    </th>*@
-
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+            <p><a href="/Employees/Create" class="w3-btn w3-large">New Employee</a></p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>Show all employees: <input id="showArchiveEmployeesCheckbox" type="checkbox" /></p>
+            <table class="table" id="employeeTable" style="width:100%">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id_Employee)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PhoneNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EmailAddress)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EmployeeReference)
-                        </td>                 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DepartmentName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CompanyName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EmployeePicture)
-                        </td>
-                        <td>
-                            @{
-                                string True = "";
-                                //if (item.Active.HasValue && (item.Active.Value == true))
-                                {
-                                    True = "checked";
-                                }
-                            }
-                            <input name="Active" type="checkbox" @True />
-                            @*@Html.DisplayFor(modelItem => item.Active)*@
-                        </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.DeletedAt)
-                        </td>*@
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id_Employee }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id_Employee }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id_Employee })
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id_Employee)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EmailAddress)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EmployeeReference)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DepartmentName)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompanyName)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.EmployeePicture)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Active)
+                        </th>
+
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.DeletedAt)
+                            </th>*@
+
+                        <th></th>
                     </tr>
-                 }
-            </tbody>
-        </table>
-    </div><!-- End content -->
-</div><!-- End page content -->
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id_Employee)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmailAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeReference)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DepartmentName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeePicture)
+                            </td>
+                            <td>
+                                @{
+                                    string True = "";
+                                    //if (item.Active.HasValue && (item.Active.Value == true))
+                                    {
+                                        True = "checked";
+                                    }
+                                }
+                                <input name="Active" type="checkbox" @True />
+                                @*@Html.DisplayFor(modelItem => item.Active)*@
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.DeletedAt)
+                                </td>*@
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id_Employee }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id_Employee }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id_Employee })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div><!-- End content -->
+    </div><!-- End page content -->
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>

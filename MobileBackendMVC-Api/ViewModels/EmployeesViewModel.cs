@@ -27,8 +27,8 @@ namespace MobileBackendMVC_Api.ViewModels
         public string EmailAddress { get; set; }
         public string EmployeeReference { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:dd\\-MM\\-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "DeletedAt")]
         public DateTime? DeletedAt { get; set; }
         public bool Active { get; set; }

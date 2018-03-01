@@ -67,102 +67,117 @@
 
 <title>WorkAssignment</title>
 
-<!-- !SIDEMENU CONTENT!
+<!-- !BODY CONTENT!
 ================================================== -->
-@{ Html.RenderAction("SideMenu", "Customers");}
 
-<!-- !PAGE CONTENT!
-================================================== -->
-<div class="w3-main" style="margin-left:300px">
+<body class="w3-content-light-grey" style="max-width:1200px">
 
-    <!-- Push down content on small screens -->
-    <div class="w3-hide-large" style="margin-top:83px"></div>
+    <!-- !SIDEMENU CONTENT!
+    ================================================== -->
+    @{ Html.RenderAction("SideMenu", "Customers");}
 
-    <!-- Container -->
-    <div class="w3-container">
+    <!-- !PAGE CONTENT!
+    ================================================== -->
+    <div class="w3-main" style="margin-left:300px">
 
-        <h2>Contractors</h2>
+        <!-- Push down content on small screens -->
+        <div class="w3-hide-large" style="margin-top:83px"></div>
 
-        <p>&nbsp;</p>
-        @*<p>Customers total: @Model.Count()</p>*@
+        <!-- Container -->
+        <div class="w3-container">
 
-        <p><a href="/Contractors/Create" class="w3-btn w3-large">New Contractor</a></p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>Show all contractors: <input id="showArchiveContractorsCheckbox" type="checkbox" /></p>
+            <h2>Contractors</h2>
 
-        <table class="table" id="contractorTable">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CompanyName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ContactPerson)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PhoneNumber)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.EmailAddress)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.VatId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.HourlyRate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Active)
-                    </th>
+            <p>&nbsp;</p>
+            @*<p>Customers total: @Model.Count()</p>*@
 
+            <p><a href="/Contractors/Create" class="w3-btn w3-large">New Contractor</a></p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>Show all contractors: <input id="showArchiveContractorsCheckbox" type="checkbox" /></p>
 
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-            {
+            <table class="table" id="contractorTable">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CompanyName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ContactPerson)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PhoneNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EmailAddress)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.VatId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HourlyRate)
-                        </td>
-                        <td>
-                            @{
-                                string True = "";
-                                //if (item.Active.HasValue && (item.Active.Value == true))
-                                {
-                                    True = "checked";
-                                }
-                            }
-                            <input name="Active" type="checkbox" @True />
-                            @*@Html.DisplayFor(modelItem => item.Active)*@
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id_Contractor)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompanyName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ContactPerson)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EmailAddress)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.VatId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.HourlyRate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Active)
+                        </th>
 
 
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id_Contractor }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id_Contractor }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id_Contractor })
-                        </td>
+                        <th></th>
                     </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id_Contractor)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactPerson)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmailAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VatId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HourlyRate)
+                            </td>
+                            <td>
+                                @{
+                                    string True = "";
+                                    //if (item.Active.HasValue && (item.Active.Value == true))
+                                    {
+                                        True = "checked";
+                                    }
                                 }
-            </tbody>
-        </table>
-    </div><!-- End content -->
-</div><!-- End page content -->
+                                <input name="Active" type="checkbox" @True />
+                                @*@Html.DisplayFor(modelItem => item.Active)*@
+                            </td>
+
+
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id_Contractor }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id_Contractor }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id_Contractor })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div><!-- End content -->
+    </div><!-- End page content -->
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>

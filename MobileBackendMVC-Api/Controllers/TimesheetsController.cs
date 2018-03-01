@@ -28,18 +28,20 @@ namespace MobileBackendMVC_Api.Controllers
                 //List<Timesheets> timesheets = entities.Timesheets.OrderByDescending(Timesheets => Timesheets.StartTime).ToList();
                 List<Timesheets> timesheets = entities.Timesheets.OrderBy(Timesheets => Timesheets.StartTime).ToList();
 
+                CultureInfo fiFi = new CultureInfo("fi-FI");
+
                 // muodostetaan näkymämalli tietokannan rivien pohjalta       
                 foreach (Timesheets timesheet in timesheets)
                 {
                     TimeSheetsViewModel view = new TimeSheetsViewModel();
-                    view.Id_Timesheet = timesheet.Id_Timesheet;
-                    view.StartTime = timesheet.StartTime;
-                    view.StopTime = timesheet.StopTime;
+                    view.Id_Timesheet = timesheet.WorkAssignments.Id_WorkAssignment;
+                    view.StartTime = timesheet.StartTime.GetValueOrDefault();
+                    view.StopTime = timesheet.StopTime.GetValueOrDefault();
                     view.Comments = timesheet.Comments;
                     view.WorkComplete = timesheet.WorkComplete;
-                    view.CreatedAt = timesheet.CreatedAt;
-                    view.LastModifiedAt = timesheet.LastModifiedAt;
-                    view.DeletedAt = timesheet.DeletedAt;
+                    view.CreatedAt = timesheet.CreatedAt.GetValueOrDefault();
+                    view.LastModifiedAt = timesheet.LastModifiedAt.GetValueOrDefault();
+                    view.DeletedAt = timesheet.DeletedAt.GetValueOrDefault();
                     view.Active = timesheet.Active;
 
                     view.Id_Employee = timesheet.Id_Employee;
@@ -64,10 +66,12 @@ namespace MobileBackendMVC_Api.Controllers
             {
                 entities.Dispose();
             }
-            CultureInfo fiFi = new CultureInfo("fi-FI");
+  
 
             return View(model);
         }//Index
+
+        CultureInfo fiFi = new CultureInfo("fi-FI");
 
         // GET: Timesheets/Details/5
         public ActionResult Details(int? id)
@@ -86,13 +90,13 @@ namespace MobileBackendMVC_Api.Controllers
                 // muodostetaan näkymämalli tietokannan rivien pohjalta
                 TimeSheetsViewModel view = new TimeSheetsViewModel();
                 view.Id_Timesheet = timesheetdetail.Id_Timesheet;
-                view.StartTime = timesheetdetail.StartTime;
-                view.StopTime = timesheetdetail.StopTime;
+                view.StartTime = timesheetdetail.StartTime.GetValueOrDefault();
+                view.StopTime = timesheetdetail.StopTime.GetValueOrDefault();
                 view.Comments = timesheetdetail.Comments;
                 view.WorkComplete = timesheetdetail.WorkComplete;
-                view.CreatedAt = timesheetdetail.CreatedAt;
-                view.LastModifiedAt = timesheetdetail.LastModifiedAt;
-                view.DeletedAt = timesheetdetail.DeletedAt;
+                view.CreatedAt = timesheetdetail.CreatedAt.GetValueOrDefault();
+                view.LastModifiedAt = timesheetdetail.LastModifiedAt.GetValueOrDefault();
+                view.DeletedAt = timesheetdetail.DeletedAt.GetValueOrDefault();
                 view.Active = timesheetdetail.Active;
 
                 view.Id_Employee = timesheetdetail.Id_Employee;
@@ -147,7 +151,7 @@ namespace MobileBackendMVC_Api.Controllers
             Timesheets tsv = new Timesheets();
             tsv.Id_Timesheet = model.Id_Timesheet;
             tsv.StartTime = model.StartTime;
-            tsv.StopTime = model.StopTime.GetValueOrDefault();
+            tsv.StopTime = model.StopTime;
             tsv.Comments = model.Comments;
             tsv.CreatedAt = DateTime.Now;
             tsv.LastModifiedAt = DateTime.Now;
@@ -200,12 +204,12 @@ namespace MobileBackendMVC_Api.Controllers
 
             TimeSheetsViewModel view = new TimeSheetsViewModel();
             view.Id_Timesheet = timesheetdetail.Id_Timesheet;
-            view.StartTime = timesheetdetail.StartTime.Value;
+            view.StartTime = timesheetdetail.StartTime.GetValueOrDefault();
             view.StopTime = timesheetdetail.StopTime.GetValueOrDefault();
             view.Comments = timesheetdetail.Comments;
             view.WorkComplete = timesheetdetail.WorkComplete;
-            view.LastModifiedAt = DateTime.Now;
-            view.DeletedAt = timesheetdetail.DeletedAt;
+            view.LastModifiedAt = timesheetdetail.LastModifiedAt.GetValueOrDefault();
+            view.DeletedAt = timesheetdetail.DeletedAt.GetValueOrDefault();
             view.Active = timesheetdetail.Active;
 
             view.Id_Employee = timesheetdetail.Id_Employee;
@@ -226,13 +230,13 @@ namespace MobileBackendMVC_Api.Controllers
         public ActionResult Edit(TimeSheetsViewModel model)
         {
             Timesheets tsv = new Timesheets();
-            tsv.Id_Timesheet = model.Id_Timesheet;
-            tsv.StartTime = model.StartTime;
-            tsv.StopTime = model.StopTime;
+            //tsv.Id_Timesheet = model.Id_Timesheet;
+            tsv.StartTime = model.StartTime.GetValueOrDefault();
+            tsv.StopTime = model.StopTime.GetValueOrDefault();
             tsv.Comments = model.Comments;
             tsv.WorkComplete = model.WorkComplete;
             tsv.LastModifiedAt = DateTime.Now;
-            tsv.DeletedAt = model.DeletedAt;
+            tsv.DeletedAt = model.DeletedAt.GetValueOrDefault();
             tsv.Active = model.Active;
 
             int employeeId = int.Parse(model.FirstName);

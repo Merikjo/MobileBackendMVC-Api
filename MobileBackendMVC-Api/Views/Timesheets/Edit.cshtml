@@ -48,7 +48,7 @@
             </div>
         </div>*@
 
-        <div class="form-group">
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.StopTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.StopTime, new { htmlAttributes = new { @class = "form-control" } })
@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
@@ -90,7 +90,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.LastModifiedAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LastModifiedAt, new { htmlAttributes = new { @class = "form-control" } })
@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.DeletedAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DeletedAt, new { htmlAttributes = new { @class = "form-control" } })

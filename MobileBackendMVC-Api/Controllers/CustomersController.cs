@@ -193,7 +193,7 @@ namespace MobileBackendMVC_Api.Controllers
             cus.PhoneNumber = model.PhoneNumber;
             cus.EmailAddress = model.EmailAddress;
             cus.CreatedAt = model.CreatedAt;
-            cus.LastModifiedAt = DateTime.Now; ;
+            cus.LastModifiedAt = DateTime.Now;
             cus.DeletedAt = model.DeletedAt;
             cus.Active = model.Active;
 

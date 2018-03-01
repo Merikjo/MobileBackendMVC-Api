@@ -20,54 +20,63 @@
 
 <title>WorkAssignment</title>
 
-<!-- !SIDEMENU CONTENT!
+<!-- !BODY CONTENT!
 ================================================== -->
-@{ Html.RenderAction("SideMenu", "Customers");}
 
-<!-- !PAGE CONTENT!
-================================================== -->
-<div class="w3-main" style="margin-left:300px">
+<body class="w3-content-light-grey" style="max-width:1200px">
 
-    <!-- Push down content on small screens -->
-    <div class="w3-hide-large" style="margin-top:83px"></div>
+    <!-- !SIDEMENU CONTENT!
+    ================================================== -->
+    @{ Html.RenderAction("SideMenu", "Customers");}
 
-    <!-- Container -->
-    <div class="w3-container">
+    <!-- !PAGE CONTENT!
+    ================================================== -->
+    <div class="w3-main" style="margin-left:300px">
 
-        <h2>Departments</h2>
+        <!-- Push down content on small screens -->
+        <div class="w3-hide-large" style="margin-top:83px"></div>
 
-        <p>&nbsp;</p>
-        @*<p>Customers total: @Model.Count()</p>*@
+        <!-- Container -->
+        <div class="w3-container">
 
-        <p><a href="/Departments/Create" class="w3-btn w3-large">New Department</a></p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
+            <h2>Departments</h2>
 
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.DepartmentName)
-                </th>
-            
+            <p>&nbsp;</p>
+            @*<p>Customers total: @Model.Count()</p>*@
 
-                <th></th>
-            </tr>
+            <p><a href="/Departments/Create" class="w3-btn w3-large">New Department</a></p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
 
-            @foreach (var item in Model)
-            {
+            <table class="table">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DepartmentName)
-                    </td>
-               
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id_Department }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id_Department }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id_Department })
-                    </td>
-                </tr>
-            }
+                    <th>
+                        @Html.DisplayNameFor(model => model.DepartmentName)
+                    </th>
 
-        </table>
-    </div><!-- End content -->
-</div><!-- End page content -->
+
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DepartmentName)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id_Department }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id_Department }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id_Department })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div><!-- End content -->
+    </div><!-- End page content -->
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>

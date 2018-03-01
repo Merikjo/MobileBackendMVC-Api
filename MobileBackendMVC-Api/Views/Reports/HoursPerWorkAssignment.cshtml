@@ -4,10 +4,11 @@
 }
 
 @section scripts {
-   
+
     <script src="~/Scripts/Chart.js"></script>
 
     <script>
+        //Chart
         var myChart = null;
         var chartOptions = {
             scales: {
@@ -19,6 +20,7 @@
             }
         };
 
+        //#Demo chart
         function alustaGraafi() {
             var ctx = document.getElementById("myChart");
             myChart = new Chart(ctx, {
@@ -74,9 +76,9 @@
                 lataaDataPalvelimelta(url);
             })
         });
+        //#Demo chart
 
-// Contractors Hourly rate
-
+        //#Contractors Hourly rate
         function alustaGraafi() {
             var ctx = document.getElementById("myChart2");
             myChart = new Chart(ctx, {
@@ -143,6 +145,143 @@
                 lataaDataPalvelimelta(url);
             })
         });
+        //#Contractors Hourly rate
+
+        //Customers rate
+        function alustaGraafi3() {
+            var ctx3 = document.getElementById("myChart3");
+            myChart3 = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: ["AA", "BB"],
+                    datasets: [{
+                        label: 'Customer Rate',
+                        data: [],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 0, 255, 0.2)',
+                            'rgba(0, 255, 0, 0.2)',
+                            'rgba(255, 255, 0, 0.2)',
+                            'rgba(192, 192, 192, 0.2)',
+                            'rgba(255, 0, 0, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 0, 255, 1)',
+                            'rgba(0, 255, 0, 1)',
+                            'rgba(255, 255, 0, 1)',
+                            'rgba(192, 192, 192, 1)',
+                            'rgba(255, 0, 0, 0.2)'
+
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: chartOptions
+            });
+        }
+
+        function lataaDataPalvelimelta3(url) {
+            $.get(url, function (data) {
+                myChart3.config.data.datasets[0].data = data.Counts;
+                myChart3.config.data.labels = data.Labels;
+                myChart3.update();
+            });
+        }
+
+        $(function () {
+            // sivun alustus
+            alustaGraafi3();
+            lataaDataPalvelimelta3("/reports/GetCustomerCounts");
+
+            $("#showOnlyCompletedRecords3").change(function () {
+                var selected3 = $("#showOnlyCompletedRecords3").is(":checked");
+
+                var url = "/reports/GetCustomerCounts";
+                if (selected3) {
+                    url += "?onlyComplete3=1"
+                }
+                lataaDataPalvelimelta3(url);
+            })
+        });
+
+        //Employees rate
+        function alustaGraafi4() {
+            var ctx4 = document.getElementById("myChart4");
+            myChart4 = new Chart(ctx4, {
+                type: 'bar',
+                data: {
+                    labels: ["AA", "BB"],
+                    datasets: [{
+                        label: 'Employee Rate',
+                        data: [],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 0, 255, 0.2)',
+                            'rgba(0, 255, 0, 0.2)',
+                            'rgba(255, 255, 0, 0.2)',
+                            'rgba(192, 192, 192, 0.2)',
+                            'rgba(255, 0, 0, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 0, 255, 1)',
+                            'rgba(0, 255, 0, 1)',
+                            'rgba(255, 255, 0, 1)',
+                            'rgba(192, 192, 192, 1)',
+                            'rgba(255, 0, 0, 0.2)'
+
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: chartOptions
+            });
+        }
+
+        function lataaDataPalvelimelta4(url) {
+            $.get(url, function (data) {
+                myChart4.config.data.datasets[0].data = data.Counts;
+                myChart4.config.data.labels = data.Labels;
+                myChart4.update();
+            });
+        }
+
+        $(function () {
+            // sivun alustus
+            alustaGraafi4();
+            lataaDataPalvelimelta4("/reports/GetEmployeeCounts");
+
+            $("#showOnlyCompletedRecords4").change(function () {
+                var selected3 = $("#showOnlyCompletedRecords4").is(":checked");
+
+                var url = "/reports/GetEmployeeCounts";
+                if (selected3) {
+                    url += "?onlyComplete4=1"
+                }
+                lataaDataPalvelimelta4(url);
+            })
+        });
     </script>
 }
 
@@ -162,98 +301,124 @@
 
 <title>WorkAssignment</title>
 
-<!-- !SIDEMENU CONTENT!
+<!-- !BODY CONTENT!
 ================================================== -->
-@{ Html.RenderAction("SideMenu", "Customers");}
 
-<!-- !PAGE CONTENT!
-================================================== -->
-<div class="w3-main" style="margin-left:300px">
-
-    <!-- Push down content on small screens -->
-    <div class="w3-hide-large" style="margin-top:83px"></div>
-
-    <!-- Container -->
-    <div class="w3-container">
+<body class="w3-content-light-grey" style="max-width:1200px">
 
 
-        <h2>Hours Per Work Assignment</h2>
-        <p>&nbsp;</p>
+    <!-- !SIDEMENU CONTENT!
+    ================================================== -->
+    @{ Html.RenderAction("SideMenu", "Customers");}
 
-        <p>Total entries: @Model.Count().</p>
-        <p>&nbsp;</p>
+    <!-- !PAGE CONTENT!
+    ================================================== -->
+    <div class="w3-main" style="margin-left:300px">
 
-        <a href="~/Reports/HoursPerWorkAssignmentAsExcel" class="w3-btn w3-large">Export To Excel</a>
-        <a href="~/Reports/HoursPerWorkAssignmentAsExcel2" class="w3-btn w3-large">Export Hours Per Work Assignment To Excel</a>
-      
-        <p>&nbsp;</p>
+        <!-- Push down content on small screens -->
+        <div class="w3-hide-large" style="margin-top:83px"></div>
 
-        @*<input id="showOnlyCompletedRecords" type="checkbox" /> Show Only Completed Records
-        <canvas id="myChart" width="400" height="200"></canvas>*@
-
-
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id_WorkAssignment)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.WorkAssignmentName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TotalHours)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.WorkComplete)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StartTime)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StopTime)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Comments)
-                </th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id_WorkAssignment)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WorkAssignmentName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalHours)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WorkComplete)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StopTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comments)
-                </td>
-            </tr>
-            }
-
-        </table>
-
-        <h2>Contractors Hourly Rate</h2>
-        <p>&nbsp;</p>
-
-        <input id="showOnlyCompletedRecords2" type="checkbox" /> Show Only Completed Records
-        <canvas id="myChart2" width="400" height="200"></canvas>
+        <!-- Container -->
+        <div class="w3-container">
 
 
-    </div><!-- End content -->
-</div><!-- End page content -->
+            <h2>Hours Per Work Assignment</h2>
+            <p>&nbsp;</p>
 
+            <p>Total entries: @Model.Count().</p>
+            <p>&nbsp;</p>
+
+            <a href="~/Reports/HoursPerWorkAssignmentAsExcel" class="w3-btn w3-large">Export To Excel</a>
+            <a href="~/Reports/HoursPerWorkAssignmentAsExcel2" class="w3-btn w3-large">Export Hours Per Work Assignment To Excel</a>
+
+            <p>&nbsp;</p>
+
+            @*<input id="showOnlyCompletedRecords" type="checkbox" /> Show Only Completed Records
+                <canvas id="myChart" width="400" height="200"></canvas>*@
+
+
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id_WorkAssignment)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WorkAssignmentName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalHours)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WorkComplete)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StopTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Comments)
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id_WorkAssignment)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WorkAssignmentName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalHours)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WorkComplete)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StopTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comments)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+            <h2>Contractors Hourly Rate</h2>
+            <p>&nbsp;</p>
+
+            <div class="w3-container">
+                <input id="showOnlyCompletedRecords2" type="checkbox" /> Show Only Completed Records
+                <canvas id="myChart2" style="width:100%;" height="400"></canvas>
+            </div>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+            <h2>Customers Rate</h2>
+            <p>&nbsp;</p>
+            <div class="w3-container">
+                <input id="showOnlyCompletedRecords3" type="checkbox" /> Show Only Completed Records
+                <canvas id="myChart3" style="width:100%;" height="400"></canvas>
+            </div>
+
+            <h2>Employees Rate</h2>
+            <p>&nbsp;</p>
+            <div class="w3-container">
+                <input id="showOnlyCompletedRecords4" type="checkbox" /> Show Only Completed Records
+                <canvas id="myChart4" style="width:100%;" height="400"></canvas>
+            </div>
+
+        </div><!-- End content -->
+    </div><!-- End page content -->
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>
 

@@ -189,5 +189,75 @@ namespace MobileBackendMVC_Api.Controllers
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult GetCustomerCounts(string onlyComplete3)
+        {
+            ReportChartDataViewModel model = new ReportChartDataViewModel();
+
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            try
+            {
+                model.Labels = (from wa in entities.WorkAssignments
+                                orderby wa.Id_WorkAssignment
+                                select wa.Title).ToArray();
+
+                if (onlyComplete3 == "1")
+                {
+                    model.Counts = (from ts in entities.Timesheets
+                                    where (ts.WorkComplete == true)
+                                    orderby ts.Id_Customer
+                                    group ts by ts.Id_Customer into grp
+                                    select grp.Count()).ToArray();
+                }
+                else
+                {
+                    model.Counts = (from ts in entities.Timesheets
+                                    orderby ts.Id_Customer
+                                    group ts by ts.Id_Customer into grp
+                                    select grp.Count()).ToArray();
+                }
+            }
+            finally
+            {
+                entities.Dispose();
+            }
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetEmployeeCounts(string onlyComplete4)
+        {
+            ReportChartDataViewModel model = new ReportChartDataViewModel();
+
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            try
+            {
+                model.Labels = (from wa in entities.WorkAssignments
+                                orderby wa.Id_WorkAssignment
+                                select wa.Title).ToArray();
+
+                if (onlyComplete4 == "1")
+                {
+                    model.Counts = (from ts in entities.Timesheets
+                                    where (ts.WorkComplete == true)
+                                    orderby ts.Id_Employee
+                                    group ts by ts.Id_Employee into grp
+                                    select grp.Count()).ToArray();
+                }
+                else
+                {
+                    model.Counts = (from ts in entities.Timesheets
+                                    orderby ts.Id_Employee
+                                    group ts by ts.Id_Employee into grp
+                                    select grp.Count()).ToArray();
+                }
+            }
+            finally
+            {
+                entities.Dispose();
+            }
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }

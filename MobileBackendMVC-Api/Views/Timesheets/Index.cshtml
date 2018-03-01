@@ -66,130 +66,140 @@
 
 <title>WorkAssignment</title>
 
-<!-- !SIDEMENU CONTENT!
+<!-- !BODY CONTENT!
 ================================================== -->
-@{ Html.RenderAction("SideMenu", "Customers");}
 
-<!-- !PAGE CONTENT!
-================================================== -->
-<div class="w3-main" style="margin-left:300px">
+<body class="w3-content-light-grey" style="max-width:1200px">
 
-    <!-- Push down content on small screens -->
-    <div class="w3-hide-large" style="margin-top:83px"></div>
 
-    <!-- Container -->
-    <div class="w3-container">
-        <h2>Timesheet</h2>
+    <!-- !SIDEMENU CONTENT!
+    ================================================== -->
+    @{ Html.RenderAction("SideMenu", "Customers");}
 
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>Show all times: <input id="showArchiveTimesCheckbox" type="checkbox" /></p>
-        @*<p>
-                @Html.ActionLink("Create New", "Create")
-            </p>*@
+    <!-- !PAGE CONTENT!
+    ================================================== -->
+    <div class="w3-main" style="margin-left:300px">
 
-        <table class="table" id="timesheetTable">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.StartTime)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.StopTime)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Comments)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.WorkComplete)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Active)
-                    </th>
-                    @*<th>
-                    @Html.DisplayNameFor(model => model.CreatedAt)
-                </th>*@
-                    @*<th>
-                    @Html.DisplayNameFor(model => model.LastModifiedAt)
-                </th>*@
-                    @*<th>
-                    @Html.DisplayNameFor(model => model.DeletedAt)
-                </th>*@
-                    <th>
-                        @Html.DisplayNameFor(model => model.CompanyName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CustomerName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Title)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
+        <!-- Push down content on small screens -->
+        <div class="w3-hide-large" style="margin-top:83px"></div>
 
-                @foreach (var item in Model)
-            {
+        <!-- Container -->
+        <div class="w3-container">
+            <h2>Timesheet</h2>
+
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>Show all times: <input id="showArchiveTimesCheckbox" type="checkbox" /></p>
+            @*<p>
+                    @Html.ActionLink("Create New", "Create")
+                </p>*@
+
+            <table class="table" id="timesheetTable">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StartTime)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StopTime)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Comments)
-                        </td>
-                        <td>
-                            @{
-                                string Work = "";
-                                //if (item.WorkComplete.HasValue && (item.WorkComplete.Value == true))
-                                {
-                                    Work = "checked";
-                                }
-                            }
-                            <input name="WorkComplete" type="checkbox" @Work />
-                            @*@Html.DisplayFor(modelItem => item.WorkComplete)*@
-                        </td>
-                        <td>
-                            @{
-                                string True = "";
-                                //if (item.Active.HasValue && (item.Active.Value == true))
-                                {
-                                    True = "checked";
-                                }
-                            }
-                            <input name="Active" type="checkbox" @True />
-                            @*@Html.DisplayFor(modelItem => item.Active)*@
-                        </td>
-                        @*<td>
-                        @Html.DisplayFor(modelItem => item.CreatedAt)
-                    </td>*@
-                        @*<td>
-                        @Html.DisplayFor(modelItem => item.LastModifiedAt)
-                    </td>*@
-                        @*<td>
-                        @Html.DisplayFor(modelItem => item.DeletedAt)
-                    </td>*@
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CompanyName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CustomerName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id_Timesheet }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id_Timesheet }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id_Timesheet })
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StartTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StopTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Comments)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.WorkComplete)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Active)
+                        </th>
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.CreatedAt)
+                            </th>*@
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.LastModifiedAt)
+                            </th>*@
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.DeletedAt)
+                            </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompanyName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CustomerName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th></th>
                     </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StopTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Comments)
+                            </td>
+                            <td>
+                                @*@{
+                                    string Work = "";
+                                    //if (item.WorkComplete.HasValue && (item.WorkComplete.Value == true))
+                                    {
+                                        Work = "checked";
+                                    }
                                 }
-            </tbody>
-        </table>
-    </div><!-- End content -->
-</div><!-- End page content -->
+                                <input name="WorkComplete" type="checkbox" @Work />*@
+                                @Html.DisplayFor(modelItem => item.WorkComplete)
+                            </td>
+                            <td>
+                                @*@{
+                                    string True = "";
+                                    //if (item.Active.HasValue && (item.Active.Value == true))
+                                    {
+                                        True = "checked";
+                                    }
+                                }
+                                <input name="Active" type="checkbox" @True />*@
+                                @Html.DisplayFor(modelItem => item.Active)
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                                </td>*@
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.LastModifiedAt)
+                                </td>*@
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.DeletedAt)
+                                </td>*@
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id_Timesheet }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id_Timesheet }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id_Timesheet })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div><!-- End content -->
+    </div><!-- End page content -->
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>

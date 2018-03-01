@@ -18,11 +18,13 @@ namespace MobileBackendMVC_Api.ViewModels
         [Display(Name = "WorkID")]
         public int Id_WorkAssignment { get; set; }
         public int? Id_Customer { get; set; }
+        public int? Id_Timesheet { get; set; }
+
         public string Title { get; set; }
         public string Description { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Work Deadline")]
         public DateTime? Deadline { get; set; }
 
@@ -30,31 +32,31 @@ namespace MobileBackendMVC_Api.ViewModels
 
 
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "In Progress")]
         public DateTime? InProgressAt { get; set; }
 
         public bool Completed { get; set; }
 
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Work Completed")]
         public DateTime? CompletedAt { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Work Created")]
         public DateTime? CreatedAt { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Last Modified")]
         public DateTime? LastModifiedAt { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Work Archived")]
         public DateTime? DeletedAt { get; set; }
 
@@ -66,7 +68,8 @@ namespace MobileBackendMVC_Api.ViewModels
        
 
         public virtual Customers Customers { get; set; }
-    
+
+
         public virtual ICollection<Timesheets> Timesheets { get; set; }
     }
 }

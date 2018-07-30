@@ -227,10 +227,6 @@
         //        lataaDataPalvelimelta(url);
         //    })
         //});
-
-
-
-
     </script>
 }
 
@@ -250,6 +246,7 @@
         .container {
             background-color: rgb(230, 230, 230);
             opacity: 0.8;
+            width:2000px
         }
     </style>
 }
@@ -374,64 +371,89 @@
                         <div class="w3-half" id="#" style="width:300px;height:300px">
                             <h5 class="w3-hide">Trafic Map</h5>
                             @*<img src="#" style="width:100%" alt="LiikenneKartta">*@*
-                            <canvas id="myDoughnutChart" width="300" height="300"></canvas>
+                            @*<canvas id="myDoughnutChart" width="300" height="300"></canvas>*@
                         </div>
                     </div>
                 </div>
 
-                    @*//WorkCompleted*@
-                    <div class="w3-container" id="#" style="width:100%;height:100%">
-                        <h5 class="w3-hide">Work Completed</h5>
-                        <iframe style="text-align:center; width:100%" height="800" src="https://app.powerbi.com/view?r=eyJrIjoiYTI4YzU3ZTUtYWI4Yy00OWNiLTg2NjYtMzk1NWIzMDRiZDJjIiwidCI6IjE2NmIwZjdjLThkYWEtNGY0OS05YzU4LTg4ZWYzMWM2NTJkMyIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
-                    </div>
-                
+                <div class="w3-panel">
+                    <div class="w3-row-padding" style="margin:0 -16px">
 
-                    <div class="w3-panel">
-                        <div class="w3-twothird">
-                            <p>&nbsp;</p>
-                            <p>&nbsp;</p>
-                            <p>&nbsp;</p>
-                            <h5>Feeds</h5>
-                            <table class="w3-table w3-striped w3-white">
-                                <tr>
-                                    <td><i class="fa fa-user w3-text w3-large" style="color:rgb(89, 89, 89)!important"></i></td>
-                                    <td>New record, over 90 views.</td>
-                                    <td><i>10 mins</i></td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-bell w3-text w3-large" style="color:rgb(255, 128, 170)!important"></i></td>
-                                    <td>Database error.</td>
-                                    <td><i>15 mins</i></td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-users w3-text w3-large" style="color:rgb(255, 184, 77)!important"></i></td>
-                                    <td>New record, over 40 users.</td>
-                                    <td><i>17 mins</i></td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-comment w3-text w3-large" style="color:rgb(89, 89, 89)!important"></i></td>
-                                    <td>New comments.</td>
-                                    <td><i>25 mins</i></td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-bookmark w3-text w3-large" style="color:rgb(89, 89, 89)!important"></i></td>
-                                    <td>Check transactions.</td>
-                                    <td><i>28 mins</i></td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-laptop w3-text w3-large" style="color:rgb(255, 128, 170)!important"></i></td>
-                                    <td>CPU overload.</td>
-                                    <td><i>35 mins</i></td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-share-alt w3-text w3-large" style="color:rgb(204, 204, 0)!important"></i></td>
-                                    <td>New shares.</td>
-                                    <td><i>39 mins</i></td>
-                                </tr>
-                            </table>
+                        @*//WorkCompleted*@
+                        <div class="w3-container" id="#" style="width:100%;height:100%">
+                            <h5 class="w3-hide">Work Completed</h5>
+                            <iframe style="text-align:center; width:100%" height="800" src="https://app.powerbi.com/view?r=eyJrIjoiYTI4YzU3ZTUtYWI4Yy00OWNiLTg2NjYtMzk1NWIzMDRiZDJjIiwidCI6IjE2NmIwZjdjLThkYWEtNGY0OS05YzU4LTg4ZWYzMWM2NTJkMyIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
+                        </div>
+
+                        <div class="w3-half" id="#" style="width:500px;height:470px">
+                            <h5 class="w3-hide">Work Completed Doughnut</h5>
+                            <canvas id="myDoughnutChart" width="400" height="400"></canvas>
                         </div>
                     </div>
-           
+                </div>
+
+                <div class="w3-panel">
+                    <div class="w3-row-padding" style="margin:0 -16px">
+
+                        <div class="w3-half" id="#" style="width:800px;height:600px">
+                            <h5 class="w3-hide">Customer rate</h5>
+                            <iframe width="800" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiN2I0MGU5MjItYWE5Ni00NWU5LWIzZjItODAwNTM4ZTAxZGYwIiwidCI6IjE2NmIwZjdjLThkYWEtNGY0OS05YzU4LTg4ZWYzMWM2NTJkMyIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
+                        </div>
+
+                        <div class="w3-half" id="#" style="width:800px;height:600px">
+                            <h5 class="w3-hide">Employee rate</h5>
+                            <iframe width="800" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiOTY2YTYxZDgtOWFlOS00ZDE2LWI1NDAtZGQ3ZjU5N2E3YjZhIiwidCI6IjE2NmIwZjdjLThkYWEtNGY0OS05YzU4LTg4ZWYzMWM2NTJkMyIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="w3-panel">
+                    <div class="w3-twothird">
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <h5>Feeds</h5>
+                        <table class="w3-table w3-striped w3-white">
+                            <tr>
+                                <td><i class="fa fa-user w3-text w3-large" style="color:rgb(89, 89, 89)!important"></i></td>
+                                <td>New record, over 90 views.</td>
+                                <td><i>10 mins</i></td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-bell w3-text w3-large" style="color:rgb(255, 128, 170)!important"></i></td>
+                                <td>Database error.</td>
+                                <td><i>15 mins</i></td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-users w3-text w3-large" style="color:rgb(255, 184, 77)!important"></i></td>
+                                <td>New record, over 40 users.</td>
+                                <td><i>17 mins</i></td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-comment w3-text w3-large" style="color:rgb(89, 89, 89)!important"></i></td>
+                                <td>New comments.</td>
+                                <td><i>25 mins</i></td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-bookmark w3-text w3-large" style="color:rgb(89, 89, 89)!important"></i></td>
+                                <td>Check transactions.</td>
+                                <td><i>28 mins</i></td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-laptop w3-text w3-large" style="color:rgb(255, 128, 170)!important"></i></td>
+                                <td>CPU overload.</td>
+                                <td><i>35 mins</i></td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-share-alt w3-text w3-large" style="color:rgb(204, 204, 0)!important"></i></td>
+                                <td>New shares.</td>
+                                <td><i>39 mins</i></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
                 <hr>
                 <div class="w3-container">
                     <h5>General Stats</h5>
@@ -550,9 +572,9 @@
                 </div>
                 <!-- End page content -->
             </div>
-        </div>
+                </div>
 
-        <script src="~/Scripts/jquery-2.2.4.min.js"></script>
-        <script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-    </body>
+                <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+                <script src="~/Scripts/jquery.validate.min.js"></script>
+                <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>

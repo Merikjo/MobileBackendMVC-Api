@@ -189,7 +189,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\TimeSheetMobileXForms\TimeSheetMobileXForms\TimeSheetMobileXForms\Models\WorkAssignmentOperationModel.cs">
+    <Compile Include="..\..\TimeSheetMobXForm\TimeSheetMobXForm\TimeSheetMobXForm\TimeSheetMobXForm\Models\WorkAssignmentOperationModel.cs">
       <Link>Models\WorkAssignmentOperationModel.cs</Link>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -334,6 +334,7 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Properties\PublishProfiles\MobileBackendMVC-Api2 - Web Deploy1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\DataTables\dataTables.bootstrap.css" />

@@ -21,7 +21,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("head", required: false)
 
-    <script type="text/javascript">
+    @*<script type="text/javascript">
             var appInsights = window.appInsights || function (config) {
                 function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } }
                 var t = { config: config }, u = document, e = window, o = 'script', s = u.createElement(o), i, f; for (s.src = config.url || '//az416426.vo.msecnd.net/scripts/a/ai.0.js', u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ['Event', 'Exception', 'Metric', 'PageView', 'Trace', 'Ajax']; i.length;)r('track' + i.pop()); return r('setAuthenticatedUserContext'), r('clearAuthenticatedUserContext'), config.disableExceptionTracking || (i = 'onerror', r('_' + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t['_' + i](config, r, u, e, o), s }), t
@@ -31,7 +31,7 @@
 
             window.appInsights = appInsights;
             appInsights.trackPageView();
-    </script>
+    </script>*@
 
     <style>
         html, body, h1, h2, h3, h4, h5 {
@@ -39,7 +39,6 @@
         }
   
     </style>
-
 
 </head>
 <body>
@@ -107,8 +106,9 @@
 
     <div class="container body-content">
         @RenderBody()
+
         <hr />
-        <footer class="w3-container w3-padding-16 w3-light-grey">
+        <footer class="w3-container w3-padding-32 w3-light-grey">
             <p>&copy; @DateTime.Now.Year - Work Assignment by Point College</p>
         </footer>
     </div>

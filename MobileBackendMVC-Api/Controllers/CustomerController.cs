@@ -27,6 +27,5 @@ namespace MobileBackendMVC_Api.Controllers
 
             return customerNames;
         }
-
     }
 }

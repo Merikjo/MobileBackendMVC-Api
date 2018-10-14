@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "General";
+}
+
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_Jxx0pa197zGwfVh7jZUks0k1SJnB7ow&callback=initMap" async defer></script>
+
+@section head {
+    <style>
+        body {
+            background-image: url('../../Images/TalviJaljet.jpg');
+        }
+
+        .bodyimagecolor {
+            /*opacity: 0.5;
+        background-color: rgb(230, 230, 230);*/
+        }
+
+        .container {
+            background-color: rgb(230, 230, 230);
+            opacity: 0.8;
+            width: 2000px
+        }
+    </style>
+}
+
+<body class="w3-content-light-grey" style="max-width:1200px">
+    <h2>General</h2>
+
+    <div class="w3-panel">
+        <div class="w3-row-padding" style="margin:0 -16px">
+
+            <div class="w3-container" id="#" style="width:100%;height:100%">
+                <h3>Asuntotilasto</h3>
+                <iframe width="800" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiNGE4ZWExNzUtMDgwOC00ZDlmLTgxY2EtOTk2OGE2YWM0MzBhIiwidCI6IjE2NmIwZjdjLThkYWEtNGY0OS05YzU4LTg4ZWYzMWM2NTJkMyIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+            <br />
+
+            <div class="w3-container" id="#" style="width:100%;height:100%">
+                <h3>Tuotetiedot</h3>
+                <iframe width="800" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiM2IzYjQzNTktNjFjNy00YjkyLWIyNjItZmU3MjllMmZhNWM0IiwidCI6IjE2NmIwZjdjLThkYWEtNGY0OS05YzU4LTg4ZWYzMWM2NTJkMyIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-panel">
+        <div class="w3-row-padding" style="margin:0 -16px">
+
+            <div class="w3-container" id="#" style="width:100%;height:100%">
+                <h3>Autotilasto</h3>
+                <iframe width="800" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiMjk0MDJjY2UtYzc0Ni00NmNlLTlhZGMtNjIyZWY5ZmMzMjI0IiwidCI6IjE2NmIwZjdjLThkYWEtNGY0OS05YzU4LTg4ZWYzMWM2NTJkMyIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
+
+                <div class="w3-half" id="#" style="width:100%;height:100%">
+                    <h3>Autotilasto</h3>
+                    <iframe width="680" height="510" src="https://app.powerbi.com/view?r=eyJrIjoiMjk0MDJjY2UtYzc0Ni00NmNlLTlhZGMtNjIyZWY5ZmMzMjI0IiwidCI6IjE2NmIwZjdjLThkYWEtNGY0OS05YzU4LTg4ZWYzMWM2NTJkMyIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-panel">
+        <div class="w3-row-padding" style="margin:0 -16px">
+
+            <div class="w3-half" id="#" style="width:800px;height:600px">
+                <h3>IoT-Measurements</h3>
+                <iframe width="800" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiNDgyMzQzOTItNGU2NS00NTMzLWEwMDItNDI3OTJmODEyYTc2IiwidCI6IjE2NmIwZjdjLThkYWEtNGY0OS05YzU4LTg4ZWYzMWM2NTJkMyIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+
+            <div class="w3-half" id="#" style="width:800px;height:600px">
+                <h5 class="w3-hide">Employee rate</h5>
+                <iframe width="800" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiOTY2YTYxZDgtOWFlOS00ZDE2LWI1NDAtZGQ3ZjU5N2E3YjZhIiwidCI6IjE2NmIwZjdjLThkYWEtNGY0OS05YzU4LTg4ZWYzMWM2NTJkMyIsImMiOjh9" frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+        </div>
+    </div>
+</body>

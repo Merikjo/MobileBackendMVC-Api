@@ -62,6 +62,7 @@ namespace MobileBackendMVC_Api.Controllers
                 else if (input.Operation == "Stop")
                 {
                     int assignmentId = assignment.Id_WorkAssignment;
+
                     Timesheets existing = (from ts in entities.Timesheets
                                           where (ts.Id_WorkAssignment == assignmentId) &&
                                           (ts.Active == true) && (ts.WorkComplete == false)

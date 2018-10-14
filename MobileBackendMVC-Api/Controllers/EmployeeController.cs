@@ -30,51 +30,51 @@ namespace MobileBackendMVC_Api.Controllers
             return employeeNames;
         }
 
-        //public byte[] GetEmployeeImage(string employeeName)
-        //{
-        //    JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
-        //    try
-        //    {
-        //        string[] nameParts = employeeName.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-        //        string first = nameParts[0];
-        //        string last = nameParts[1];
-        //        byte[] bytes = (from e in entities.Employees
-        //                        where (e.Active == true) &&
-        //                        (e.FirstName == first) &&
-        //                        (e.LastName == last)
-        //                        select e.EmployeePicture).FirstOrDefault();
+        public byte[] GetEmployeeImage(string employeeName)
+        {
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            try
+            {
+                string[] nameParts = employeeName.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                string first = nameParts[0];
+                string last = nameParts[1];
+                byte[] bytes = (from e in entities.Employees
+                                where (e.Active == true) &&
+                                (e.FirstName == first) &&
+                                (e.LastName == last)
+                                select e.EmployeePicture).FirstOrDefault();
 
-        //        return bytes;
-        //    }
-        //    finally
-        //    {
-        //        entities.Dispose();
-        //    }
-        //}
+                return bytes;
+            }
+            finally
+            {
+                entities.Dispose();
+            }
+        }
 
-        //public string PutEmployeeImage()
-        //{
-        //    JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
-        //    try
-        //    {
-        //        Employees newEmployee = new Employees()
-        //        {
-        //            FirstName = "Matti",
-        //            LastName = "Tuhkanen",
-        //            //EmployeePicture = File.ReadAllBytes(@"E:\Visual Studio 2017\Images\Ratasopacity.png")
-        //            EmployeePicture = File.ReadAllBytes(@"C:\TEMP\Matti.png")
-        //        };
-        //        entities.Employees.Add(newEmployee);
-        //        entities.SaveChanges();
+        public string PutEmployeeImage()
+        {
+            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            try
+            {
+                Employees newEmployee = new Employees()
+                {
+                    FirstName = "Matti",
+                    LastName = "Tuhkanen",
+                    //EmployeePicture = File.ReadAllBytes(@"E:\Visual Studio 2017\Images\Ratasopacity.png")
+                    EmployeePicture = File.ReadAllBytes(@"C:\TEMP\Matti.png")
+                };
+                entities.Employees.Add(newEmployee);
+                entities.SaveChanges();
 
-        //        return "OK!";
-        //    }
-        //    finally
-        //    {
-        //        entities.Dispose();
-        //    }
+                return "OK!";
+            }
+            finally
+            {
+                entities.Dispose();
+            }
 
-        //    return "Error";
-        //}
+            return "Error";
+        }
     }
 }

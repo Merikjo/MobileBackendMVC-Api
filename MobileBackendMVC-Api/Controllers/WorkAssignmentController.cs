@@ -1,11 +1,13 @@
 ﻿using MobileBackendMVC_Api.DataAccess;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using TimeSheetMobXForm.Models;
+using TimeSheetMobileXamarin.Models;
+
 
 namespace MobileBackendMVC_Api.Controllers
 {
@@ -14,7 +16,7 @@ namespace MobileBackendMVC_Api.Controllers
         public string[] GetAll()
         {
             string[] assignmentNames = null;
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 assignmentNames = (from wa in entities.WorkAssignments
@@ -29,21 +31,34 @@ namespace MobileBackendMVC_Api.Controllers
             return assignmentNames;
         }
 
-        [HttpPost]
+        [HttpPost] //verbiattribuutti
+        public bool GetStatus(WorkAssignmentOperationModel input)
+        {
+            return true;
+        }
+
+        [HttpPost] //verbiattribuutti
         public bool PostStatus(WorkAssignmentOperationModel input)
         {
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 WorkAssignments assignment = (from wa in entities.WorkAssignments
-                                             where (wa.Active == true) &&
-                                             (wa.Title == input.AssignmentTitle)
-                                             select wa).FirstOrDefault();
+                                              where (wa.Active == true) &&
+                                              (wa.Title == input.AssignmentTitle)
+                                              select wa).FirstOrDefault();
 
                 if (assignment == null)
                 {
                     return false;
                 }
+
+                //NumberStyles style;
+                //CultureInfo provider;
+                //provider = new CultureInfo("fi-FI");
+                //string valueString = input.Latitude.ToString("R", CultureInfo.InvariantCulture);
+                //style = NumberStyles.AllowDecimalPoint;
+
 
                 if (input.Operation == "Start")
                 {
@@ -64,10 +79,10 @@ namespace MobileBackendMVC_Api.Controllers
                     int assignmentId = assignment.Id_WorkAssignment;
 
                     Timesheets existing = (from ts in entities.Timesheets
-                                          where (ts.Id_WorkAssignment == assignmentId) &&
-                                          (ts.Active == true) && (ts.WorkComplete == false)
-                                          orderby ts.StartTime descending
-                                          select ts).FirstOrDefault();
+                                           where (ts.Id_WorkAssignment == assignmentId) &&
+                                           (ts.Active == true) && (ts.WorkComplete == false)
+                                           orderby ts.StartTime descending
+                                           select ts).FirstOrDefault();
 
                     if (existing != null)
                     {
@@ -80,7 +95,6 @@ namespace MobileBackendMVC_Api.Controllers
                         return false;
                     }
                 }
-
                 entities.SaveChanges();
             }
             catch
@@ -91,8 +105,11 @@ namespace MobileBackendMVC_Api.Controllers
             {
                 entities.Dispose();
             }
-
             return true;
         }
     }
 }
+
+
+    
+

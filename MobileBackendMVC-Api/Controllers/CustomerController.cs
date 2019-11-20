@@ -1,4 +1,6 @@
-﻿using MobileBackendMVC_Api.DataAccess;
+﻿
+using MobileBackendMVC_Api.DataAccess;
+using MobileBackendMVC_Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,7 @@ namespace MobileBackendMVC_Api.Controllers
         public string[] GetAll()
         {
             string[] customerNames = null;
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 customerNames = (from c in entities.Customers

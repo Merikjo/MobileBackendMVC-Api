@@ -1,4 +1,5 @@
 ﻿using MobileBackendMVC_Api.DataAccess;
+using MobileBackendMVC_Api.Models;
 using MobileBackendMVC_Api.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -6,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-
-
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 
 namespace MobileBackendMVC_Api.Controllers
@@ -18,17 +20,17 @@ namespace MobileBackendMVC_Api.Controllers
         public ActionResult HoursPerWorkAssignment()
         {
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
-                DateTime today = DateTime.Today.AddDays(-1);
+                DateTime today = DateTime.Today;
                 DateTime tomorrow = today.AddDays(1);
 
                 // haetaan kaikki kuluvan päivän tuntikirjaukset
                 List<Timesheets> allTimesheetsToday = (from ts in entities.Timesheets
                                                        where (ts.StartTime > today) &&
-                                                       (ts.StartTime < tomorrow) &&
-                                                       (ts.WorkComplete == true)
+                                                       (ts.StartTime < tomorrow) 
+                                                       //&& (ts.WorkComplete == true)
                                                        select ts).ToList();
 
                 // ryhmitellään kirjaukset tehtävittäin, ja lasketaan kestot
@@ -91,11 +93,11 @@ namespace MobileBackendMVC_Api.Controllers
             StringBuilder csv = new StringBuilder();
 
             // luodaan CSV-muotoinen tiedosto
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 DateTime today = DateTime.Today;
-                DateTime tomorrow = today.AddDays(30);
+                DateTime tomorrow = today.AddDays(1);
 
                 // haetaan kaikki kuluvan päivän tuntikirjaukset
                 List<Timesheets> allTimesheetsToday = (from ts in entities.Timesheets
@@ -120,11 +122,135 @@ namespace MobileBackendMVC_Api.Controllers
             return File(buffer, "text/csv", "Työtunnit2.csv");
         }
 
+        public ActionResult HoursPerWorkAssignmentAsExcelWeek()
+        {
+            StringBuilder csv = new StringBuilder();
+
+            // luodaan CSV-muotoinen tiedosto
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
+            try
+            {
+                DateTime today = DateTime.Today;
+                DateTime week = today.AddDays(7);
+
+                // haetaan kaikki kuluvan päivän tuntikirjaukset
+                List<Timesheets> allTimesheetsWeek = (from ts in entities.Timesheets
+                                                       where (ts.StartTime > today) &&
+                                                       (ts.StartTime < week) &&
+                                                       (ts.WorkComplete == true)
+                                                       select ts).ToList();
+
+
+
+                foreach (Timesheets timesheet in allTimesheetsWeek)
+                {
+                    csv.AppendLine(timesheet.Id_Employee + ";" +
+                        timesheet.StartTime + ";" + timesheet.StopTime + ";" + timesheet.Comments + ";");
+                }
+            }
+            finally
+            {
+                entities.Dispose();
+            }
+
+            // palautetaan CSV-tiedot selaimelle
+            byte[] buffer = Encoding.UTF8.GetBytes(csv.ToString());
+            return File(buffer, "text/csv", "Työtunnit3.csv");
+        }
+
+        public ActionResult HoursPerWorkAssignmentAsExcelDates()
+        {
+            StringBuilder csv = new StringBuilder();
+
+            // luodaan CSV-muotoinen tiedosto
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
+            try
+            {
+                DateTime today = DateTime.Today;
+                DateTime tomorrow = today.AddDays(1);
+                DateTime week = today.AddDays(7);      
+                DateTime month = today.AddMonths(1);
+
+                // haetaan kaikki kuluvan päivän tuntikirjaukset
+                List<Timesheets> allTimesheetsWeek = (from ts in entities.Timesheets
+                                                      where (ts.StartTime > today) &&
+                                                      (ts.StartTime < week) &&
+                                                      (ts.WorkComplete == true)
+                                                      select ts).ToList();
+
+
+
+                foreach (Timesheets timesheet in allTimesheetsWeek)
+                {
+                    csv.AppendLine(timesheet.Id_Employee + ";" +
+                        timesheet.StartTime + ";" + timesheet.StopTime + ";" + timesheet.Comments + ";");
+                }
+            }
+            finally
+            {
+                entities.Dispose();
+            }
+
+            // palautetaan CSV-tiedot selaimelle
+            byte[] buffer = Encoding.UTF8.GetBytes(csv.ToString());
+            return File(buffer, "text/csv", "Työtunnit3.csv");
+        }
+
+        //public ActionResult GetTimesheetDates(String dates)
+        //{
+        //    GetTimesheetDatesModel model = new GetTimesheetDatesModel();
+        //    MobileWorkDataEntities entities = new MobileWorkDataEntities();
+
+        //    try
+        //    {
+        //        DateTime today = DateTime.Today;
+        //        DateTime tomorrow = today.AddDays(1);
+        //        DateTime week = today.AddDays(7);
+        //        DateTime month = today.AddMonths(1);
+
+        //        if (dates == "1")
+        //        {
+        //            model.Dates = (from ts in entities.Timesheets
+        //                           where (ts.StartTime > today) &&
+        //                                 (ts.StartTime < tomorrow) &&
+        //                                  (ts.WorkComplete == true)
+        //                           select ts.Title).ToArray();
+        //        }
+        //        else if (dates == "2")
+        //        {
+        //            model.Dates = (from ts in entities.Timesheets
+        //                           where (ts.StartTime > today) &&
+        //                                 (ts.StartTime < week) &&
+        //                                  (ts.WorkComplete == true)
+        //                           select ts.).ToArray();
+        //        }
+        //        else if (dates == "3")
+        //        {
+        //            model.Dates = (from ts in entities.Timesheets
+        //                           where (ts.StartTime > today) &&
+        //                                 (ts.StartTime < month) &&
+        //                                  (ts.WorkComplete == true)
+        //                           select ts.).ToArray();
+        //        }
+
+        //        else
+        //        {
+        //            model.Dates = (from ts in entities.Timesheets
+        //                           select ts.).ToArray();
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        entities.Dispose();
+        //    }
+        //    return Json(model, JsonRequestBehavior.AllowGet);
+        //}
+
         public ActionResult GetTimesheetCounts(string onlyComplete)
         {
             ReportChartDataViewModel model = new ReportChartDataViewModel();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 model.Labels = (from wa in entities.WorkAssignments
@@ -159,7 +285,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             ReportChartDataViewModel model = new ReportChartDataViewModel();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 model.Labels = (from wa in entities.WorkAssignments
@@ -194,7 +320,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             ReportChartDataViewModel model = new ReportChartDataViewModel();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 model.Labels = (from wa in entities.WorkAssignments
@@ -229,7 +355,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             ReportChartDataViewModel model = new ReportChartDataViewModel();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 model.Labels = (from wa in entities.WorkAssignments
@@ -259,5 +385,7 @@ namespace MobileBackendMVC_Api.Controllers
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        
     }
 }

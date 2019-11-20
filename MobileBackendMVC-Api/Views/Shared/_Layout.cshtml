@@ -10,10 +10,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-    <script src="~/Scripts/jquery-2.2.4.js"></script>
-    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+  
+
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/respond.js"></script>
 
     @Styles.Render("~/Content/css")
@@ -104,12 +103,12 @@
             </div>
         </div>*@
 
-    <div class="container body-content">
+    <div class="container body-content" style="margin-left:300px; width:100%">
         @RenderBody()
 
-        <hr />
-        <footer class="w3-container w3-padding-32 w3-light-grey">
-            <p>&copy; @DateTime.Now.Year - Work Assignment by Point College</p>
+        <hr style="margin-left:300px; width:100%"/>
+        <footer class="w3-container w3-padding-32 w3-light-grey" style="margin-left:300px; width:100%">
+            <p>&copy; @DateTime.Now.Year - Work Assignment by Careeria</p>
         </footer>
     </div>
 

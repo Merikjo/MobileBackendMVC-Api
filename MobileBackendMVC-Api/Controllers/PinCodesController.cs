@@ -7,20 +7,21 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MobileBackendMVC_Api.DataAccess;
+using MobileBackendMVC_Api.Models;
 using MobileBackendMVC_Api.ViewModels;
 
 namespace MobileBackendMVC_Api.Controllers
 {
     public class PinCodesController : Controller
     {
-        private JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
+        private MobileWorkDataEntities db = new MobileWorkDataEntities();
 
         // GET: PinCodes
         public ActionResult Index()
         {
             List<PinCodesViewModel> model = new List<PinCodesViewModel>();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
 
             try
             {
@@ -66,7 +67,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             PinCodesViewModel model = new PinCodesViewModel();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 PinCodes pincodedetail = entities.PinCodes.Find(id);
@@ -108,7 +109,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: PinCodes/Create
         public ActionResult Create()
         {
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
 
             PinCodesViewModel model = new PinCodesViewModel();
 
@@ -129,7 +130,7 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PinCodesViewModel model)
         {
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
 
             PinCodes pin = new PinCodes();
             pin.Id_PinCode = model.Id_PinCode;

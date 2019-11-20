@@ -282,16 +282,55 @@
                 lataaDataPalvelimelta4(url);
             })
         });
+
+        //testaus
+        //function lataaDataPalvelimelta(url) {
+        //    $.get(url, function (data) {
+        //        alert(data);
+        //    });
+        //}
+
+        //$("#showLastDayRecords").change(function myfunction() {
+        //    var selected = $("#showLastDayRecords").is(":checked");
+
+        //    var url = "/reports/GetTimesheetDates";
+        //    if (selected) {
+        //        url += "?dates=1"
+        //    }
+        //    lataaDataPalvelimelta(url);
+        //})
+
+        //$("#showLastWeekRecords").change(function myfunction() {
+        //    var selected = $("#showLastWeekRecords").is(":checked");
+
+        //    var url = "/reports/GetTimesheetDates";
+        //    if (selected) {
+        //        url += "?dates=2"
+        //    }
+        //    lataaDataPalvelimelta(url);
+        //})
+
+        //$("#showLastMonthRecords").change(function myfunction() {
+        //    var selected = $("#showLastMonthRecords").is(":checked");
+
+        //    var url = "/reports/GetTimesheetDates";
+        //    if (selected) {
+        //        url += "?dates=3"
+        //    }
+        //    lataaDataPalvelimelta(url);
+        //})
+
     </script>
 }
 
+
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Scripts/DataTables/datatables.css" rel="stylesheet" />
+<link href="~/Scripts/DataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+
 @section head {
-
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Scripts/DataTables/datatables.css" rel="stylesheet" />
-    <link href="~/Scripts/DataTables/dataTables.bootstrap.css" rel="stylesheet" />
-
-
     <style>
         /*div.dataTables_wrapper div.dataTables_filter input {
             width: 400px;
@@ -319,7 +358,7 @@
         <div class="w3-hide-large" style="margin-top:83px"></div>
 
         <!-- Container -->
-        <div class="w3-container">
+        <div class="w3-container" style="margin-top:50px">
 
 
             <h2>Hours Per Work Assignment</h2>
@@ -328,13 +367,22 @@
             <p>Total entries: @Model.Count().</p>
             <p>&nbsp;</p>
 
+            <p>Valitse ajanjakso ja paina "Export to Excel"</p>
+            <p>&nbsp;</p>
+            <input id="showLastDayRecords" type="checkbox" /> Show Yesterday Records
+            <input id="showLastWeekRecords" type="checkbox" /> Show Lastweek Records
+            <input id="showLastMonthRecords" type="checkbox" /> Show Lastmonth Records
+            <p>&nbsp;</p>
+
             <a href="~/Reports/HoursPerWorkAssignmentAsExcel" class="w3-btn w3-large">Export To Excel</a>
             <a href="~/Reports/HoursPerWorkAssignmentAsExcel2" class="w3-btn w3-large">Export Hours Per Work Assignment To Excel</a>
+            <p>&nbsp;</p>
+            <a href="~/Reports/HoursPerWorkAssignmentAsExcelWeek" class="w3-btn w3-large">Export Week Hours Per Work Assignment To Excel</a>
 
             <p>&nbsp;</p>
 
             @*<input id="showOnlyCompletedRecords" type="checkbox" /> Show Only Completed Records
-                <canvas id="myChart" width="400" height="200"></canvas>*@
+        <canvas id="myChart" width="400" height="200"></canvas>*@
 
 
             <table class="table">
@@ -417,6 +465,7 @@
 
         </div><!-- End content -->
     </div><!-- End page content -->
+
     <script src="~/Scripts/jquery-2.2.4.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

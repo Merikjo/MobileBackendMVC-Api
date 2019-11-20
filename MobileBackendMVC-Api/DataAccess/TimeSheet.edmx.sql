@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/06/2017 13:34:40
--- Generated from EDMX file: E:\Visual Studio 2017\Projects\MobileBackendMVC-Api2\MobileBackendMVC-Api\DataAccess\TimesheetModel.edmx
+-- Date Created: 04/16/2019 18:06:53
+-- Generated from EDMX file: E:\VisualStudio2017\MobileBackendMVC-Api\MobileBackendMVC-Api\DataAccess\TimeSheet.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [JohaMeriSQL5];
+USE [MobileWorkData];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO

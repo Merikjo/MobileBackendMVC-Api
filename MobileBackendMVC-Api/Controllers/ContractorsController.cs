@@ -7,13 +7,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MobileBackendMVC_Api.DataAccess;
+using MobileBackendMVC_Api.Models;
 using MobileBackendMVC_Api.ViewModels;
 
 namespace MobileBackendMVC_Api.Controllers
 {
     public class ContractorsController : Controller
     {
-        private JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
+        private MobileWorkDataEntities db = new MobileWorkDataEntities();
 
         // GET: Contractors
         public ActionResult Index()
@@ -21,7 +22,7 @@ namespace MobileBackendMVC_Api.Controllers
 
             List<ContractorsViewModel> model = new List<ContractorsViewModel>();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
 
             try
             {
@@ -64,7 +65,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             ContractorsViewModel model = new ContractorsViewModel();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 Contractors contractordetail = entities.Contractors.Find(id);
@@ -100,7 +101,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: Contractors/Create
         public ActionResult Create()
         {
-            JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities db = new MobileWorkDataEntities();
 
             ContractorsViewModel model = new ContractorsViewModel();
 
@@ -114,7 +115,7 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ContractorsViewModel model)
         {
-            JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities db = new MobileWorkDataEntities();
 
             Contractors con = new Contractors();
             con.CompanyName = model.CompanyName;

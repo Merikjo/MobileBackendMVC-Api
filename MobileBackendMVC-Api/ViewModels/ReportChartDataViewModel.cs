@@ -9,5 +9,7 @@ namespace MobileBackendMVC_Api.ViewModels
     {
         public string[] Labels { get; set; }
         public int[] Counts { get; set; }
+
+        public string Title { get; set; }
     }
 }

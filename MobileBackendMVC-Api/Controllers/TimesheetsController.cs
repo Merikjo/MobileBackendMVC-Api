@@ -6,22 +6,24 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using MobileBackendMVC_Api.DataAccess;
+
 using MobileBackendMVC_Api.ViewModels;
 using System.Globalization;
+using MobileBackendMVC_Api.Models;
+using MobileBackendMVC_Api.DataAccess;
 
 namespace MobileBackendMVC_Api.Controllers
 {
     public class TimesheetsController : Controller
     {
-        private JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
+        private MobileWorkDataEntities db = new MobileWorkDataEntities();
 
         // GET: Timesheets
         public ActionResult Index()
         {
             List<TimeSheetsViewModel> model = new List<TimeSheetsViewModel>();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
 
             try
             {
@@ -78,7 +80,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             TimeSheetsViewModel model = new TimeSheetsViewModel();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 Timesheets timesheetdetail = entities.Timesheets.Find(id);
@@ -128,7 +130,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: Timesheets/Create
             public ActionResult Create()
         {
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
 
             TimeSheetsViewModel model = new TimeSheetsViewModel();
 
@@ -146,7 +148,7 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TimeSheetsViewModel model)
         { 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
 
             Timesheets tsv = new Timesheets();
             tsv.Id_Timesheet = model.Id_Timesheet;

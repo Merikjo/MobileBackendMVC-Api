@@ -8,7 +8,6 @@
 @section scripts {
     <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
     <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
-
     <script type="text/javascript">
         // oma filtteröintifunktio ..., jotka ovat aktiivisia
         $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
@@ -50,16 +49,21 @@
     </script>
 
 }
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
 
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
 @section head {
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Scripts/DataTables/datatables.css" rel="stylesheet" />
     <link href="~/Scripts/DataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
+
+
 
     <style>
-        /*div.dataTables_wrapper div.dataTables_filter input {
+        div.dataTables_wrapper div.dataTables_filter input {
             width: 400px;
-        }*/
+        }
     </style>
 }
 
@@ -82,7 +86,7 @@
         <div class="w3-hide-large" style="margin-top:83px"></div>
 
         <!-- Container -->
-        <div class="w3-container">
+        <div class="w3-container" style="margin-top:50px">
 
             <h2>Employees</h2>
             <p>&nbsp;</p>

@@ -6,22 +6,24 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using MobileBackendMVC_Api.DataAccess;
+
 using MobileBackendMVC_Api.ViewModels;
 using System.Globalization;
+using MobileBackendMVC_Api.Models;
+using MobileBackendMVC_Api.DataAccess;
 
 namespace MobileBackendMVC_Api.Controllers
 {
     public class WorkAssignmentsController : Controller
     {
-        private JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
+        private MobileWorkDataEntities db = new MobileWorkDataEntities();
 
         // GET: WorkAssignments
         public ActionResult Index()
         {
             List<WorkAssignmentsViewModel> model = new List<WorkAssignmentsViewModel>();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
 
             try
             {
@@ -67,7 +69,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             WorkAssignmentsViewModel model = new WorkAssignmentsViewModel();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 WorkAssignments workassdetail = entities.WorkAssignments.Find(id);
@@ -109,7 +111,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: WorkAssignments/Create
         public ActionResult Create()
         {
-            JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities db = new MobileWorkDataEntities();
 
             WorkAssignmentsViewModel model = new WorkAssignmentsViewModel();
 
@@ -125,7 +127,7 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(WorkAssignmentsViewModel model)
         {
-            JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities db = new MobileWorkDataEntities();
 
             WorkAssignments wam = new WorkAssignments();
             wam.Title = model.Title;

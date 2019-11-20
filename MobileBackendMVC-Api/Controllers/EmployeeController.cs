@@ -14,7 +14,7 @@ namespace MobileBackendMVC_Api.Controllers
         public string[] GetAll()
         {
             string[] employeeNames = null;
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 employeeNames = (from e in entities.Employees
@@ -32,7 +32,7 @@ namespace MobileBackendMVC_Api.Controllers
 
         public byte[] GetEmployeeImage(string employeeName)
         {
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 string[] nameParts = employeeName.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
@@ -54,15 +54,16 @@ namespace MobileBackendMVC_Api.Controllers
 
         public string PutEmployeeImage()
         {
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
             try
             {
                 Employees newEmployee = new Employees()
                 {
-                    FirstName = "Matti",
-                    LastName = "Tuhkanen",
-                    //EmployeePicture = File.ReadAllBytes(@"E:\Visual Studio 2017\Images\Ratasopacity.png")
-                    EmployeePicture = File.ReadAllBytes(@"C:\TEMP\Matti.png")
+                    FirstName = "Teppo",
+                    LastName = "Testaaja",
+
+                    //EmployeePicture = File.ReadAllBytes(@"C:\TEMP\Matti.png")
+                    EmployeePicture = File.ReadAllBytes(@"D:\VisualStudio2017\MobileBackendMVC - Api\MobileBackendMVC - Api\Images\Matti.png")
                 };
                 entities.Employees.Add(newEmployee);
                 entities.SaveChanges();
@@ -76,5 +77,7 @@ namespace MobileBackendMVC_Api.Controllers
 
             return "Error";
         }
+
+    
     }
 }

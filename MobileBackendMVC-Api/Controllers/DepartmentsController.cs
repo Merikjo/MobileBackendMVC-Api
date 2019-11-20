@@ -7,20 +7,21 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MobileBackendMVC_Api.DataAccess;
+using MobileBackendMVC_Api.Models;
 using MobileBackendMVC_Api.ViewModels;
 
 namespace MobileBackendMVC_Api.Controllers
 {
     public class DepartmentsController : Controller
     {
-        private JohaMeriSQL5Entities db = new JohaMeriSQL5Entities();
+        private MobileWorkDataEntities db = new MobileWorkDataEntities();
 
         // GET: Departments
         public ActionResult Index()
         {
             List<DepartmentsViewModel> model = new List<DepartmentsViewModel>();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
 
             try
             {
@@ -49,7 +50,7 @@ namespace MobileBackendMVC_Api.Controllers
         {
             DepartmentsViewModel model = new DepartmentsViewModel();
 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
 
             try
             {
@@ -80,7 +81,7 @@ namespace MobileBackendMVC_Api.Controllers
         // GET: Departments/Create
         public ActionResult Create()
         {
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
 
             DepartmentsViewModel model = new DepartmentsViewModel();
 
@@ -97,7 +98,7 @@ namespace MobileBackendMVC_Api.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(DepartmentsViewModel model)
         { 
-            JohaMeriSQL5Entities entities = new JohaMeriSQL5Entities();
+            MobileWorkDataEntities entities = new MobileWorkDataEntities();
 
 
             Departments dep= new Departments();        
